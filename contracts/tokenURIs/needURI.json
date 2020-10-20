@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Asset Metadata",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Sina"
+      },
+      "description": {
+        "type": "string",
+        "description": "Doctor Appointment"
+      },
+      "image": {
+        "type": "string",
+        "description": ""
+      }
+    }
+  },
+  {
+    "title": "Asset Metadata",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Negar"
+      },
+      "description": {
+        "type": "string",
+        "description": "Sneakers"
+      },
+      "image": {
+        "type": "string",
+        "description": ""
+      }
+    }
+  }
+]
