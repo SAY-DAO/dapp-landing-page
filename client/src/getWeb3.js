@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import Nakama from "./contracts/Nakama.json";
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -10,6 +11,8 @@ const getWeb3 = () =>
         try {
           // Request account access if needed
           await window.ethereum.enable();
+          // console.log(accounts)
+
           // Acccounts now exposed
           resolve(web3);
         } catch (error) {
@@ -35,4 +38,33 @@ const getWeb3 = () =>
     });
   });
 
-export default getWeb3;
+
+const loadSmartContract = async () => {
+  try {
+    // Get network provider and web3 instance.
+    const web3 = await getWeb3();
+
+    // Use web3 to get the user's accounts.
+    const accounts = await web3.eth.getAccounts();
+
+
+    // Get the contract instance.
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = Nakama.networks[networkId];
+    const nakama = new web3.eth.Contract(
+        Nakama.abi,
+        deployedNetwork && deployedNetwork.address,
+    );
+    return {web3, accounts, nakama}
+  } catch (error) {
+    // Catch any errors for any of the above operations.
+    alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`,
+    );
+    console.error(error);
+  }
+
+};
+
+
+export default loadSmartContract;
