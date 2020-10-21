@@ -21,16 +21,7 @@ class App extends Component {
         return (
             <div className="App">
                 <div>
-                    <div>
-                        <h2>Mint a Nakama</h2>
-                        <form>
-                            <div>Child</div>
-                            <div>Need</div>
-                            <div>Need Cost</div>
-                            <input />
-                        </form>
-                        <button>Pay with ETH</button>
-                    </div>
+                   App
                 </div>
             </div>
         );
