@@ -17,10 +17,11 @@ function TabPanel(props) {
             id={`vertical-tabpanel-${index}`}
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
+
         >
             {value === index && (
                 <Box p={3}>
-                    <Typography>{children}</Typography>
+                    <Typography component={'span'} variant={'body2'} >{children}</Typography>
                 </Box>
             )}
         </div>
@@ -45,11 +46,20 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
         display: 'flex',
-        // height: 224,
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
+
     },
+    paper: {
+        padding: theme.spacing(6),
+        margin: 'auto',
+        maxWidth: 1440,
+    },
+    tab: {
+        marginRight: 40,
+        minWidth:50
+    }
 }));
 
 export default function VerticalTabs() {
@@ -61,22 +71,22 @@ export default function VerticalTabs() {
     };
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} >
             <Tabs
                 orientation="vertical"
                 variant="scrollable"
+                scrollButtons="auto"
                 value={value}
                 onChange={handleChange}
                 aria-label="Vertical tabs example"
                 className={classes.tabs}
+
             >
-                <Tab label="Item One" {...a11yProps(0)} />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
-                <Tab label="Item Four" {...a11yProps(3)} />
-                <Tab label="Item Five" {...a11yProps(4)} />
-                <Tab label="Item Six" {...a11yProps(5)} />
-                <Tab label="Item Seven" {...a11yProps(6)} />
+                <Tab label="Item One" {...a11yProps(0)} className={classes.tab} />
+                <Tab label="Item Two" {...a11yProps(1)} className={classes.tab} />
+                <Tab label="Item Three" {...a11yProps(2)} className={classes.tab} />
+                <Tab label="Item Four" {...a11yProps(3)} className={classes.tab} />
+
             </Tabs>
             <TabPanel value={value} index={0}>
                 <Sections />
@@ -88,15 +98,6 @@ export default function VerticalTabs() {
                 <Sections />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <Sections />
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                <Sections />
-            </TabPanel>
-            <TabPanel value={value} index={5}>
-                <Sections />
-            </TabPanel>
-            <TabPanel value={value} index={6}>
                 <Sections />
             </TabPanel>
         </div>

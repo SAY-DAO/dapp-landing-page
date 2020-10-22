@@ -5,6 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MidSection from "./MidSection";
 import IntroSection from "./IntroSection";
 import VerticalTabs from "./VerticalTabs";
+import Eye from "./Eye";
+import EndSection from "./EndSection";
 
 
 class App extends Component {
@@ -29,6 +31,8 @@ class App extends Component {
                     <IntroSection />
                     <MidSection />
                     <VerticalTabs />
+                    <EndSection />
+                    <Eye />
                 </Container>
             </React.Fragment>
         );
