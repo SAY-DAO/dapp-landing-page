@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import loadSmartContract from "../getWeb3";
-
-
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MidSection from "./MidSection";
+import IntroSection from "./IntroSection";
+import VerticalTabs from "./VerticalTabs";
 
 
 class App extends Component {
@@ -11,22 +14,27 @@ class App extends Component {
         const { web3, accounts, nakama } = await loadSmartContract();
         this.setState({web3, accounts, contract:nakama})
         console.log(nakama)
-
     }
 
     render() {
         if (!this.state.web3) {
             return <div>Loading Web3, accounts, and contract...</div>;
         }
+
         return (
-            <div className="App">
-                <div>
-                   App
-                </div>
-            </div>
+            <React.Fragment>
+                {/* Older browsers need a lot of normalization help*/}
+                <CssBaseline />
+                <Container>
+                    <IntroSection />
+                    <MidSection />
+                    <VerticalTabs />
+                </Container>
+            </React.Fragment>
         );
     }
 }
 
 
 export default App;
+
