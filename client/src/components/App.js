@@ -7,6 +7,7 @@ import IntroSection from "./IntroSection";
 import VerticalTabs from "./VerticalTabs";
 import Eye from "./Eye";
 import EndSection from "./EndSection";
+import NavBar from "./NavBar";
 
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
                 {/* Older browsers need a lot of normalization help*/}
                 <CssBaseline />
                 <Container>
+                    {/*<NavBar />*/}
                     <IntroSection />
                     <MidSection />
                     <VerticalTabs />
