@@ -4,7 +4,7 @@ import React from "react";
 
 export default function() {
     return (
-        <Container maxWidth="md" style={{ height: '300px', marginTop: 100}}>
+        <Container id="midsection" maxWidth="md" style={{ height: '300px', marginTop: 100}}>
             <div className="App">
                 <Typography align="center" color="secondary" variant="h5">
                     The world is changing so is SAY

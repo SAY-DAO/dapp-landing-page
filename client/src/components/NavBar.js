@@ -1,32 +1,43 @@
-import React from 'react';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { Link } from "react-scroll";
 
-const NavBar = () => {
+const useStyles = makeStyles((theme) => ({
+    grow: {
+        flexGrow: 1
+    },
+    menuTitles: {
+        marginRight: theme.spacing(2),
+    }
+}));
 
-    return(
-        <div>
-            <nav>
-                <div className="nav-wrapper">
-                    <a href="#!" className="brand-logo">Logo</a>
-                    <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i
-                        className="material-icons">menu</i></a>
-                    <ul className="right hide-on-med-and-down">
-                        <li><a href="sass.html">Sass</a></li>
-                        <li><a href="badges.html">Components</a></li>
-                        <li><a href="collapsible.html">Javascript</a></li>
-                        <li><a href="mobile.html">Mobile</a></li>
-                    </ul>
-                </div>
-            </nav>
+export default function NavBar() {
+    const classes = useStyles();
+    return (
+            <div className={classes.grow}>
+                <AppBar style={{ backgroundColor: "black" }} position="static">
+                    <Toolbar >
+                        <Typography className={classes.title} variant="h6" noWrap>
+                            Material-UI
+                        </Typography>
+                        <div className={classes.grow} />
+                        <Typography className={classes.root}>
+                            <Link href="https://say.company" className={classes.menuTitles} color="inherit">
+                                Home
+                            </Link>
+                            <Link to="midsection" smooth={true} duration={1000} className={classes.menuTitles} color="inherit">
+                                About Us
+                            </Link>
+                            <Link to="midsection" smooth={true} duration={1000} className={classes.menuTitles} color="inherit">
+                                Joi
+                            </Link>
 
-            <ul className="sidenav" id="mobile-demo">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
-            </ul>
-
-        </div>
-    );
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
 }
-
-export default NavBar;

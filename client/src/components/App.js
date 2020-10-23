@@ -14,6 +14,7 @@ class App extends Component {
     state = { web3: null, accounts: null, contract: null};
 
     componentDidMount = async () => {
+
         const { web3, accounts, nakama } = await loadSmartContract();
         this.setState({web3, accounts, contract:nakama})
         console.log(nakama)
@@ -29,7 +30,7 @@ class App extends Component {
                 {/* Older browsers need a lot of normalization help*/}
                 <CssBaseline />
                 <Container>
-                    {/*<NavBar />*/}
+                    <NavBar />
                     <IntroSection />
                     <MidSection />
                     <VerticalTabs />
