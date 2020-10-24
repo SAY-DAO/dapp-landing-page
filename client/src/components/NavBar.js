@@ -1,12 +1,8 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { Link } from "react-scroll";
 import WalletButton from "./WalletButton";
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 
@@ -35,16 +31,8 @@ const styles = (theme) => ({
 
 
 class NavBar extends React.Component {
-    state= {
-        mobileView: false
-    }
-
     render() {
-    const renderButton = (
-        <Link to="" color="inherit">
-            <WalletButton />
-        </Link>
-     );
+    const renderButton = ( <WalletButton onConnect={this.props.onConnect}/>);
 
     const {classes} = this.props
     return (

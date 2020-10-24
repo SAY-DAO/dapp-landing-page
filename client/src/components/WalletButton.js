@@ -14,10 +14,14 @@ const MyButton = styled(Button)({
 
 });
 
-export default function () {
-    return (
-        <div className="App">
-            <MyButton color="secondary" variant="outlined">Connect Wallet</MyButton>
-        </div>
-    );
-};
+export default class WalletButton extends React.Component {
+    render()
+    {
+
+        return (
+            <div className="App">
+                <MyButton color="secondary" variant="outlined" onClick={this.props.onConnect}>Connect Wallet</MyButton>
+            </div>
+        );
+    }
+}
