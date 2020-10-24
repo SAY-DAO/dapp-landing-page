@@ -13,24 +13,20 @@ import NavBar from "./NavBar";
 class App extends Component {
     state = { web3: null, accounts: null, contract: null};
 
-    componentDidMount = async () => {
-
+    connectWallet = async () => {
         const { web3, accounts, nakama } = await loadSmartContract();
         this.setState({web3, accounts, contract:nakama})
         console.log(nakama)
     }
 
     render() {
-        if (!this.state.web3) {
-            return <div>Loading Web3, accounts, and contract...</div>;
-        }
 
         return (
             <React.Fragment>
                 {/* Older browsers need a lot of normalization help*/}
                 <CssBaseline />
                 <Container>
-                    <NavBar />
+                    <NavBar onConnect={this.connectWallet}/>
                     <IntroSection />
                     <MidSection />
                     <VerticalTabs />

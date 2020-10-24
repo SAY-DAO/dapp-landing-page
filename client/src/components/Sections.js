@@ -43,10 +43,11 @@ export default function ComplexGrid() {
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
-                                    Standard license
+                                    Crowd Sourcing
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    You have lost connection to lost connection to the internet. This app is offline.
+                                    We believe borders should not separate people from each other and our focuse is global
+                                    have lost connection to lost connection to the internet. This app is offline.
                                     You have lost connectionlost connection to  to the internet. This app is offline.
                                     You have lost connectiolost connection to n to the internet. This app is offline.
                                     You have lost connectiolost connection to n to the internet. This app is offline.

@@ -16,6 +16,8 @@ export default function() {
                     rthjdh gehjdj dhgehjdyj trjtrjj thj dhge hshshshjdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rthjdhgehjdythjdhgehjdyj trjtrjj thjdhgehjdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rt hjdhgehj dythjdhgehjdyj trjtrjj thjdh gehjdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
+                    receive a Nakama token - App Dapp
+                    find out what we have been up to from our website or just keep scrolling
                 </Typography>
             </div>
         </Container>
