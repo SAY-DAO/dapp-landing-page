@@ -16,7 +16,9 @@ class App extends Component {
     state = {
         web3: null,
         userAccount: null,
-        contract: null
+        contract: null,
+        totalSupply: 0,
+        nakamas: []
     };
 
     componentDidMount() {
@@ -58,6 +60,30 @@ class App extends Component {
             window.ethereum.request({ method: 'eth_requestAccounts' });
     };
 
+    onMint = async () => {
+        const contract = this.state.contract;
+        const totalSupply = await contract.methods.totalSupply().call()
+        this.setState({totalSupply})
+        console.log(totalSupply)
+        for (let i=1; i <= totalSupply; i++) {
+           const token = await contract.methods.tokenURI(i).call()
+            this.setState({nakamas: [...this.state.nakamas, token]})
+        }
+        console.log(this.state.nakamas)
+        const nakama = await contract.methods.awardItem('0x9ADAc2568f035707d3b88EA8D7F705f0B4481D67', "sefgsfsefes").send({
+            from: this.state.userAccount })
+            .once('receipt', (receipt) => {
+                this.setState({
+                    nakamas: [...this.state.nakamas, nakama]
+                })
+        })
+
+        // const nakama3 = await contract.methods.awardItem('0x8eb307186C929b0a06CcC9A2F83398e53a9E5FC4', "sefgfdtesfsefes").call()
+        // console.log(nakama2)
+        // console.log(nakama3)
+
+    }
+
     render() {
         // if (!this.state.web3) {
         //     return(
@@ -73,8 +99,14 @@ class App extends Component {
                 <CssBaseline />
                 <Container>
                     <NavBar onConnect={this.onConnect} />
+                    <button onClick={this.onMint}>Mint a Nakama</button>
                     <IntroSection />
+
                     {this.state.userAccount}
+                    <br/>
+                    {this.state.nakamas.map((token, key) => {
+                        return(token)
+                    })}
                     <MidSection />
                     <VerticalTabs />
                     <EndSection />

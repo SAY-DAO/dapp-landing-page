@@ -53,7 +53,7 @@ export default function SignIn() {
                                 <TextField id="outlined-basic" label="ETH" type="number" variant="outlined" />
                             </Grid>
                             <Grid>
-                                <Button variant="outlined"  color="secondary">
+                                <Button type="submit" variant="outlined"  color="secondary">
                                     pay with ETH
                                 </Button>
                             </Grid>
