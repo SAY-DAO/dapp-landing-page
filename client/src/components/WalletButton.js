@@ -15,11 +15,28 @@ const MyButton = styled(Button)({
 });
 
 export default class WalletButton extends React.Component {
+    componentDidMount() {
+        this.walletStatus()
+        console.log(this.props.state.walletConnection)
+    }
+
+    walletStatus = () => {
+        if(this.props.state.walletConnection !== "CONNECTED"){
+            return "Connect Wallet"
+        }
+        return this.props.state.userAccount
+    }
+
+
     render()
     {
+        const walletStatus =this.walletStatus()
+
         return (
             <div className="App">
-                <MyButton color="secondary" variant="outlined" onClick={this.props.onConnect}>Connect Wallet</MyButton>
+                <MyButton color="secondary" variant="outlined" onClick={this.props.onConnect}>
+                    { walletStatus }
+                </MyButton>
             </div>
         );
     }

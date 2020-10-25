@@ -32,7 +32,7 @@ const styles = (theme) => ({
 
 class NavBar extends React.Component {
     render() {
-    const renderButton = ( <WalletButton onConnect={this.props.onConnect}/>);
+    const renderButton = ( <WalletButton onConnect={this.props.onConnect} state={this.props.state}/>);
 
     const {classes} = this.props
     return (

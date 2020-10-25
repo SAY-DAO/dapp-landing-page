@@ -10,6 +10,7 @@ export default function() {
                     The world is changing so is SAY
                 </Typography>
                 <Typography align="center"  variant="body1">
+                    receive a Nakama token by helping a child with their needs our leave us your email to stay updated.
                     rthjdhgehjdyt hjdhgehjdyj trjtrjj thjdhgehjhhdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rthjdhg gehfdhgfdh fdhshshj thjdhg ehjdyj trjtrhjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rth jdhge hjdythjdhgehjdyj trjtrjj t hjdhgehjdyj trjtr jtrjtrjs tyj thjdhgehjdyj trjtrjjsj

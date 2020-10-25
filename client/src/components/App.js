@@ -14,25 +14,32 @@ import Nakama from "../contracts/Nakama.json";
 
 class App extends Component {
     state = {
+        walletConnection: 'NOT_CONNECTED',
         web3: null,
+        accounts: null,
         userAccount: null,
         contract: null,
         totalSupply: 0,
         nakamas: []
     };
 
-    componentDidMount() {
-        window.addEventListener("load", async () => {
+    componentDidMount = async () => {
             try {
+                if (typeof window.ethereum === 'undefined') {
+                    console.log('MetaMask is not installed!');
+                }
+
                 // Get network provider and web3 instance.
                 const web3 = await getWeb3();
                 this.setState({web3})
-                console.log('here')
 
                 // Use web3 to get the user's accounts.
                 const accounts = await web3.eth.getAccounts();
+                if (accounts[0]){
+                    this.setState({ walletConnection: "CONNECTED" })
+                }
                 const networkId = await web3.eth.net.getId();
-                console.log(networkId)
+                console.log('Network id: ',networkId)
 
                 // Get the contract instance.
                 const deployedNetwork = Nakama.networks[networkId];
@@ -41,7 +48,7 @@ class App extends Component {
                     deployedNetwork && deployedNetwork.address,
                 );
 
-                this.setState({ web3, userAccount: accounts[0], contract: nakama });
+                this.setState({ web3, accounts, userAccount: accounts[0], contract: nakama });
                 window.ethereum.on('accountsChanged',  (accounts) => {
                     // Time to reload your interface with accounts[0]!
                     this.setState({ userAccount: accounts[0] })
@@ -51,13 +58,19 @@ class App extends Component {
                 alert(
                     `Failed to load web3, accounts, or contract. Check console for details.`,
                 );
-            }
-        })
+        }
     }
 
     onConnect = async () => {
             // Request account access if needed
-            window.ethereum.request({ method: 'eth_requestAccounts' });
+            try {
+                // Metmask pops up if not connected
+                window.ethereum.request({method: 'eth_requestAccounts'});
+                this.setState({ walletConnection: "CONNECTED" })
+            }catch (error) {
+                console.log(error)
+            }
+
     };
 
     onMint = async () => {
@@ -70,18 +83,14 @@ class App extends Component {
             this.setState({nakamas: [...this.state.nakamas, token]})
         }
         console.log(this.state.nakamas)
-        const nakama = await contract.methods.awardItem('0x9ADAc2568f035707d3b88EA8D7F705f0B4481D67', "sefgsfsefes").send({
-            from: this.state.userAccount })
+        const nakama = await contract.methods.awardItem('0x50c8de07d6964b3b3b9DE1c35bA8bddB7a0429De', "esyj").send({
+            from: this.state.accounts[0],
+        })
             .once('receipt', (receipt) => {
                 this.setState({
                     nakamas: [...this.state.nakamas, nakama]
                 })
         })
-
-        // const nakama3 = await contract.methods.awardItem('0x8eb307186C929b0a06CcC9A2F83398e53a9E5FC4', "sefgfdtesfsefes").call()
-        // console.log(nakama2)
-        // console.log(nakama3)
-
     }
 
     render() {
@@ -98,11 +107,9 @@ class App extends Component {
                 {/* Older browsers need a lot of normalization help*/}
                 <CssBaseline />
                 <Container>
-                    <NavBar onConnect={this.onConnect} />
+                    <NavBar onConnect={this.onConnect} state={this.state}/>
                     <button onClick={this.onMint}>Mint a Nakama</button>
                     <IntroSection />
-
-                    {this.state.userAccount}
                     <br/>
                     {this.state.nakamas.map((token, key) => {
                         return(token)
