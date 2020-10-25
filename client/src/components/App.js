@@ -52,6 +52,7 @@ class App extends Component {
                 window.ethereum.on('accountsChanged',  (accounts) => {
                     // Time to reload your interface with accounts[0]!
                     this.setState({ userAccount: accounts[0] })
+
                 })
             } catch (error) {
                 // Catch any errors for any of the above operations.
