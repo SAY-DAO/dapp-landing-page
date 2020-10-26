@@ -73,7 +73,7 @@ class WalletButton extends React.Component {
         if(!this.props.theWallet.accounts[0]){
             return(
                 <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-                    Connnnnect
+                    Connect Wallet
                 </MyButton>
             )
         }

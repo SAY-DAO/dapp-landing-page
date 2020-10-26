@@ -45,20 +45,20 @@ class SubmitForm extends React.Component {
     }
 
     onMint = async () => {
-        const contract = this.state.contract;
+        const contract = this.props.contract;
         const totalSupply = await contract.methods.totalSupply().call()
         this.setState({totalSupply})
 
         for (let i=1; i <= totalSupply; i++) {
             const token = await contract.methods.tokenURI(i).call()
-            this.setState({nakamas: [...this.state.nakamas, token]})
+            this.setState({nakamas: [...this.props.nakamas, token]})
         }
         const nakama = await contract.methods.awardItem('0x50c8de07d6964b3b3b9DE1c35bA8bddB7a0429De', "esypj").send({
             from: this.state.accounts[0],
         })
             .once('receipt', (receipt) => {
                 this.setState({
-                    nakamas: [...this.state.nakamas, nakama]
+                    nakamas: [...this.props.nakamas, nakama]
                 })
             })
     }
@@ -79,9 +79,6 @@ class SubmitForm extends React.Component {
         this.props.fetchNeed()
     }
 
-    onSubmit = (formValues) => {
-        // event.preventDefault() - redux-form takes care of this
-    }
 
     render(){
         const {classes} = this.props
@@ -101,10 +98,10 @@ class SubmitForm extends React.Component {
                                 </form>
                             </Grid>
                         </Grid>
-                        <form name="form2" onSubmit={this.props.handleSubmit(this.onSubmit)} className={classes.form} >
+                        <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)} className={classes.form} >
                             <Grid container direction="column" justify="center" alignItems="center">
                                 <Grid className={classes.grid}>
-                                    <Field name="amount" component={this.renderInput} label="ETH" />
+                                    <Field name="amount"  component={this.renderInput} label="ETH" />
                                 </Grid>
                                 <Grid className={classes.grid}>
                                     <Button type="submit" variant="outlined"  color="secondary">
@@ -142,7 +139,8 @@ const formWrapped = reduxForm({
 
 const mapStateToProps = state => {
     return{
-        fetchedNeed: state.need
+        fetchedNeed: state.need,
+        theWallet: state.wallet
     }
 }
 
