@@ -8,6 +8,9 @@ import Container from '@material-ui/core/Container';
 import Paper from "@material-ui/core/Paper";
 import { Field, reduxForm } from "redux-form";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { connect } from 'react-redux';
+import { fetchNeed } from '../actions'
+import Need from "./Need";
 
 
 const styles = ((theme) => ({
@@ -22,8 +25,8 @@ const styles = ((theme) => ({
     },
 
     avatar: {
+        maxWidth: "75%",
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -32,15 +35,19 @@ const styles = ((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+
 }));
 
 class SubmitForm extends React.Component {
+    componentDidMount() {
+        this.props.fetchNeed()
+    }
 
     getChild = () => {
         return "Nima"
     };
 
-    renderInput = ({label, input, meta: { touched, invalid, error }, ...custom}) => (
+    renderInput = ({label, input, meta: { touched, invalid, error }}) => (
         <TextField
             variant="outlined"
             label={label}
@@ -48,32 +55,37 @@ class SubmitForm extends React.Component {
             error={touched && invalid}
             helperText={touched && error}
             {...input}
-            {...custom}
         />
     )
 
-    onSubmit(formValues) {
+    randomNeed = () => {
+        this.props.fetchNeed()
+    }
+
+    onSubmit = (formValues) => {
         // event.preventDefault() - redux-form takes care of this
         console.log(formValues)
     }
 
     render(){
-        const child = this.getChild
         const {classes} = this.props
     return (
             <Container id="intro" component="main" maxWidth="xs">
                 <CssBaseline />
                 <Paper className={classes.paper} elevation={3} >
-                    <div className={classes.paper}>
-                        <img alt="child" src={require('../static/child.svg')}/>
-                        <Typography component="h1" variant="h5">
-                            {'child'}
-                        </Typography>
-                        <form onSubmit={this.props.handleSubmit(this.onSubmit)} className={classes.form} noValidate>
+                <div className={classes.paper}>
+                        <Grid container direction="column" justify="center" alignItems="center">
+                            <Need props={this.props.fetchedNeed}/>
+                            <Grid>
+                                <form name="form1" onSubmit={this.props.handleSubmit(this.randomNeed)} className={classes.form} noValidate>
+                                    <Button  type="submit" variant="outlined"  color="secondary">
+                                        Random Need
+                                    </Button>
+                                </form>
+                            </Grid>
+                        </Grid>
+                        <form name="form2" onSubmit={this.props.handleSubmit(this.onSubmit)} className={classes.form} >
                             <Grid container direction="column" justify="center" alignItems="center">
-                                <Grid className={classes.grid}>
-                                    <Field name="amount" component={this.renderInput} label="ETH" />
-                                </Grid>
                                 <Grid className={classes.grid}>
                                     <Field name="amount" component={this.renderInput} label="ETH" />
                                 </Grid>
@@ -94,6 +106,7 @@ class SubmitForm extends React.Component {
 const validate = (formValues) => {
     const errors ={};
     console.log(formValues)
+
     if(!formValues.amount){
         errors.amount = "Enter Amount"
     }
@@ -105,7 +118,17 @@ const validate = (formValues) => {
     return errors;
 }
 
-export default reduxForm({
+const formWrapped = reduxForm({
     form: 'becomeNakama',
-    validate
+    // validate
 }) (withStyles(styles)(SubmitForm));
+
+
+const mapStateToProps = state => {
+    return{
+        fetchedNeed: state.need
+    }
+}
+
+
+export default connect(mapStateToProps, { fetchNeed })(formWrapped);

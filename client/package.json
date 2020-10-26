@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "axios": "^0.21.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "16.11.0",
     "react-dom": "16.11.0",
