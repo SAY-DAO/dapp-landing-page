@@ -11,6 +11,8 @@ export default function() {
                 </Typography>
                 <Typography align="center"  variant="body1">
                     receive a Nakama token by helping a child with their needs our leave us your email to stay updated.
+                    we use nakama to connect to you to your child.
+                    we will show the receipt in next stage using nakama
                     rthjdhgehjdyt hjdhgehjdyj trjtrjj thjdhgehjhhdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rthjdhg gehfdhgfdh fdhshshj thjdhg ehjdyj trjtrhjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rth jdhge hjdythjdhgehjdyj trjtrjj t hjdhgehjdyj trjtr jtrjtrjs tyj thjdhgehjdyj trjtrjjsj

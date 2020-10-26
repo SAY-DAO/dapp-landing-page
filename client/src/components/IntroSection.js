@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Paper from "@material-ui/core/Paper";
 import { Field, reduxForm } from "redux-form";
@@ -38,14 +37,32 @@ const styles = ((theme) => ({
 
 }));
 
+
+
 class SubmitForm extends React.Component {
     componentDidMount() {
         this.props.fetchNeed()
     }
 
-    getChild = () => {
-        return "Nima"
-    };
+    onMint = async () => {
+        const contract = this.state.contract;
+        const totalSupply = await contract.methods.totalSupply().call()
+        this.setState({totalSupply})
+
+        for (let i=1; i <= totalSupply; i++) {
+            const token = await contract.methods.tokenURI(i).call()
+            this.setState({nakamas: [...this.state.nakamas, token]})
+        }
+        const nakama = await contract.methods.awardItem('0x50c8de07d6964b3b3b9DE1c35bA8bddB7a0429De', "esypj").send({
+            from: this.state.accounts[0],
+        })
+            .once('receipt', (receipt) => {
+                this.setState({
+                    nakamas: [...this.state.nakamas, nakama]
+                })
+            })
+    }
+
 
     renderInput = ({label, input, meta: { touched, invalid, error }}) => (
         <TextField
@@ -64,7 +81,6 @@ class SubmitForm extends React.Component {
 
     onSubmit = (formValues) => {
         // event.preventDefault() - redux-form takes care of this
-        console.log(formValues)
     }
 
     render(){
@@ -75,6 +91,7 @@ class SubmitForm extends React.Component {
                 <Paper className={classes.paper} elevation={3} >
                 <div className={classes.paper}>
                         <Grid container direction="column" justify="center" alignItems="center">
+
                             <Need props={this.props.fetchedNeed}/>
                             <Grid>
                                 <form name="form1" onSubmit={this.props.handleSubmit(this.randomNeed)} className={classes.form} noValidate>
@@ -105,7 +122,6 @@ class SubmitForm extends React.Component {
 
 const validate = (formValues) => {
     const errors ={};
-    console.log(formValues)
 
     if(!formValues.amount){
         errors.amount = "Enter Amount"
@@ -120,7 +136,7 @@ const validate = (formValues) => {
 
 const formWrapped = reduxForm({
     form: 'becomeNakama',
-    // validate
+    validate
 }) (withStyles(styles)(SubmitForm));
 
 

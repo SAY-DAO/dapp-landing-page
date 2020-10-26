@@ -15,6 +15,21 @@ export const fetchNeed = () =>  async dispatch => {
         })
 }
 
+export const connectWallet = (accounts, web3, networkId, nakama) => {
+        return({
+                type: "CONNECT_WALLET",
+                payload: {
+                        accounts,
+                        userAccount: accounts[0],
+                        web3,
+                        networkId,
+                        nakama
+                }
+        })
+}
+
+
+
 //
 // export const updateServer = (data) => async dispatch => {
 //         const response = randomNeed.post(`/ethereum/${data.needId}/${data.transaction}`);
@@ -23,3 +38,4 @@ export const fetchNeed = () =>  async dispatch => {
 //                 payload: response.data
 //         });
 // }
+

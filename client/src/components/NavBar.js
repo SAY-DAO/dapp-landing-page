@@ -32,8 +32,6 @@ const styles = (theme) => ({
 
 class NavBar extends React.Component {
     render() {
-    const renderButton = ( <WalletButton onConnect={this.props.onConnect} state={this.props.state}/>);
-
     const {classes} = this.props
     return (
         <div>
@@ -44,9 +42,8 @@ class NavBar extends React.Component {
                             <img alt="logo" src={require('../static/sayLogo.png')}/>
                         </Grid>
                         <Grid  container className={classes.buttonGrid} item xs={6}>
-                            {renderButton}
+                            <WalletButton />
                         </Grid>
-
                     </Grid>
                 </Toolbar>
             </AppBar>
