@@ -46,21 +46,29 @@ class SubmitForm extends React.Component {
 
     onMint = async () => {
         const contract = this.props.theWallet.contract;
-        const totalSupply = await contract.methods.totalSupply().call()
-        this.setState({totalSupply})
-
-        for (let i=1; i <= totalSupply; i++) {
-            const token = await contract.methods.tokenURI(i).call()
-            this.setState({nakamas: [...this.props.nakamas, token]})
+        console.log(contract)
+        try{
+            const totalSupply = await contract.methods.totalSupply().call()
+            console.log(`total supply: ${totalSupply}`)
+            for (let i=1; i <= totalSupply; i++) {
+                const token = await contract.methods.tokenURI(i).call()
+                this.setState({nakamas: [...this.props.nakamas, token]})
+            }
+        }catch (error) {
+            console.log("error: ", error)
         }
-        const nakama = await contract.methods.awardItem('0x50c8de07d6964b3b3b9DE1c35bA8bddB7a0429De', "es9ypj").send({
-            from: this.state.accounts[0],
+
+        console.log(this.props.theWallet.accounts[0])
+
+        const nakama = await contract.methods.awardItem('0x9F48492751919439DEeAeaFd1C096555730CD182', "first nakama").send({
+            from: this.props.theWallet.accounts[0],
         })
-            .once('receipt', (receipt) => {
-                this.setState({
-                    nakamas: [...this.props.nakamas, nakama]
-                })
-            })
+            // .once('receipt', (receipt) => {
+            //     this.setState({
+            //         nakamas: [...this.props.nakamas, nakama]
+            //     })
+            // })
+        console.log(nakama)
     }
 
 
