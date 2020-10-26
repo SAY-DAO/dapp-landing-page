@@ -45,7 +45,7 @@ class SubmitForm extends React.Component {
     }
 
     onMint = async () => {
-        const contract = this.props.contract;
+        const contract = this.props.theWallet.contract;
         const totalSupply = await contract.methods.totalSupply().call()
         this.setState({totalSupply})
 
@@ -53,7 +53,7 @@ class SubmitForm extends React.Component {
             const token = await contract.methods.tokenURI(i).call()
             this.setState({nakamas: [...this.props.nakamas, token]})
         }
-        const nakama = await contract.methods.awardItem('0x50c8de07d6964b3b3b9DE1c35bA8bddB7a0429De', "esypj").send({
+        const nakama = await contract.methods.awardItem('0x50c8de07d6964b3b3b9DE1c35bA8bddB7a0429De', "es9ypj").send({
             from: this.state.accounts[0],
         })
             .once('receipt', (receipt) => {
@@ -88,7 +88,6 @@ class SubmitForm extends React.Component {
                 <Paper className={classes.paper} elevation={3} >
                 <div className={classes.paper}>
                         <Grid container direction="column" justify="center" alignItems="center">
-
                             <Need props={this.props.fetchedNeed}/>
                             <Grid>
                                 <form name="form1" onSubmit={this.props.handleSubmit(this.randomNeed)} className={classes.form} noValidate>
