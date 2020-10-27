@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 
-const styles = (theme) => ({
+const styles = (darkTheme) => ({
     root: {
         flexGrow: 1
     },
@@ -21,7 +21,7 @@ const styles = (theme) => ({
         justifyContent: "flex-end",
         direction: "row",
         display: "none",
-        [theme.breakpoints.up("sm")]: {
+        [darkTheme.breakpoints.up("sm")]: {
             display: "flex"
         }
     }

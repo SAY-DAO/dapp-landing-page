@@ -13,6 +13,14 @@ const darkTheme = createMuiTheme({
             main: '#FFF688',
         },
     },
+    typography: {
+        // fontFamily: 'Turret Road',
+        button: {
+            textTransform: ""
+        }
+    },
+
+
 });
 
 export default darkTheme;

@@ -14,16 +14,17 @@ import Button from "@material-ui/core/Button";
 import {Field, reduxForm} from "redux-form";
 import TextField from "@material-ui/core/TextField";
 
-const styles = ((theme) => ({
+const styles = ((darkTheme) => ({
     root: {
         width: '100%',
     },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
+    more: {
+        fontSize: darkTheme.typography.pxToRem(15),
+        fontWeight: darkTheme.typography.fontWeightRegular,
+        fontFamily: 'Londrina Shadow'
     },
     accordion: {
-      background: "#000000"
+      background: "#000000",
     },
     border: {
         borderColor: '#FFF688',
@@ -36,7 +37,9 @@ const styles = ((theme) => ({
         background: "#000000",
         minWidth: 60,
         minHeight: 60
-    }
+    },
+
+
 }));
 
 
@@ -95,12 +98,12 @@ class TheNeed extends React.Component {
         const totalSupply = (await this.getContract()).totalSupply
         console.log("Smart Contract: ", contract)
         console.log("Total Supply: ", totalSupply)
-        const userAccount = this.props.theWallet.accounts[0]
+        const userAccount = this.props.theWallet.userAccount
         const theNeed = this.props.fetchedNeed
 
         try{
             const nakama = await contract.methods.awardItem(userAccount, JSON.stringify(theNeed)).send({
-                from: this.props.theWallet.accounts[0],
+                from: this.props.theWallet.userAccount,
             })
                 .once('receipt', (receipt) => {
                     console.log({nakama})
@@ -111,100 +114,134 @@ class TheNeed extends React.Component {
         }
     }
 
-    render() {
-    const { classes } = this.props
-    if(this.props.fetchedNeed) {
-        return (
-            <div>
-                <Grid className={classes.grid}>
-                    <Field name="amount" component={this.renderInput} label="ETH"/>
-                </Grid>
-                <Box display="flex" p={1} m={1} alignItems="center">
+    renderTheForm = () => {
+        const { classes } = this.props
+            return (
+                <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)}>
+                    <Box display="flex" flexDirection="row" p={1} m={1} alignItems="center">
+                        <Box m={1}>
+                            <Field name="amount" component={this.renderInput} label="ETH"/>
+                        </Box>
+                        <Box>
+                            <Button type="submit" variant="outlined" color="secondary" className={classes.button}>
+                                Mint NFT
+                            </Button>
+                        </Box>
+                    </Box>
+                </form>
+            )
+        }
 
-                    <Box m={2}>
-                        <form name="form1" onSubmit={this.props.handleSubmit(this.randomNeed)} className={classes.form}
-                              noValidate>
-                            <Button type="submit" variant="outlined" color="secondary">
-                                Random Need
+
+    render() {
+        const { classes } = this.props
+        if(this.props.fetchedNeed) {
+            return (
+                <div className={classes.root}>
+                    <Box display="flex" p={1} m={1} justifyContent="center">
+                        <form name="form1" onSubmit={this.props.handleSubmit(this.randomNeed)} noValidate >
+                            <Button type="submit" variant="outlined" color="secondary" className={ classes.button }>
+                                Random Search
                             </Button>
                         </form>
-                    </Box>
-                    <Box m={2}>
-                        <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)} className={classes.form}>
-                            <Button type="submit" variant="outlined" color="secondary">
-                                pay with ETH
-                            </Button>
-                        </form>
-                    </Box>
-                </Box>
-                <Box display="flex" p={1} m={1} alignItems="center">
-                    <Box m={2}>
-                        <Avatar className={classes.needIcon}>
-                            <img src={`https://sayapp.company${this.props.fetchedNeed.imageUrl}`} alt="need icons"/>
-                        </Avatar>
                     </Box>
                     <Box>
-                        <Typography component="p" variant="subtitle1" align="center">
-                            {this.props.fetchedNeed.name} -- { this.props.fetchedEth.needEthCost}
-                        </Typography>
+                        { this.renderTheForm() }
                     </Box>
-                </Box>
-                <Grid>
-                    <div className={classes.root}>
-                        <Accordion className={classes.accordion}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon/>}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography className={classes.heading}>More...</Typography>
-                            </AccordionSummary>
-                            <Box display="flex" justifyContent="center" className={classes.border}>
-                                <Box borderTop={1} className={classes.border}/>
-                            </Box>
-                            <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-                                    ex,
-                                    sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                    </div>
-                </Grid>
-            </div>
-        )
-    }
+                    <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+                        <Box>
+                            <Avatar className={classes.needIcon}>
+                                <img src={`https://sayapp.company${this.props.fetchedNeed.imageUrl}`} alt="need icons"/>
+                            </Avatar>
+                        </Box>
+                        <Box p={1}>
+                            <Typography component="p" variant="subtitle1" align="center" style={{ fontFamily: 'Londrina Shadow', fontSize:"1.5rem" }}>
+                                {this.props.fetchedNeed.name}
+                            </Typography>
+                        </Box>
+                        <Box p={1}>
+                            <Typography component="p" variant="subtitle1" align="center" style={{ fontFamily: 'Londrina Shadow', fontSize:"1.5rem" }}>
+                                { this.props.fetchedEth.needEthCost}
+                            </Typography>
+                        </Box>
+                        <Box pt={2}>
+                            <img alt="eth" src={require('../static/eth.svg')} />
+                        </Box>
+                    </Box>
+
+                    <Grid>
+                        <div className={classes.root}>
+                            <Accordion className={classes.accordion}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon/>}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                >
+                                    <Typography className={classes.more}>More...</Typography>
+                                </AccordionSummary>
+                                <Box display="flex" justifyContent="center" className={classes.border}>
+                                    <Box borderTop={1} className={classes.border}/>
+                                </Box>
+                                <AccordionDetails>
+                                    <Typography style={{ fontFamily: 'Londrina Shadow'}} >
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
+                                        ex,
+                                        sit amet blandit leo lobortis eget.
+                                    </Typography>
+                                </AccordionDetails>
+                            </Accordion>
+                        </div>
+                    </Grid>
+                </div>
+            )
+        }
     }
 }
 
-
-const validate = (formValues) => {
-    const errors ={};
-
-    if(!formValues.amount){
-        errors.amount = "Enter Amount"
+const validate = values => {
+    const errors = {}
+    if (!values.username) {
+        errors.username = 'Required'
+    } else if (values.username.length > 15) {
+        errors.username = 'Must be 15 characters or less'
     }
-    // parsing the formValues string to an integer
-    else if(parseInt(formValues.amount, 10) < 5){
-        errors.amount = 'minimum is 5 yo!'
+    if (!values.email) {
+        errors.email = 'Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address'
     }
-
-    return errors;
+    if (!values.age) {
+        errors.age = 'Required'
+    } else if (isNaN(Number(values.age))) {
+        errors.age = 'Must be a number'
+    } else if (Number(values.age) < 18) {
+        errors.age = 'Sorry, you must be at least 18 years old'
+    }
+    return errors
 }
 
+const warn = values => {
+    const warnings = {}
+    if (values.age < 19) {
+        warnings.age = 'Hmm, you seem a bit young...'
+    }
+    return warnings
+}
+
+
+const formWrapped = reduxForm({
+    form: 'syncValidation', // a unique identifier for this form
+    validate, // <--- validation function given to redux-form
+    warn // <--- warning function given to redux-form
+})(withStyles(styles)(TheNeed))
 
 const mapStateToProps = state => {
     return{
         fetchedNeed: state.need,
-        fetchedEth: state.ethPrice
+        fetchedEth: state.ethPrice,
+        theWallet: state.wallet
     }
 }
-
-const formWrapped = reduxForm({
-    form: 'becomeNakama',
-    validate
-}) (withStyles(styles)(TheNeed));
 
 
 export default connect(mapStateToProps, {fetchEthPrice, fetchNeed})(formWrapped)

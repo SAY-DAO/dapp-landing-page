@@ -6,12 +6,12 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Container from "@material-ui/core/Container";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((darkTheme) => ({
     root: {
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: darkTheme.spacing(2),
         margin: 'auto',
         maxWidth: 1000,
     },

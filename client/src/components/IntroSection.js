@@ -10,27 +10,28 @@ import TheChild from "./TheChild";
 import TheNeed from "./TheNeed";
 
 
-const styles = ((theme) => ({
+const styles = ((darkTheme) => ({
     paper: {
-        marginTop: theme.spacing(3),
+        marginTop: darkTheme.spacing(3),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+
     },
     grid: {
-        marginTop: theme.spacing(3),
+        marginTop: darkTheme.spacing(3),
     },
 
     avatar: {
         maxWidth: "75%",
-        margin: theme.spacing(1),
+        margin: darkTheme.spacing(1),
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: darkTheme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: darkTheme.spacing(3, 0, 2),
     },
 
 }));
@@ -50,7 +51,7 @@ class IntroSection extends React.Component {
                 <div className={classes.paper}>
                         <Grid container direction="column" justify="center" alignItems="center">
                             <TheChild/>
-                            <Paper style={{ background: "#000000", width: "90%" ,marginBottom: 10}}>
+                            <Paper style={{ background: "#000000", width: "85%" ,margin: 15}}>
                                 <TheNeed />
                             </Paper>
                         </Grid>

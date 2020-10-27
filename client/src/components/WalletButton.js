@@ -15,7 +15,8 @@ const MyButton = styled(Button)({
     color: 'white',
     height: 48,
     padding: '0 30px',
-    margin: 30
+    margin: 30,
+    whiteSpace: "normal"
 
 });
 
@@ -70,6 +71,7 @@ class WalletButton extends React.Component {
     };
 
     walletStatus = () => {
+
         if(!this.props.theWallet.accounts[0]){
             return(
                 <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
@@ -77,9 +79,14 @@ class WalletButton extends React.Component {
                 </MyButton>
             )
         }
+        const userAccount = this.props.theWallet.userAccount
+        console.log(userAccount)
+        const userAccountStart = userAccount.slice(0, 6);
+        const userAccountEnd = userAccount.slice(-5);
+
         return(
             <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-                {this.props.theWallet.accounts[0]}
+                {userAccountStart} ... {userAccountEnd}
             </MyButton>
         )
     }

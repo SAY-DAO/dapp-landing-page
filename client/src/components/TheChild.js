@@ -5,14 +5,15 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux"
 import {fetchNeed} from "../actions";
 
-const styles = ((theme) => ({
+const styles = ((darkTheme) => ({
     childImg: {
         maxWidth: 225,
-        margin: theme.spacing(1),
+        margin: darkTheme.spacing(1),
         boxShadow: "10px",
         justifyContent: "center",
         background: "#501E33",
-        borderRadius: "50%"
+        borderRadius: "50%",
+        filter: "drop-shadow(0px 18px 18px #262617)"
     }
 }));
 

@@ -41,18 +41,18 @@ function a11yProps(index) {
     };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((darkTheme) => ({
     root: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: darkTheme.palette.background.paper,
         display: 'flex',
     },
     tabs: {
-        borderRight: `1px solid ${theme.palette.divider}`,
+        borderRight: `1px solid ${darkTheme.palette.divider}`,
 
     },
     paper: {
-        padding: theme.spacing(6),
+        padding: darkTheme.spacing(6),
         margin: 'auto',
         maxWidth: 1440,
     },
