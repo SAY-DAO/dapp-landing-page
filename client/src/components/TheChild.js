@@ -25,7 +25,6 @@ class TheChild extends React.Component {
 
     renderForm() {
         const { classes } = this.props
-
         if(this.props.fetchedNeed['childAvatarUrl']) {
             const imgUrl = this.props.fetchedNeed['childAvatarUrl']
             return (

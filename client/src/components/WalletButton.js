@@ -86,7 +86,7 @@ class WalletButton extends React.Component {
 
         return(
             <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-                {userAccountStart} ... {userAccountEnd}
+                {userAccountStart}...{userAccountEnd}
             </MyButton>
         )
     }

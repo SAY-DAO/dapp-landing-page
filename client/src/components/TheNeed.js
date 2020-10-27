@@ -29,7 +29,8 @@ const styles = ((darkTheme) => ({
     border: {
         borderColor: '#FFF688',
         width: "80%",
-        margin: 10,
+        marginBottom: 10,
+        marginLeft: 25,
         style: { width: '5rem', height: '5rem' },
         zIndex: 1000
     },
@@ -54,18 +55,9 @@ class TheNeed extends React.Component {
         console.log(needFetchedCost, fetchedCostCleaned, this.props.fetchedEth)
     }
 
-    renderInput = ({label, input, meta: { touched, invalid, error }}) => (
-        <TextField
-            variant="outlined"
-            label={label}
-            placeholder={label}
-            error={touched && invalid}
-            helperText={touched && error}
-            {...input}
-        />
-    )
 
-    randomNeed = async () => {
+    randomNeed = async (event) => {
+        event.preventDefault()
         await this.props.fetchNeed()
         const needFetchedCost = this.props.fetchedNeed.cost
         await this.props.fetchEthPrice(needFetchedCost)
@@ -94,19 +86,21 @@ class TheNeed extends React.Component {
     }
 
     onMint = async () => {
+        console.log("huh")
         const contract = (await this.getContract()).contract
         const totalSupply = (await this.getContract()).totalSupply
         console.log("Smart Contract: ", contract)
         console.log("Total Supply: ", totalSupply)
         const userAccount = this.props.theWallet.userAccount
         const theNeed = this.props.fetchedNeed
+        console.log(userAccount)
 
         try{
             const nakama = await contract.methods.awardItem(userAccount, JSON.stringify(theNeed)).send({
-                from: this.props.theWallet.userAccount,
+                from: this.props.theWallet.accounts[0],
             })
                 .once('receipt', (receipt) => {
-                    console.log({nakama})
+                    console.log("NAK Receipt")
                 })
         }catch (error) {
             if(error.code === -32603)
@@ -114,16 +108,30 @@ class TheNeed extends React.Component {
         }
     }
 
+    renderInput = ({label, input, meta: { touched, invalid, error }}) => (
+        <TextField
+            // variant="outlined"
+            type="number"
+            label={label}
+            inputProps={{ min: this.props.fetchedEth.needEthCost }}
+            placeholder={this.props.fetchedEth.needEthCost}
+            error={touched && invalid}
+            helperText={touched && error}
+            {...input}
+        />
+    )
+
     renderTheForm = () => {
         const { classes } = this.props
             return (
                 <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)}>
-                    <Box display="flex" flexDirection="row" p={1} m={1} alignItems="center">
-                        <Box m={1}>
-                            <Field name="amount" component={this.renderInput} label="ETH"/>
+                    <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+                        <Box m={1} style={{ width: "50%", maxHeight: "70%"}}>
+                            <Field name="amount" component={this.renderInput} label="ETH" />
+
                         </Box>
-                        <Box>
-                            <Button type="submit" variant="outlined" color="secondary" className={classes.button}>
+                        <Box style={{ margin: "auto"}}>
+                            <Button type="submit" variant="outlined" color="secondary" >
                                 Mint NFT
                             </Button>
                         </Box>
@@ -139,7 +147,7 @@ class TheNeed extends React.Component {
             return (
                 <div className={classes.root}>
                     <Box display="flex" p={1} m={1} justifyContent="center">
-                        <form name="form1" onSubmit={this.props.handleSubmit(this.randomNeed)} noValidate >
+                        <form name="form1" onSubmit={this.randomNeed} noValidate >
                             <Button type="submit" variant="outlined" color="secondary" className={ classes.button }>
                                 Random Search
                             </Button>
@@ -155,12 +163,12 @@ class TheNeed extends React.Component {
                             </Avatar>
                         </Box>
                         <Box p={1}>
-                            <Typography component="p" variant="subtitle1" align="center" style={{ fontFamily: 'Londrina Shadow', fontSize:"1.5rem" }}>
+                            <Typography component="p" variant="subtitle1" align="center" style={{ fontFamily: 'Londrina Shadow', fontSize:"1.2rem" }}>
                                 {this.props.fetchedNeed.name}
                             </Typography>
                         </Box>
                         <Box p={1}>
-                            <Typography component="p" variant="subtitle1" align="center" style={{ fontFamily: 'Londrina Shadow', fontSize:"1.5rem" }}>
+                            <Typography component="p" variant="subtitle1" align="center" style={{ fontFamily: 'Londrina Shadow', fontSize:"1.2rem" }}>
                                 { this.props.fetchedEth.needEthCost}
                             </Typography>
                         </Box>
@@ -172,11 +180,7 @@ class TheNeed extends React.Component {
                     <Grid>
                         <div className={classes.root}>
                             <Accordion className={classes.accordion}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon/>}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
+                                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
                                     <Typography className={classes.more}>More...</Typography>
                                 </AccordionSummary>
                                 <Box display="flex" justifyContent="center" className={classes.border}>
@@ -199,31 +203,22 @@ class TheNeed extends React.Component {
 }
 
 const validate = values => {
+    console.log(values)
     const errors = {}
-    if (!values.username) {
-        errors.username = 'Required'
-    } else if (values.username.length > 15) {
-        errors.username = 'Must be 15 characters or less'
-    }
-    if (!values.email) {
-        errors.email = 'Required'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-    }
-    if (!values.age) {
-        errors.age = 'Required'
-    } else if (isNaN(Number(values.age))) {
-        errors.age = 'Must be a number'
-    } else if (Number(values.age) < 18) {
-        errors.age = 'Sorry, you must be at least 18 years old'
+    if (!values.amount) {
+        errors.amount = 'Required'
+    // } else if (isNaN(Number(values.amount))) {
+    //     errors.amount = 'Must be a number'
+    // } else if (Number(values.amount) < 18) {
+    //     errors.amount = `Minimum price to mint is the price of the need`
     }
     return errors
 }
 
 const warn = values => {
     const warnings = {}
-    if (values.age < 19) {
-        warnings.age = 'Hmm, you seem a bit young...'
+    if (values.amount < 19 ) {
+        warnings.amount = 'Hmm, you seem a bit young...'
     }
     return warnings
 }

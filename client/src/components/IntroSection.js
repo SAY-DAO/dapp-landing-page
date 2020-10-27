@@ -16,6 +16,14 @@ const styles = ((darkTheme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        borderRadius: 18
+
+    },
+    paper2: {
+        background: "#000000",
+        width: "85%" ,
+        margin: 15,
+        borderRadius: 18
 
     },
     grid: {
@@ -36,12 +44,7 @@ const styles = ((darkTheme) => ({
 
 }));
 
-
-
 class IntroSection extends React.Component {
-
-
-
     render(){
         const {classes} = this.props
     return (
@@ -51,7 +54,7 @@ class IntroSection extends React.Component {
                 <div className={classes.paper}>
                         <Grid container direction="column" justify="center" alignItems="center">
                             <TheChild/>
-                            <Paper style={{ background: "#000000", width: "85%" ,margin: 15}}>
+                            <Paper className={classes.paper2}>
                                 <TheNeed />
                             </Paper>
                         </Grid>
@@ -69,6 +72,5 @@ const mapStateToProps = state => {
         fetchedTokens: state.tokens,
     }
 }
-
 
 export default connect(mapStateToProps, {  mintedNakama })((withStyles(styles)(IntroSection)));
