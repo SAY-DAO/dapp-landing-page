@@ -28,6 +28,12 @@ export const connectWallet = (accounts, web3, networkId, nakama) => {
         })
 }
 
+export const mintedNakama = (NAK) => {
+        return({
+                type: "MINTED",
+                payload: NAK
+        })
+}
 
 
 //
