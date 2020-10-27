@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { connect } from "react-redux"
+import {fetchNeed} from "../actions";
 
 const styles = ((theme) => ({
     childImg: {
@@ -16,11 +18,15 @@ const styles = ((theme) => ({
 
 
 class TheChild extends React.Component {
+    componentDidMount = async () => {
+        await this.props.fetchNeed()
+    }
+
     renderForm() {
         const { classes } = this.props
 
-        if(this.props.props['childAvatarUrl']) {
-            const imgUrl = this.props.props['childAvatarUrl']
+        if(this.props.fetchedNeed['childAvatarUrl']) {
+            const imgUrl = this.props.fetchedNeed['childAvatarUrl']
             return (
                 <div>
                     <Grid container>
@@ -28,7 +34,7 @@ class TheChild extends React.Component {
                     </Grid>
                     <Grid>
                         <Typography  component="h1" variant="h5" align="center">
-                            {this.props.props.childSayName}
+                            {this.props.fetchedNeed.childSayName}
                         </Typography>
                     </Grid>
                 </div>
@@ -41,7 +47,7 @@ class TheChild extends React.Component {
                 </Grid>
                 <Grid>
                     <Typography  component="h1" variant="h5" align="center">
-                        {this.props.props.childSayName}
+                        {this.props.fetchedNeed.childSayName}
                     </Typography>
                 </Grid>
             </div>
@@ -57,4 +63,8 @@ class TheChild extends React.Component {
     }
 }
 
-export default withStyles(styles)(TheChild)
+const mapStateToProps = (state) =>{
+    return { fetchedNeed: state.need }
+}
+
+export default connect(mapStateToProps, { fetchNeed })(withStyles(styles)(TheChild))
