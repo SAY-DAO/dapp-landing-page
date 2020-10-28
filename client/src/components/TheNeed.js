@@ -17,6 +17,23 @@ import TextField from "@material-ui/core/TextField";
 const styles = ((darkTheme) => ({
     root: {
         width: '100%',
+        '& label.Mui-focused': {
+            color: '#FFF688',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#FFF688',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#ffffff',
+            },
+            '&:hover fieldset': {
+                borderColor: '#FFF688',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#FFF688',
+            },
+        },
     },
     more: {
         fontSize: darkTheme.typography.pxToRem(15),
@@ -27,7 +44,7 @@ const styles = ((darkTheme) => ({
       background: "#000000",
     },
     border: {
-        borderColor: '#FFF688',
+        borderColor: '#8CB4C5',
         width: "80%",
         marginBottom: 10,
         marginLeft: 25,
@@ -39,7 +56,22 @@ const styles = ((darkTheme) => ({
         minWidth: 60,
         minHeight: 60
     },
+    button1: {
+       margin: "auto",
+        height: 56,
+        borderColor: '#8CB4C5',
+        borderRadius: 3,
+        border: "1px solid",
+        color: "white"
 
+    },
+
+    button2: {
+        borderColor: '#8CB4C5',
+        borderRadius: 3,
+        border: "1px solid",
+        color: "white"
+    }
 
 }));
 
@@ -110,11 +142,11 @@ class TheNeed extends React.Component {
 
     renderInput = ({label, input, meta: { touched, invalid, error }}) => (
         <TextField
-            // variant="outlined"
+            variant="outlined"
             type="number"
+            color="secondary"
             label={label}
-            inputProps={{ min: this.props.fetchedEth.needEthCost }}
-            placeholder={this.props.fetchedEth.needEthCost}
+            inputProps={{ min: this.props.fetchedEth.needEthCost,  step: "any"}}
             error={touched && invalid}
             helperText={touched && error}
             {...input}
@@ -123,15 +155,16 @@ class TheNeed extends React.Component {
 
     renderTheForm = () => {
         const { classes } = this.props
+        if (this.props.theWallet.userAccount && this.props.fetchedEth.needEthCost){
+
             return (
                 <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)}>
                     <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
-                        <Box m={1} style={{ width: "50%", maxHeight: "70%"}}>
-                            <Field name="amount" component={this.renderInput} label="ETH" />
-
+                        <Box m={1} style={{ width: "50%", maxHeight: "70%"}}  color="secondary" >
+                            <Field name="amount" component={this.renderInput} label="ETH" style={{  border: '1px solid #ced4da'}} />
                         </Box>
-                        <Box style={{ margin: "auto"}}>
-                            <Button type="submit" variant="outlined" color="secondary" >
+                        <Box style={{ margin: "auto", height: 56}}>
+                            <Button type="submit" variant="outlined"  color="secondary" className={classes.button1}>
                                 Mint NFT
                             </Button>
                         </Box>
@@ -139,16 +172,33 @@ class TheNeed extends React.Component {
                 </form>
             )
         }
+        return (
+                <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+                    <Box m={1} style={{ width: "50%", maxHeight: "70%"}}  color="secondary" >
+                        <Field name="amount" component={this.renderInput} label="ETH" style={{  border: '1px solid #ced4da'}} />
+                    </Box>
+                    <Box style={{ margin: "auto", height: 56}}>
+                        <Button type="submit" variant="outlined"  color="secondary" className={classes.button1} disabled>
+                            Connect Wallet
+                        </Button>
+                    </Box>
+                </Box>
+        )
+
+
+        }
 
 
     render() {
+        let  user = this.props.theWallet.userAccount
+        let needEthCost = this.props.fetchedEth.needEthCost
         const { classes } = this.props
         if(this.props.fetchedNeed) {
             return (
                 <div className={classes.root}>
                     <Box display="flex" p={1} m={1} justifyContent="center">
                         <form name="form1" onSubmit={this.randomNeed} noValidate >
-                            <Button type="submit" variant="outlined" color="secondary" className={ classes.button }>
+                            <Button type="submit" variant="outlined" color="secondary" className={ classes.button2 }>
                                 Random Search
                             </Button>
                         </form>

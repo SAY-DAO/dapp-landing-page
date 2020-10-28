@@ -8,11 +8,11 @@ import {connectWallet} from "../actions";
 
 
 const MyButton = styled(Button)({
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    border: 0,
+    background: 'linear-gradient(45deg, #FF36BB6E 30%, #FF8E53 90%)',
+    border: "0px solid",
     borderRadius: 10,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
+    color: '#ceb7b7',
     height: 48,
     padding: '0 30px',
     margin: 30,
@@ -63,10 +63,12 @@ class WalletButton extends React.Component {
     onConnect = async () => {
         try {
             // Metmask pops up if not connected
-            window.ethereum.request({method: 'eth_requestAccounts'});
+            await window.ethereum.request({method: 'eth_requestAccounts'});
 
         }catch (error) {
-            console.log(error)
+            if (error.code === -32002){
+                console.log(" Already processing in background")
+            }
         }
     };
 
