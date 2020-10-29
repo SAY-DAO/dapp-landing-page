@@ -21,8 +21,10 @@ export const fetchEthPrice = (needFetchedCost) => async dispatch => {
         // Due to $ / IRR volatility in recent years we are using a constant rate.
         const USDtoIRR = 30000;
         const needUsdCost = needFetchedCost / USDtoIRR
+        const needCostUSD = needUsdCost.toFixed(2);
         const ethCurrentPrice = response.data.market_data.current_price.usd
-        let needEthCost = Math.round((needUsdCost / ethCurrentPrice) * 1000) / 1000
+        const needEthCost = Math.round((needCostUSD / ethCurrentPrice) * 1000000) / 1000000
+
         console.log(needFetchedCost, needEthCost)
 
         dispatch({

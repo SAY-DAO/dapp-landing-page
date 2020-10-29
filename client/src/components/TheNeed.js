@@ -14,6 +14,9 @@ import Button from "@material-ui/core/Button";
 import {Field, reduxForm} from "redux-form";
 import TextField from "@material-ui/core/TextField";
 
+
+
+
 const styles = ((darkTheme) => ({
     root: {
         width: '100%',
@@ -106,6 +109,7 @@ class TheNeed extends React.Component {
 
             for (let i=1; i <= totalSupply; i++) {
                 // console.log(await contract.methods.ownerOf(i).call())
+
                 const NAK = await contract.methods.tokenURI(i).call();
                 NAKS = {...NAKS, [`${i} -- ${userAccount}`]: NAK }
             }
@@ -116,7 +120,8 @@ class TheNeed extends React.Component {
         return { contract, totalSupply }
     }
 
-    onMint = async (values) => {
+    onMint = async (formValues) => {
+        console.log("values", formValues.amount)
         const contract = (await this.getContract()).contract
         const totalSupply = (await this.getContract()).totalSupply
         console.log("Smart Contract: ", contract)
@@ -124,12 +129,20 @@ class TheNeed extends React.Component {
         const userAccount = this.props.theWallet.userAccount
         const theNeed = this.props.fetchedNeed
         // Solidity need uint256 type
-        const needValue = this.props.fetchedEth.needEthCost
-        const needValueInt = needValue * (10 ** 18)
+        const needValueEth = this.props.fetchedEth.needEthCost
+        const web3 = await this.props.theWallet.web3
+
+
+        const defaultFormValue = web3.utils.toWei(needValueEth.toString(), 'ether')
+        const inputFormValue = web3.utils.toWei(formValues.amount.toString(), 'ether')
+
+        const needValueWei = formValues.amount ? inputFormValue : defaultFormValue
 
         try{
             await contract.methods.awardItem(userAccount, JSON.stringify(theNeed)).send({
-                from: this.props.theWallet.accounts[0]
+                from: this.props.theWallet.userAccount,
+                value: needValueWei,
+                gas: '1000000'
             })
                 .once('receipt', (receipt) => {
                     alert("NAK Receipt")
@@ -142,16 +155,17 @@ class TheNeed extends React.Component {
         }
     }
 
-    renderInput = ({ defaultValue, input, meta: { touched, invalid, error }}) => {
+
+    renderInput = ({ input, label, meta: { touched, error } }) => {
+        const needEthCost = this.props.fetchedEth.needEthCost
         return(
         <TextField
             variant="outlined"
             type="number"
             color="secondary"
-            defaultValue={defaultValue}
-            label={ (this.props.fetchedEth.needEthCost ? this.props.fetchedEth.needEthCost : "0")}
-            inputProps={{ min: this.props.fetchedEth.needEthCost,  step: "any"}}
-            error={touched && invalid}
+            label ={`min ${label}`}
+            inputProps = {{ min: needEthCost,  step: "any"}}
+            error={touched && error}
             helperText={touched && error}
             {...input}
             style={{ fontSize: 3}}
@@ -161,12 +175,18 @@ class TheNeed extends React.Component {
     renderTheForm = () => {
         const { classes } = this.props
         if (this.props.theWallet.userAccount && this.props.fetchedEth.needEthCost){
-
+            const needEthCost = this.props.fetchedEth.needEthCost
             return (
-                <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)}>
+                <form onSubmit={this.props.handleSubmit(this.onMint)} >
                     <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
                         <Box m={1} style={{ width: "50%", maxHeight: "70%"}}  color="secondary" >
-                            <Field name="amount"  placeholder="0" component={this.renderInput}  style={{  border: '1px solid #ced4da'}} />
+                            <Field
+                                name="amount"
+                                component={this.renderInput}
+                                style={{ border: '1px solid #ced4da' }}
+                                label= { needEthCost ? needEthCost : "0"}
+                                defaultValue={needEthCost}
+                            />
                         </Box>
                         <Box style={{ margin: "auto", height: 56}}>
                             <Button type="submit" variant="outlined"  color="secondary" className={classes.button1}>
@@ -240,10 +260,15 @@ class TheNeed extends React.Component {
                                     <Box borderTop={1} className={classes.border}/>
                                 </Box>
                                 <AccordionDetails>
-                                    <Typography style={{ fontFamily: 'Londrina Shadow'}} >
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-                                        ex,
-                                        sit amet blandit leo lobortis eget.
+                                    <Typography style={{ fontSize: "0.7rem"}} >
+                                        Nakama tokens are meant to be minted only one per person which later have an important
+                                        part in SAY token economic.
+                                        SAY token economic . The minimum price to receive a Nakama (NAK) NFT token is
+                                        to pay for a need. Any additional donations will be used toward expanding SAY
+                                        and adding more children to our platform.
+                                        Nakama tokens will be used in future
+                                        will be used to get involved with the product and community.
+                                        More information will be released in comming weeks regarding SAY tokens economics.
                                     </Typography>
                                 </AccordionDetails>
                             </Accordion>
@@ -255,35 +280,27 @@ class TheNeed extends React.Component {
     }
 }
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+// const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const validate = values => {
-    return sleep(1000) // simulate server latency
-        .then(() => {
+    // return sleep(1000) // simulate server latency
+    //     .then(() => {
     const errors = {}
     if (!values.amount) {
         errors.amount = 'Required'
     } else if (isNaN(Number(values.amount))) {
+        console.log("here")
         errors.amount = 'Must be a number'
     } else if ( values.amount === "") {
         errors.amount = `Minimum price to mint is the price of the need`
     }
-    return errors
-})
-}
-
-const warn = values => {
-    const warnings = {}
-    if (values.amount < 19 ) {
-        warnings.amount = 'Hmm, you seem a bit young...'
-    }
-    return warnings
+    return  errors.amount = 'fuck'
+// })
 }
 
 
 const formWrapped = reduxForm({
-    form: 'syncValidation', // a unique identifier for this form
+    form: 'Mint', // a unique identifier for this form
     validate, // <--- validation function given to redux-form
-    warn // <--- warning function given to redux-form
 })(withStyles(styles)(TheNeed))
 
 const mapStateToProps = state => {

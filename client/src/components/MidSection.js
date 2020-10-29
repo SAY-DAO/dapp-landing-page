@@ -15,10 +15,6 @@ export default function() {
                     we will show the receipt in next stage using nakama
                     rthjdhgehjdyt hjdhgehjdyj trjtrjj thjdhgehjhhdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     rthjdhg gehfdhgfdh fdhshshj thjdhg ehjdyj trjtrhjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
-                    rth jdhge hjdythjdhgehjdyj trjtrjj t hjdhgehjdyj trjtr jtrjtrjs tyj thjdhgehjdyj trjtrjjsj
-                    rthjdh gehjdj dhgehjdyj trjtrjj thj dhge hshshshjdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
-                    rthjdhgehjdythjdhgehjdyj trjtrjj thjdhgehjdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
-                    rt hjdhgehj dythjdhgehjdyj trjtrjj thjdh gehjdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
                     receive a Nakama token which we will announce in upcoming weeks about how our NFTs will be used in SAY ecosystem
                     - App Dapp
                     find out what we have been up to from our website or just keep scrolling

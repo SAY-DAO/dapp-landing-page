@@ -55,6 +55,8 @@ const useStyles = makeStyles((darkTheme) => ({
         padding: darkTheme.spacing(6),
         margin: 'auto',
         maxWidth: 1440,
+        borderRadius: 18
+
     },
     tab: {
         marginRight: 40,
@@ -89,7 +91,7 @@ export default function VerticalTabs() {
 
             </Tabs>
             <TabPanel value={value} index={0}>
-                <Sections />
+                tt<Sections />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <Sections />

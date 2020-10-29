@@ -14,6 +14,8 @@ const useStyles = makeStyles((darkTheme) => ({
         padding: darkTheme.spacing(2),
         margin: 'auto',
         maxWidth: 1000,
+        borderRadius: 18
+
     },
     image: {
         width: 128,
