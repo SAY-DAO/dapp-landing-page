@@ -8,11 +8,11 @@ import {connectWallet} from "../actions";
 
 
 const MyButton = styled(Button)({
-    background: 'linear-gradient(45deg, #FF36BB6E 30%, #FF8E53 90%)',
+    background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
     border: "0px solid",
     borderRadius: 10,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: '#ceb7b7',
+    color: '#ffffff',
     height: 48,
     padding: '0 30px',
     margin: 30,
@@ -82,7 +82,6 @@ class WalletButton extends React.Component {
             )
         }
         const userAccount = this.props.theWallet.userAccount
-        console.log(userAccount)
         const userAccountStart = userAccount.slice(0, 6);
         const userAccountEnd = userAccount.slice(-5);
 

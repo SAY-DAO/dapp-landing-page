@@ -35,7 +35,7 @@ class NavBar extends React.Component {
     const {classes} = this.props
     return (
         <div>
-            <AppBar style={{backgroundColor: "black"}} position="static">
+            <AppBar style={{backgroundColor: "transparent"}} position="static">
                 <Toolbar>
                     <Grid container>
                         <Grid container className={classes.imgGrid} item xs={6}>

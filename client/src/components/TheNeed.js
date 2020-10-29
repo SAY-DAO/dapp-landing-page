@@ -44,7 +44,7 @@ const styles = ((darkTheme) => ({
       background: "#000000",
     },
     border: {
-        borderColor: '#8CB4C5',
+        borderColor: '#ffeb90',
         width: "80%",
         marginBottom: 10,
         marginLeft: 25,
@@ -84,7 +84,6 @@ class TheNeed extends React.Component {
 
         // Adding commas to price
         const fetchedCostCleaned = needFetchedCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        console.log(needFetchedCost, fetchedCostCleaned, this.props.fetchedEth)
     }
 
 
@@ -106,10 +105,10 @@ class TheNeed extends React.Component {
             const userAccount = this.props.theWallet.userAccount
 
             for (let i=1; i <= totalSupply; i++) {
+                // console.log(await contract.methods.ownerOf(i).call())
                 const NAK = await contract.methods.tokenURI(i).call();
-                NAKS = {...NAKS, [`${i} -- ${userAccount}`]:NAK}
+                NAKS = {...NAKS, [`${i} -- ${userAccount}`]: NAK }
             }
-            console.log(NAKS)
 
         }catch (error) {
             console.log("Can't load Nakamas: ", error)
@@ -117,41 +116,47 @@ class TheNeed extends React.Component {
         return { contract, totalSupply }
     }
 
-    onMint = async () => {
-        console.log("huh")
+    onMint = async (values) => {
         const contract = (await this.getContract()).contract
         const totalSupply = (await this.getContract()).totalSupply
         console.log("Smart Contract: ", contract)
         console.log("Total Supply: ", totalSupply)
         const userAccount = this.props.theWallet.userAccount
         const theNeed = this.props.fetchedNeed
-        console.log(userAccount)
+        // Solidity need uint256 type
+        const needValue = this.props.fetchedEth.needEthCost
+        const needValueInt = needValue * (10 ** 18)
 
         try{
-            const nakama = await contract.methods.awardItem(userAccount, JSON.stringify(theNeed)).send({
-                from: this.props.theWallet.accounts[0],
+            await contract.methods.awardItem(userAccount, JSON.stringify(theNeed)).send({
+                from: this.props.theWallet.accounts[0]
             })
                 .once('receipt', (receipt) => {
-                    console.log("NAK Receipt")
+                    alert("NAK Receipt")
                 })
         }catch (error) {
-            if(error.code === -32603)
-                console.log("Sorry! This Need Has Been Already Payed")
+            if(error.code === -32603) {
+                alert("This need has already been taken care of :)")
+            }
+            console.log(error)
         }
     }
 
-    renderInput = ({label, input, meta: { touched, invalid, error }}) => (
+    renderInput = ({ defaultValue, input, meta: { touched, invalid, error }}) => {
+        return(
         <TextField
             variant="outlined"
             type="number"
             color="secondary"
-            label={label}
+            defaultValue={defaultValue}
+            label={ (this.props.fetchedEth.needEthCost ? this.props.fetchedEth.needEthCost : "0")}
             inputProps={{ min: this.props.fetchedEth.needEthCost,  step: "any"}}
             error={touched && invalid}
             helperText={touched && error}
             {...input}
+            style={{ fontSize: 3}}
         />
-    )
+    )}
 
     renderTheForm = () => {
         const { classes } = this.props
@@ -161,11 +166,11 @@ class TheNeed extends React.Component {
                 <form name="form2" onSubmit={this.props.handleSubmit(this.onMint)}>
                     <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
                         <Box m={1} style={{ width: "50%", maxHeight: "70%"}}  color="secondary" >
-                            <Field name="amount" component={this.renderInput} label="ETH" style={{  border: '1px solid #ced4da'}} />
+                            <Field name="amount"  placeholder="0" component={this.renderInput}  style={{  border: '1px solid #ced4da'}} />
                         </Box>
                         <Box style={{ margin: "auto", height: 56}}>
                             <Button type="submit" variant="outlined"  color="secondary" className={classes.button1}>
-                                Mint NFT
+                                Mint Nakama
                             </Button>
                         </Box>
                     </Box>
@@ -190,8 +195,6 @@ class TheNeed extends React.Component {
 
 
     render() {
-        let  user = this.props.theWallet.userAccount
-        let needEthCost = this.props.fetchedEth.needEthCost
         const { classes } = this.props
         if(this.props.fetchedNeed) {
             return (
@@ -252,17 +255,20 @@ class TheNeed extends React.Component {
     }
 }
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const validate = values => {
-    console.log(values)
+    return sleep(1000) // simulate server latency
+        .then(() => {
     const errors = {}
     if (!values.amount) {
         errors.amount = 'Required'
-    // } else if (isNaN(Number(values.amount))) {
-    //     errors.amount = 'Must be a number'
-    // } else if (Number(values.amount) < 18) {
-    //     errors.amount = `Minimum price to mint is the price of the need`
+    } else if (isNaN(Number(values.amount))) {
+        errors.amount = 'Must be a number'
+    } else if ( values.amount === "") {
+        errors.amount = `Minimum price to mint is the price of the need`
     }
     return errors
+})
 }
 
 const warn = values => {

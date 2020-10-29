@@ -9,12 +9,36 @@ contract Nakama is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
+//    address payable public say;
     mapping(string => bool) _doneNeeds;
     address [] donors;
+    uint256 public needValue;
 
-    constructor() public ERC721("Nakama", "NAK") {}
+    constructor() public ERC721("Nakama", "NAK") {
+        say = msg.sender;
+    }
 
-    function awardItem(address _donor, string memory _tokenURI) public returns (uint256) {
+    function getDonors()  public  view returns( address [] memory ) {
+        return donors;
+    }
+
+
+    function convert(uint256 needEthCost) payable public {
+        uint256 amount = msg.value;
+        uint256 newAmount = amount * 10**18;
+        send(needEthCost, newAmount);
+    }
+
+
+    function send(uint256 needEthCost, uint newAmount) public payable {
+        require(newAmount > needEthCost );
+        donors.push(msg.sender);
+        say.transfer(address(this).balance);
+    }
+
+
+    function awardItem(address _donor, string memory _tokenURI, uint256 needEthCost) public returns (uint256) {
+        convert(needEthCost);
         require(!_doneNeeds[_tokenURI]);
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
@@ -29,9 +53,4 @@ contract Nakama is ERC721 {
 
         return newItemId;
     }
-
-    function getDonors()  public  view returns( address [] memory ) {
-    return donors;
-}
-
 }

@@ -6,16 +6,15 @@ const darkTheme = createMuiTheme({
     palette: {
         type: 'dark',
         background: {
-            default: '#000000',
-            paper: '#131313'
+            default: '#130f05',
+            paper: '#080602'
         },
         secondary: {
-            main: '#FFF688',
+            main: '#ffeb90',
         },
 
         error: {
-            main: '#e57373',
-            light: '#e57373'
+            main: '#d27d5e',
         },
     },
 
@@ -26,6 +25,14 @@ const darkTheme = createMuiTheme({
         }
 
     },
+    overrides: {
+        MuiInputLabel: {
+            root: {
+                color: 'white',
+                fontSize: 12,
+            },
+        }
+    }
 
 
 });

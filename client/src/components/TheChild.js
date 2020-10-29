@@ -11,7 +11,7 @@ const styles = ((darkTheme) => ({
         margin: darkTheme.spacing(1),
         boxShadow: "10px",
         justifyContent: "center",
-        background: "#501E33",
+        background: "#7f3536",
         borderRadius: "50%",
         filter: "drop-shadow(0px 18px 18px #262617)"
     }

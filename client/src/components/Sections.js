@@ -48,6 +48,8 @@ export default function ComplexGrid() {
                                 <Typography variant="body2" gutterBottom>
                                     We believe borders should not separate people from each other and our focuse is global
                                     have lost connection to lost connection to the internet. This app is offline.
+                                    children are chosen diff iranian / afghans and say does not select on basis of race, religion and ..
+                                    chosenwhere we can access them care to join and connect international ngo?
                                     You have lost connectionlost connection to  to the internet. This app is offline.
                                     You have lost connectiolost connection to n to the internet. This app is offline.
                                     You have lost connectiolost connection to n to the internet. This app is offline.
