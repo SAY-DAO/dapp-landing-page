@@ -7,17 +7,17 @@ export default function() {
         <Container id="midsection" maxWidth="md" style={{ height: '300px', marginTop: 100}}>
             <div className="App">
                 <Typography align="center" color="secondary" variant="h5">
-                    The world is changing so is SAY
+                    The world is changing and so is SAY
                 </Typography>
                 <Typography align="center"  variant="body1">
-                    receive a Nakama token by helping a child with their needs our leave us your email to stay updated.
-                    we use nakama to connect to you to your child.
-                    we will show the receipt in next stage using nakama
-                    rthjdhgehjdyt hjdhgehjdyj trjtrjj thjdhgehjhhdyj trjtrjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
-                    rthjdhg gehfdhgfdh fdhshshj thjdhg ehjdyj trjtrhjtrjtrjs tyj thjdhgehjdyj trjtrjjsj
-                    receive a Nakama token which we will announce in upcoming weeks about how our NFTs will be used in SAY ecosystem
-                    - App Dapp
-                    find out what we have been up to from our website or just keep scrolling
+                    SAY is an evolving project aiming to register and monitor every child under poverty and provide
+                    them with their necessary goods/service through a self-sustaining business model governed by
+                    its community. Nakama token is our first step to expand our reach to like-minded individuals for
+                    building an international community to think and work collectively and help SAY to transfer to a
+                    decentralized organization <a href="www.say.company">www.say.company</a> for more information
+                    regarding our solution.
+                    <br />
+                    Up to today 673 needs of 31 children have been taken care of by SAY virtual families.
                 </Typography>
             </div>
         </Container>

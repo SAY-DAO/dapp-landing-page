@@ -29,41 +29,27 @@ const useStyles = makeStyles((darkTheme) => ({
     },
 }));
 
-export default function ComplexGrid() {
+export default function Sections(data) {
     const classes = useStyles();
-
+    console.log(data.props.img)
     return (
         <Container className={classes.root}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="complex" src={require('../static/logo192.png')} />
+                            <img className={classes.img} alt="complex" src={require(`../static/${data.props.img}.png`)} />
+
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
-                                    Crowd Sourcing
+                                    {data.props.title}
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    We believe borders should not separate people from each other and our focuse is global
-                                    have lost connection to lost connection to the internet. This app is offline.
-                                    children are chosen diff iranian / afghans and say does not select on basis of race, religion and ..
-                                    chosenwhere we can access them care to join and connect international ngo?
-                                    You have lost connectionlost connection to  to the internet. This app is offline.
-                                    You have lost connectiolost connection to n to the internet. This app is offline.
-                                    You have lost connectiolost connection to n to the internet. This app is offline.
-                                    You have lost connectc iolost connection to n to the internet. This app is offline.
-                                    You have lost connectiolost connection to n to the internet. This app is offline.
-                                    You have lost connectiolost connection to n to the internet. This app is offline.
-                                    You have lost connection to the internet. This app is offline.
-                                    You have lost connection to the internet. This app is offline.
-                                    You have lost connection to the internet. This app is offline.
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary">
-                                    more ...
+                                    {data.props.content}
                                 </Typography>
                             </Grid>
                         </Grid>

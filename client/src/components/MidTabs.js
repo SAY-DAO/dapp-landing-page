@@ -64,13 +64,39 @@ const useStyles = makeStyles((darkTheme) => ({
     }
 }));
 
-export default function VerticalTabs() {
+export default function MidTabs() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const contents = {
+        section1: {
+            img: "child2",
+            title: "Ecosystem",
+            content: "Children are registered by social workers who are the bridge between the real world and the" +
+                     "virtual world. They update children needs on SAY platform and insure the product/service is received" +
+                     "by the child on a weekly basis. All social workers and children are authorized by local registered NGOs that are" +
+                     "in partnership with SAY. on the other side, users get matched to a child with two different methods" +
+                     "and become the virtual family a child to take care of their regularly updated needs."
+        },
+        section2: {
+            img: "logo192",
+            title: "Transparency",
+            content: "2"
+        },
+        section3: {
+            img: "logo192",
+            title: "Business Model",
+            content: "3"
+        },
+        section4: {
+            img: "logo192",
+            title: "Token Economic",
+            content: "More information about our road map and crypto economic will be posted in upcoming weeks."
+        },
+    }
 
     return (
         <div className={classes.root} >
@@ -84,23 +110,23 @@ export default function VerticalTabs() {
                 className={classes.tabs}
 
             >
-                <Tab label="Item One" {...a11yProps(0)} className={classes.tab} />
-                <Tab label="Item Two" {...a11yProps(1)} className={classes.tab} />
-                <Tab label="Item Three" {...a11yProps(2)} className={classes.tab} />
-                <Tab label="Item Four" {...a11yProps(3)} className={classes.tab} />
+                <Tab label={contents.section1.title} {...a11yProps(0)} className={classes.tab} />
+                <Tab label={contents.section2.title} {...a11yProps(1)} className={classes.tab} />
+                <Tab label={contents.section3.title} {...a11yProps(2)} className={classes.tab} />
+                <Tab label={contents.section4.title} {...a11yProps(3)} className={classes.tab} />
 
             </Tabs>
             <TabPanel value={value} index={0}>
-                tt<Sections />
+                <Sections props={contents.section1}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Sections />
+                <Sections props={contents.section2}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Sections />
+                <Sections props={contents.section3}/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <Sections />
+                <Sections props={contents.section4}/>
             </TabPanel>
         </div>
     );

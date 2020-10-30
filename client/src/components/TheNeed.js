@@ -86,7 +86,7 @@ class TheNeed extends React.Component {
         await this.props.fetchEthPrice(needFetchedCost)
 
         // Adding commas to price
-        const fetchedCostCleaned = needFetchedCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        // const fetchedCostCleaned = needFetchedCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
 
@@ -132,11 +132,14 @@ class TheNeed extends React.Component {
         const needValueEth = this.props.fetchedEth.needEthCost
         const web3 = await this.props.theWallet.web3
 
-
-        const defaultFormValue = web3.utils.toWei(needValueEth.toString(), 'ether')
-        const inputFormValue = web3.utils.toWei(formValues.amount.toString(), 'ether')
-
-        const needValueWei = formValues.amount ? inputFormValue : defaultFormValue
+        let needValueWei;
+        // When no input is inserted by the user
+        if(formValues.amount === undefined){
+            needValueWei = web3.utils.toWei(needValueEth.toString(), 'ether')
+        }
+        else{
+            needValueWei = web3.utils.toWei(formValues.amount.toString(), 'ether')
+        }
 
         try{
             await contract.methods.awardItem(userAccount, JSON.stringify(theNeed)).send({
@@ -261,14 +264,13 @@ class TheNeed extends React.Component {
                                 </Box>
                                 <AccordionDetails>
                                     <Typography style={{ fontSize: "0.7rem"}} >
-                                        Nakama tokens are meant to be minted only one per person which later have an important
-                                        part in SAY token economic.
-                                        SAY token economic . The minimum price to receive a Nakama (NAK) NFT token is
-                                        to pay for a need. Any additional donations will be used toward expanding SAY
-                                        and adding more children to our platform.
-                                        Nakama tokens will be used in future
-                                        will be used to get involved with the product and community.
-                                        More information will be released in comming weeks regarding SAY tokens economics.
+                                        Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to
+                                        the SAY ecosystem such as paying a need, taking part in building the software,
+                                        or helping with the logistic side of SAY.
+                                        NAK is meant to be created only once per person. NAK tokens are NOT valued based
+                                        on the way you choose to contribute and are NOT designed to be traded rather
+                                        behold as a community membership token to get involved in SAY token economic.
+                                        More information about tokens use cases will be released in the coming weeks.
                                     </Typography>
                                 </AccordionDetails>
                             </Accordion>
@@ -293,7 +295,7 @@ const validate = values => {
     } else if ( values.amount === "") {
         errors.amount = `Minimum price to mint is the price of the need`
     }
-    return  errors.amount = 'fuck'
+    return  errors
 // })
 }
 
