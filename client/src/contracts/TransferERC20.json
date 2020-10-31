@@ -63,9 +63,7 @@
   "ast": {
     "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/TransferERC20.sol",
     "exportedSymbols": {
-      "TransferERC20": [
-        220
-      ]
+      "TransferERC20": [220]
     },
     "id": 221,
     "license": "MIT",
@@ -73,12 +71,7 @@
     "nodes": [
       {
         "id": 171,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "60:23:2"
       },
@@ -90,9 +83,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 220,
-        "linearizedBaseContracts": [
-          220
-        ],
+        "linearizedBaseContracts": [220],
         "name": "TransferERC20",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -344,10 +335,7 @@
                       "id": 190,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "317:7:2",
                       "typeDescriptions": {
@@ -462,9 +450,7 @@
                   "src": "361:23:2"
                 },
                 {
-                  "assignments": [
-                    205
-                  ],
+                  "assignments": [205],
                   "declarations": [
                     {
                       "constant": false,
@@ -721,9 +707,7 @@
   "legacyAST": {
     "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/TransferERC20.sol",
     "exportedSymbols": {
-      "TransferERC20": [
-        220
-      ]
+      "TransferERC20": [220]
     },
     "id": 221,
     "license": "MIT",
@@ -731,12 +715,7 @@
     "nodes": [
       {
         "id": 171,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "60:23:2"
       },
@@ -748,9 +727,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 220,
-        "linearizedBaseContracts": [
-          220
-        ],
+        "linearizedBaseContracts": [220],
         "name": "TransferERC20",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1002,10 +979,7 @@
                       "id": 190,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "317:7:2",
                       "typeDescriptions": {
@@ -1120,9 +1094,7 @@
                   "src": "361:23:2"
                 },
                 {
-                  "assignments": [
-                    205
-                  ],
+                  "assignments": [205],
                   "declarations": [
                     {
                       "constant": false,

@@ -7,23 +7,17 @@ COPY . /app
 RUN npm run lint:prettier
 
 FROM node:12-slim as base
+WORKDIR /app
 RUN apt-get update && apt-get install -y \
     git gcc python3 build-essential bzip2
-RUN mkdir /app && chown -R node:node /app
-WORKDIR /app
-USER node
-COPY --chown=node:node package.json package-lock*.json ./
-RUN npm ci --only=production
-
-FROM base as source
-COPY --chown=node:node . /app
-
-FROM source as build
+COPY package.json package-lock*.json ./
+COPY . /app
 ARG ENVIRONMENT=prod
+RUN npm install
 RUN npm run build
 
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=base /app/build /usr/share/nginx/html
 WORKDIR /app
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
