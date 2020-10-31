@@ -1,0 +1,80 @@
+image: tiangolo/docker-with-compose
+services:
+  - docker:19.03.12-dind
+
+stages:
+  - build
+  - deploy
+
+variables:
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  BASE_IMAGE: $CI_REGISTRY_IMAGE:base
+
+before_script:
+  - docker login -u $USER -p $TOKEN $CI_REGISTRY
+
+build-dev:
+  stage: build
+  retry: 2
+  script:
+    - ENVIRONMENT=dev sh ./client/scripts/build-push.sh
+  only:
+    - develop
+
+build-stag:
+  stage: build
+  retry: 2
+  script:
+    - ENVIRONMENT=stag sh ./client/scripts/build-push.sh
+  only:
+    - master
+
+build-prod:
+  stage: build
+  retry: 2
+  script:
+    - ENVIRONMENT=prod sh ./client/scripts/build-push.sh
+  only:
+    - release
+
+deploy-dev:
+  stage: deploy
+  retry: 2
+  script:
+    - >
+      ENVIRONMENT=dev
+      DOMAIN=d.saydapp.company
+      STACK_NAME=say-dev-dapp
+      sh ./client/scripts/deploy.sh
+  only:
+    - develop
+  tags:
+    - deploy
+
+deploy-stag:
+  stage: deploy
+  retry: 2
+  script:
+    - >
+      ENVIRONMENT=stag 
+      DOMAIN=s.saydapp.company
+      STACK_NAME=say-stag-dapp
+      sh ./client/scripts/deploy.sh
+  only:
+    - master
+  tags:
+    - deploy
+
+deploy-prod:
+  stage: deploy
+  retry: 2
+  script:
+    - >
+      ENVIRONMENT=prod
+      DOMAIN=saydapp.company
+      STACK_NAME=say-dapp
+      sh ./client/scripts/deploy.sh
+  only:
+    - release
+  tags:
+    - deploy-prod
