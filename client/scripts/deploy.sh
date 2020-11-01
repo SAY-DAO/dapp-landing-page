@@ -2,6 +2,8 @@
 
 set -e
 
+cd client
+
 docker-compose \
     -f docker-compose.yml \
     config > docker-stack.yml
