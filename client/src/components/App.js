@@ -7,6 +7,8 @@ import MidTabs from "./MidTabs";
 import Eye from "./Eye";
 import EndSection from "./EndSection";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
+import Circle from "./Circles";
 
 
 
@@ -21,14 +23,16 @@ class App extends Component {
             <React.Fragment>
                 {/* Older browsers need a lot of normalization help*/}
                 <CssBaseline />
-                <Container>
+                <Container style={{ maxWidth: 1000}}>
                     <NavBar onConnect={this.onConnect} state={this.state}/>
                     <IntroSection />
                     <br/>
                     <MidSection />
                     <MidTabs />
-                    <EndSection />
+                    {/*<EndSection />*/}
                     <Eye />
+                    <Footer />
+                    <Circle />
                 </Container>
             </React.Fragment>
         );
