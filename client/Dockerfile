@@ -11,9 +11,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     git gcc python3 build-essential bzip2
 COPY package.json package-lock*.json ./
+RUN npm install
 COPY . /app
 ARG ENVIRONMENT=prod
-RUN npm install
 RUN npm run build
 
 FROM nginx:stable-alpine as prod
