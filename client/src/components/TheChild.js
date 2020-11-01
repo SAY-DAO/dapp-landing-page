@@ -29,7 +29,7 @@ class TheChild extends React.Component {
       return (
         <div>
           <Grid container>
-            <img className={classes.childImg} alt="child" src={`https:/sayapp.company${imgUrl}`} />
+            <img className={classes.childImg} alt="child" src={`https://sayapp.company${imgUrl}`} />
           </Grid>
           <Grid>
             <Typography component="h1" variant="h5" align="center">
