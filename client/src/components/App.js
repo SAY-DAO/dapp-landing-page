@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Circle from "./Circles";
 import Web3Provider from 'web3-react'
 import MetaMask from '../connectors'
+import MyComponent from "../connectActivate";
 
 
 export default function App() {
@@ -17,7 +18,8 @@ export default function App() {
         <React.Fragment>
             {/* Older browsers need a lot of normalization help*/}
             <CssBaseline />
-            <Web3Provider >
+            <Web3Provider connectors={MetaMask} libraryName={'ethers.js'}>
+                <MyComponent />
                 <Container style={{ maxWidth: 1000}}>
                     <NavBar />
                     <IntroSection />

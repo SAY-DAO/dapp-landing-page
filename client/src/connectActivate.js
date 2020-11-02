@@ -19,4 +19,5 @@ export default function MyComponent () {
     //     // success
     //     return ...
     // }
+    return true
 }
