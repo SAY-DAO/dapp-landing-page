@@ -17,7 +17,7 @@ export default function App() {
     <React.Fragment>
       {/* Older browsers need a lot of normalization help*/}
       <CssBaseline />
-      <Web3Provider connectors={MetaMask} libraryName={'ethers.js'}>
+      <Web3Provider connectors={MetaMask} libraryName={'ethers.js'| 'web3.js'}>
         <MyComponent />
         <Container style={{ maxWidth: 1000 }}>
           <NavBar />
