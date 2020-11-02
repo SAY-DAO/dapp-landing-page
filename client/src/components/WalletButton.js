@@ -5,6 +5,8 @@ import getWeb3 from "../getWeb3";
 import Nakama from "../contracts/Nakama.json";
 import { connect } from 'react-redux';
 import {connectWallet} from "../actions";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 
 
 const MyButton = styled(Button)({
@@ -86,9 +88,18 @@ class WalletButton extends React.Component {
         const userAccountEnd = userAccount.slice(-5);
 
         return(
-            <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-                {userAccountStart}...{userAccountEnd}
-            </MyButton>
+            <Grid container>
+                <Box  style={{ margin: "auto"}}>
+                    <Box xs={2} >
+                        <img alt="nakama" src={require("../static/NAKAMA-03.png")} style={{ height: 40, justifyContent: "center", marginTop: "auto" }}/>
+                    </Box>
+                </Box>
+                <Box>
+                    <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+                        {userAccountStart}...{userAccountEnd}
+                    </MyButton>
+                </Box>
+            </Grid>
         )
     }
 
