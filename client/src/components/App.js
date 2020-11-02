@@ -13,24 +13,24 @@ import MetaMask from '../connectors'
 
 
 export default function App() {
-        return (
-                <React.Fragment>
-                    {/* Older browsers need a lot of normalization help*/}
-                    <CssBaseline />
-                    <Web3Provider >
-                        <Container style={{ maxWidth: 1000}}>
-                            <NavBar />
-                            <IntroSection />
-                            <br/>
-                            <MidSection />
-                            <MidTabs />
-                            {/*<EndSection />*/}
-                            <Eye />
-                            <Footer />
-                            <Circle />
-                        </Container>
-                    </Web3Provider>
-                </React.Fragment>
-        );
+    return (
+        <React.Fragment>
+            {/* Older browsers need a lot of normalization help*/}
+            <CssBaseline />
+            <Web3Provider >
+                <Container style={{ maxWidth: 1000}}>
+                    <NavBar />
+                    <IntroSection />
+                    <br/>
+                    <MidSection />
+                    <MidTabs />
+                    {/*<EndSection />*/}
+                    <Eye />
+                    <Footer />
+                    <Circle />
+                </Container>
+            </Web3Provider>
+        </React.Fragment>
+    );
 }
 
