@@ -8,33 +8,29 @@ import Eye from "./Eye";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Circle from "./Circles";
+import Web3Provider from 'web3-react'
+import MetaMask from '../connectors'
 
 
-
-class App extends Component {
-    componentDidMount = async () => {
-
-    }
-    render() {
+export default function App() {
         return (
-            <React.Fragment>
-                {/* Older browsers need a lot of normalization help*/}
-                <CssBaseline />
-                <Container style={{ maxWidth: 1000}}>
-                    <NavBar onConnect={this.onConnect} state={this.state}/>
-                    <IntroSection />
-                    <br/>
-                    <MidSection />
-                    <MidTabs />
-                    {/*<EndSection />*/}
-                    <Eye />
-                    <Footer />
-                    <Circle />
-                </Container>
-            </React.Fragment>
+                <React.Fragment>
+                    {/* Older browsers need a lot of normalization help*/}
+                    <CssBaseline />
+                    <Web3Provider >
+                        <Container style={{ maxWidth: 1000}}>
+                            <NavBar />
+                            <IntroSection />
+                            <br/>
+                            <MidSection />
+                            <MidTabs />
+                            {/*<EndSection />*/}
+                            <Eye />
+                            <Footer />
+                            <Circle />
+                        </Container>
+                    </Web3Provider>
+                </React.Fragment>
         );
-    }
-
 }
 
-export default App;

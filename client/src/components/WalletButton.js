@@ -17,7 +17,7 @@ const MyButton = styled(Button)({
   color: '#ffffff',
   height: 48,
   padding: '0 30px',
-  margin: 30,
+  margin: 10,
   whiteSpace: 'normal',
 });
 
@@ -95,18 +95,6 @@ class WalletButton extends React.Component {
             </Grid>
         )
 
-  };
-
-  onConnect = async () => {
-    try {
-      // Metmask pops up if not connected
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-    } catch (error) {
-      if (error.code === -32002) {
-        console.log(' Already processing in background');
-      }
-
-    }
   };
 
   render() {

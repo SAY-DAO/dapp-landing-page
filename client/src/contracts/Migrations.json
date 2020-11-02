@@ -59,7 +59,9 @@
   "ast": {
     "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol",
     "exportedSymbols": {
-      "Migrations": [36]
+      "Migrations": [
+        36
+      ]
     },
     "id": 37,
     "license": "MIT",
@@ -67,7 +69,15 @@
     "nodes": [
       {
         "id": 1,
-        "literals": ["solidity", ">=", "0.4", ".21", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "32:32:0"
       },
@@ -79,7 +89,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 36,
-        "linearizedBaseContracts": [36],
+        "linearizedBaseContracts": [
+          36
+        ],
         "name": "Migrations",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -473,7 +485,9 @@
   "legacyAST": {
     "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol",
     "exportedSymbols": {
-      "Migrations": [36]
+      "Migrations": [
+        36
+      ]
     },
     "id": 37,
     "license": "MIT",
@@ -481,7 +495,15 @@
     "nodes": [
       {
         "id": 1,
-        "literals": ["solidity", ">=", "0.4", ".21", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "32:32:0"
       },
@@ -493,7 +515,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 36,
-        "linearizedBaseContracts": [36],
+        "linearizedBaseContracts": [
+          36
+        ],
         "name": "Migrations",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -892,12 +916,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xF1Ee7e1F10eE6da64699c7f119eA25b963dfc01D",
-      "transactionHash": "0xccf3d87c784e9b9c35cdd102516557e2eb62cc67cb902e08bc3c1249bf744d55"
+      "address": "0x2E6De3532ed036189B03f7424E583a7cF8BA4546",
+      "transactionHash": "0x989bb8af7fe7f3063be2efd5ffebfdcbad5426b4613bc226b477cd1fe6f0a08c"
     }
   },
   "schemaVersion": "3.3.0",
-  "updatedAt": "2020-11-01T16:35:47.534Z",
+  "updatedAt": "2020-11-02T14:59:33.561Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

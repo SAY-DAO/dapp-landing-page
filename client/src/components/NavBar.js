@@ -17,7 +17,8 @@ const styles = (darkTheme) => ({
     buttonGrid: {
         justifyContent: 'flex-end',
         direction: 'row',
-        display: 'none',
+        // O to sm size until the break
+        display: 'inlineBlock',
         [darkTheme.breakpoints.up('sm')]: {
           display: 'flex',
     },
@@ -32,10 +33,10 @@ class NavBar extends React.Component {
         <AppBar style={{ backgroundColor: 'transparent' }} position="static">
           <Toolbar>
             <Grid container>
-              <Grid container className={classes.imgGrid} item xs={6}>
+              <Grid container className={classes.imgGrid} item xs={2}>
                 <img alt="logo" src={require('../static/sayLogo.png')} />
               </Grid>
-              <Grid container className={classes.buttonGrid} item xs={6}>
+              <Grid container className={classes.buttonGrid} item xs={10}>
                 <WalletButton />
               </Grid>
             </Grid>
