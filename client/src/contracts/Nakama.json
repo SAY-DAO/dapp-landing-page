@@ -490,9 +490,7 @@
   "ast": {
     "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Nakama.sol",
     "exportedSymbols": {
-      "Nakama": [
-        145
-      ]
+      "Nakama": [145]
     },
     "id": 146,
     "license": "MIT",
@@ -500,12 +498,7 @@
     "nodes": [
       {
         "id": 38,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "60:23:1"
       },
@@ -553,29 +546,12 @@
             "src": "221:6:1"
           }
         ],
-        "contractDependencies": [
-          168,
-          225,
-          237,
-          1364,
-          1480,
-          1511,
-          1538
-        ],
+        "contractDependencies": [168, 225, 237, 1364, 1480, 1511, 1538],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
         "id": 145,
-        "linearizedBaseContracts": [
-          145,
-          1364,
-          1511,
-          1538,
-          1480,
-          225,
-          237,
-          168
-        ],
+        "linearizedBaseContracts": [145, 1364, 1511, 1538, 1480, 225, 237, 168],
         "name": "Nakama",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1200,10 +1176,7 @@
                       "id": 98,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "810:7:1",
                       "typeDescriptions": {
@@ -1283,9 +1256,7 @@
                   "src": "852:21:1"
                 },
                 {
-                  "assignments": [
-                    111
-                  ],
+                  "assignments": [111],
                   "declarations": [
                     {
                       "constant": false,
@@ -1448,10 +1419,7 @@
                       "id": 119,
                       "name": "_safeMint",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1012,
-                        1041
-                      ],
+                      "overloadedDeclarations": [1012, 1041],
                       "referencedDeclaration": 1012,
                       "src": "1047:9:1",
                       "typeDescriptions": {
@@ -1844,9 +1812,7 @@
   "legacyAST": {
     "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Nakama.sol",
     "exportedSymbols": {
-      "Nakama": [
-        145
-      ]
+      "Nakama": [145]
     },
     "id": 146,
     "license": "MIT",
@@ -1854,12 +1820,7 @@
     "nodes": [
       {
         "id": 38,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "60:23:1"
       },
@@ -1907,29 +1868,12 @@
             "src": "221:6:1"
           }
         ],
-        "contractDependencies": [
-          168,
-          225,
-          237,
-          1364,
-          1480,
-          1511,
-          1538
-        ],
+        "contractDependencies": [168, 225, 237, 1364, 1480, 1511, 1538],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
         "id": 145,
-        "linearizedBaseContracts": [
-          145,
-          1364,
-          1511,
-          1538,
-          1480,
-          225,
-          237,
-          168
-        ],
+        "linearizedBaseContracts": [145, 1364, 1511, 1538, 1480, 225, 237, 168],
         "name": "Nakama",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -2554,10 +2498,7 @@
                       "id": 98,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "810:7:1",
                       "typeDescriptions": {
@@ -2637,9 +2578,7 @@
                   "src": "852:21:1"
                 },
                 {
-                  "assignments": [
-                    111
-                  ],
+                  "assignments": [111],
                   "declarations": [
                     {
                       "constant": false,
@@ -2802,10 +2741,7 @@
                       "id": 119,
                       "name": "_safeMint",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1012,
-                        1041
-                      ],
+                      "overloadedDeclarations": [1012, 1041],
                       "referencedDeclaration": 1012,
                       "src": "1047:9:1",
                       "typeDescriptions": {

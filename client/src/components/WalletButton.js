@@ -4,10 +4,9 @@ import Button from '@material-ui/core/Button';
 import getWeb3 from '../getWeb3';
 import Nakama from '../contracts/Nakama.json';
 import { connect } from 'react-redux';
-import { connectWallet } from "../actions";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-
+import { connectWallet } from '../actions';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
@@ -53,48 +52,49 @@ class WalletButton extends React.Component {
       // Catch any errors for any of the above operations.
       alert(`Failed to load web3, accounts, or contract. Check console for details.`);
     }
-  }
+  };
 
-    onConnect = async () => {
-        try {
-            // Metmask pops up if not connected
-            await window.ethereum.request({method: 'eth_requestAccounts'});
+  onConnect = async () => {
+    try {
+      // Metmask pops up if not connected
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+    } catch (error) {
+      if (error.code === -32002) {
+        console.log(' Already processing in background');
+      }
+    }
+  };
 
-        }catch (error) {
-            if (error.code === -32002){
-                console.log(" Already processing in background")
-            }
-        }
-    };
+  walletStatus = () => {
+    if (!this.props.theWallet.accounts[0]) {
+      return (
+        <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+          Connect Wallet
+        </MyButton>
+      );
+    }
+    const userAccount = this.props.theWallet.userAccount;
+    const userAccountStart = userAccount.slice(0, 6);
+    const userAccountEnd = userAccount.slice(-5);
 
-    walletStatus = () => {
-
-        if(!this.props.theWallet.accounts[0]){
-            return(
-                <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-                    Connect Wallet
-                </MyButton>
-            )
-        }
-        const userAccount = this.props.theWallet.userAccount
-        const userAccountStart = userAccount.slice(0, 6);
-        const userAccountEnd = userAccount.slice(-5);
-
-        return(
-            <Grid container>
-                <Box  style={{ margin: "auto"}}>
-                    <Box xs={2} >
-                        <img alt="nakama" src={require("../static/NAKAMA-03.png")} style={{ height: 40, justifyContent: "center", marginTop: "auto" }}/>
-                    </Box>
-                </Box>
-                <Box>
-                    <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-                        {userAccountStart}...{userAccountEnd}
-                    </MyButton>
-                </Box>
-            </Grid>
-        )
-
+    return (
+      <Grid container>
+        <Box style={{ margin: 'auto' }}>
+          <Box xs={2}>
+            <img
+              alt="nakama"
+              src={require('../static/NAKAMA-03.png')}
+              style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
+            />
+          </Box>
+        </Box>
+        <Box>
+          <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+            {userAccountStart}...{userAccountEnd}
+          </MyButton>
+        </Box>
+      </Grid>
+    );
   };
 
   render() {

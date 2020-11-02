@@ -6,21 +6,21 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = (darkTheme) => ({
-    root: {
-        flexGrow: 1
-    },
+  root: {
+    flexGrow: 1,
+  },
 
-    imgGrid: {
-        alignItems: "center",
-    },
+  imgGrid: {
+    alignItems: 'center',
+  },
 
-    buttonGrid: {
-        justifyContent: 'flex-end',
-        direction: 'row',
-        // O to sm size until the break
-        display: 'inlineBlock',
-        [darkTheme.breakpoints.up('sm')]: {
-          display: 'flex',
+  buttonGrid: {
+    justifyContent: 'flex-end',
+    direction: 'row',
+    // O to sm size until the break
+    display: 'inlineBlock',
+    [darkTheme.breakpoints.up('sm')]: {
+      display: 'flex',
     },
   },
 });
