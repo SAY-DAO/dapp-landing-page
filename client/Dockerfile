@@ -1,20 +1,23 @@
-FROM node:12-slim as style
-ENV ENVIRONMENT=development
-WORKDIR /app
-COPY package.json package-lock*.json ./
-RUN npm install --only=development
-COPY . /app
-RUN npm run lint:prettier
+# FROM node:12-slim as style
+# ENV ENVIRONMENT=development
+# RUN apt-get update && apt-get install -y \
+#     git
+# WORKDIR /app
+# COPY package.json yarn.lock ./
+# RUN yarn install --only=development
+# COPY . /app
+# RUN yarn run lint:prettier
 
 FROM node:12-slim as base
 WORKDIR /app
 RUN apt-get update && apt-get install -y \
-    git gcc python3 build-essential bzip2
-COPY package.json package-lock*.json ./
-RUN npm install
+    git gcc python3 build-essential bzip2 \
+    libudev-dev libusb-1.0-0-dev
+COPY package.json yarn.lock ./
+RUN yarn install
 COPY . /app
 ARG ENVIRONMENT=prod
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:stable-alpine as prod
 COPY --from=base /app/build /usr/share/nginx/html
