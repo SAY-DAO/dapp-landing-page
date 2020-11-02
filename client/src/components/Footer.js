@@ -26,7 +26,6 @@ const styles = (darkTheme) => ({
 
 class NavBar extends React.Component {
     render() {
-        const {classes} = this.props
         return (
             <div>
                 <AppBar style={{backgroundColor: "transparent"}} position="static">

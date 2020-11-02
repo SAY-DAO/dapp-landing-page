@@ -1,10 +1,9 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import WalletButton from "./WalletButton";
-import Grid from "@material-ui/core/Grid";
-import withStyles from "@material-ui/core/styles/withStyles";
-
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import WalletButton from './WalletButton';
+import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = (darkTheme) => ({
     root: {
@@ -13,43 +12,38 @@ const styles = (darkTheme) => ({
 
     imgGrid: {
         alignItems: "center",
-
     },
-    buttonGrid: {
-        justifyContent: "flex-end",
-        direction: "row",
-        display: "none",
-        [darkTheme.breakpoints.up("sm")]: {
-            display: "flex"
-        }
-    }
 
+    buttonGrid: {
+        justifyContent: 'flex-end',
+        direction: 'row',
+        display: 'none',
+        [darkTheme.breakpoints.up('sm')]: {
+          display: 'flex',
+    },
+  },
 });
 
-
-
 class NavBar extends React.Component {
-    render() {
-    const {classes} = this.props
+  render() {
+    const { classes } = this.props;
     return (
-        <div>
-            <AppBar style={{backgroundColor: "transparent"}} position="static">
-                <Toolbar>
-                    <Grid container>
-                        <Grid container className={classes.imgGrid} item xs={6}>
-                            <img alt="logo" src={require('../static/sayLogo.png')}/>
-                        </Grid>
-                        <Grid  container className={classes.buttonGrid} item xs={6} >
-                            <WalletButton />
-                        </Grid>
-
-                    </Grid>
-                </Toolbar>
-            </AppBar>
-        </div>
-        );
-    }
+      <div>
+        <AppBar style={{ backgroundColor: 'transparent' }} position="static">
+          <Toolbar>
+            <Grid container>
+              <Grid container className={classes.imgGrid} item xs={6}>
+                <img alt="logo" src={require('../static/sayLogo.png')} />
+              </Grid>
+              <Grid container className={classes.buttonGrid} item xs={6}>
+                <WalletButton />
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-export default withStyles(styles)(NavBar)
-
+export default withStyles(styles)(NavBar);

@@ -12,9 +12,7 @@
   "ast": {
     "absolutePath": "@openzeppelin/contracts/utils/EnumerableSet.sol",
     "exportedSymbols": {
-      "EnumerableSet": [
-        2612
-      ]
+      "EnumerableSet": [2612]
     },
     "id": 2613,
     "license": "MIT",
@@ -22,12 +20,7 @@
     "nodes": [
       {
         "id": 2219,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:14"
       },
@@ -44,9 +37,7 @@
         },
         "fullyImplemented": true,
         "id": 2612,
-        "linearizedBaseContracts": [
-          2612
-        ],
+        "linearizedBaseContracts": [2612],
         "name": "EnumerableSet",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -638,9 +629,7 @@
               "src": "2255:1440:14",
               "statements": [
                 {
-                  "assignments": [
-                    2280
-                  ],
+                  "assignments": [2280],
                   "declarations": [
                     {
                       "constant": false,
@@ -822,9 +811,7 @@
                     "src": "2437:1209:14",
                     "statements": [
                       {
-                        "assignments": [
-                          2290
-                        ],
+                        "assignments": [2290],
                         "declarations": [
                           {
                             "constant": false,
@@ -910,9 +897,7 @@
                         "src": "2777:38:14"
                       },
                       {
-                        "assignments": [
-                          2296
-                        ],
+                        "assignments": [2296],
                         "declarations": [
                           {
                             "constant": false,
@@ -1030,9 +1015,7 @@
                         "src": "2829:42:14"
                       },
                       {
-                        "assignments": [
-                          2304
-                        ],
+                        "assignments": [2304],
                         "declarations": [
                           {
                             "constant": false,
@@ -2127,10 +2110,7 @@
                       "id": 2390,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "4509:7:14",
                       "typeDescriptions": {
@@ -5082,9 +5062,7 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/utils/EnumerableSet.sol",
     "exportedSymbols": {
-      "EnumerableSet": [
-        2612
-      ]
+      "EnumerableSet": [2612]
     },
     "id": 2613,
     "license": "MIT",
@@ -5092,12 +5070,7 @@
     "nodes": [
       {
         "id": 2219,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:14"
       },
@@ -5114,9 +5087,7 @@
         },
         "fullyImplemented": true,
         "id": 2612,
-        "linearizedBaseContracts": [
-          2612
-        ],
+        "linearizedBaseContracts": [2612],
         "name": "EnumerableSet",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -5708,9 +5679,7 @@
               "src": "2255:1440:14",
               "statements": [
                 {
-                  "assignments": [
-                    2280
-                  ],
+                  "assignments": [2280],
                   "declarations": [
                     {
                       "constant": false,
@@ -5892,9 +5861,7 @@
                     "src": "2437:1209:14",
                     "statements": [
                       {
-                        "assignments": [
-                          2290
-                        ],
+                        "assignments": [2290],
                         "declarations": [
                           {
                             "constant": false,
@@ -5980,9 +5947,7 @@
                         "src": "2777:38:14"
                       },
                       {
-                        "assignments": [
-                          2296
-                        ],
+                        "assignments": [2296],
                         "declarations": [
                           {
                             "constant": false,
@@ -6100,9 +6065,7 @@
                         "src": "2829:42:14"
                       },
                       {
-                        "assignments": [
-                          2304
-                        ],
+                        "assignments": [2304],
                         "declarations": [
                           {
                             "constant": false,
@@ -7197,10 +7160,7 @@
                       "id": 2390,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "4509:7:14",
                       "typeDescriptions": {

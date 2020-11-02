@@ -12,9 +12,7 @@
   "ast": {
     "absolutePath": "@openzeppelin/contracts/utils/Strings.sol",
     "exportedSymbols": {
-      "Strings": [
-        2699
-      ]
+      "Strings": [2699]
     },
     "id": 2700,
     "license": "MIT",
@@ -22,12 +20,7 @@
     "nodes": [
       {
         "id": 2614,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:15"
       },
@@ -44,9 +37,7 @@
         },
         "fullyImplemented": true,
         "id": 2699,
-        "linearizedBaseContracts": [
-          2699
-        ],
+        "linearizedBaseContracts": [2699],
         "name": "Strings",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -144,9 +135,7 @@
                   }
                 },
                 {
-                  "assignments": [
-                    2631
-                  ],
+                  "assignments": [2631],
                   "declarations": [
                     {
                       "constant": false,
@@ -195,9 +184,7 @@
                   "src": "531:20:15"
                 },
                 {
-                  "assignments": [
-                    2635
-                  ],
+                  "assignments": [2635],
                   "declarations": [
                     {
                       "constant": false,
@@ -381,9 +368,7 @@
                   "src": "585:75:15"
                 },
                 {
-                  "assignments": [
-                    2650
-                  ],
+                  "assignments": [2650],
                   "declarations": [
                     {
                       "constant": false,
@@ -480,9 +465,7 @@
                   "src": "669:39:15"
                 },
                 {
-                  "assignments": [
-                    2657
-                  ],
+                  "assignments": [2657],
                   "declarations": [
                     {
                       "constant": false,
@@ -1153,9 +1136,7 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/utils/Strings.sol",
     "exportedSymbols": {
-      "Strings": [
-        2699
-      ]
+      "Strings": [2699]
     },
     "id": 2700,
     "license": "MIT",
@@ -1163,12 +1144,7 @@
     "nodes": [
       {
         "id": 2614,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:15"
       },
@@ -1185,9 +1161,7 @@
         },
         "fullyImplemented": true,
         "id": 2699,
-        "linearizedBaseContracts": [
-          2699
-        ],
+        "linearizedBaseContracts": [2699],
         "name": "Strings",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1285,9 +1259,7 @@
                   }
                 },
                 {
-                  "assignments": [
-                    2631
-                  ],
+                  "assignments": [2631],
                   "declarations": [
                     {
                       "constant": false,
@@ -1336,9 +1308,7 @@
                   "src": "531:20:15"
                 },
                 {
-                  "assignments": [
-                    2635
-                  ],
+                  "assignments": [2635],
                   "declarations": [
                     {
                       "constant": false,
@@ -1522,9 +1492,7 @@
                   "src": "585:75:15"
                 },
                 {
-                  "assignments": [
-                    2650
-                  ],
+                  "assignments": [2650],
                   "declarations": [
                     {
                       "constant": false,
@@ -1621,9 +1589,7 @@
                   "src": "669:39:15"
                 },
                 {
-                  "assignments": [
-                    2657
-                  ],
+                  "assignments": [2657],
                   "declarations": [
                     {
                       "constant": false,

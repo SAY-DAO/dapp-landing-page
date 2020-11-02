@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MidSection from "./MidSection";
 import IntroSection from "./IntroSection";
 import MidTabs from "./MidTabs";
 import Eye from "./Eye";
-import EndSection from "./EndSection";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Circle from "./Circles";
@@ -13,8 +12,6 @@ import Circle from "./Circles";
 
 
 class App extends Component {
-
-
     componentDidMount = async () => {
 
     }
@@ -37,8 +34,7 @@ class App extends Component {
             </React.Fragment>
         );
     }
+
 }
 
-
 export default App;
-

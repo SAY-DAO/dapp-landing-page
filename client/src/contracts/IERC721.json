@@ -298,9 +298,7 @@
   "ast": {
     "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
     "exportedSymbols": {
-      "IERC721": [
-        1441
-      ]
+      "IERC721": [1441]
     },
     "id": 1442,
     "license": "MIT",
@@ -308,12 +306,7 @@
     "nodes": [
       {
         "id": 1327,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".2"
-        ],
+        "literals": ["solidity", "^", "0.6", ".2"],
         "nodeType": "PragmaDirective",
         "src": "33:23:7"
       },
@@ -350,9 +343,7 @@
             "src": "190:7:7"
           }
         ],
-        "contractDependencies": [
-          198
-        ],
+        "contractDependencies": [198],
         "contractKind": "interface",
         "documentation": {
           "id": 1329,
@@ -362,10 +353,7 @@
         },
         "fullyImplemented": false,
         "id": 1441,
-        "linearizedBaseContracts": [
-          1441,
-          198
-        ],
+        "linearizedBaseContracts": [1441, 198],
         "name": "IERC721",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1682,9 +1670,7 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
     "exportedSymbols": {
-      "IERC721": [
-        1441
-      ]
+      "IERC721": [1441]
     },
     "id": 1442,
     "license": "MIT",
@@ -1692,12 +1678,7 @@
     "nodes": [
       {
         "id": 1327,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".2"
-        ],
+        "literals": ["solidity", "^", "0.6", ".2"],
         "nodeType": "PragmaDirective",
         "src": "33:23:7"
       },
@@ -1734,9 +1715,7 @@
             "src": "190:7:7"
           }
         ],
-        "contractDependencies": [
-          198
-        ],
+        "contractDependencies": [198],
         "contractKind": "interface",
         "documentation": {
           "id": 1329,
@@ -1746,10 +1725,7 @@
         },
         "fullyImplemented": false,
         "id": 1441,
-        "linearizedBaseContracts": [
-          1441,
-          198
-        ],
+        "linearizedBaseContracts": [1441, 198],
         "name": "IERC721",
         "nodeType": "ContractDefinition",
         "nodes": [

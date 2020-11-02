@@ -36,6 +36,4 @@ class Circle extends React.Component{
     }
 }
 
-const body = document.querySelector("#root")
-
 export default withStyles(styles)(Circle);

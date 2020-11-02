@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'https://sayapp.company'
-})
+  baseURL: 'https://sayapp.company',
+});
