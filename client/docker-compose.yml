@@ -4,10 +4,6 @@ services:
     image: ${CONTAINER_IMAGE}
     networks:
       - traefik-public
-    environment:
-      - NGINX_PORT=8080
-    volumes:
-      - ./nginx:/etc/nginx/templates
     deploy:
       replicas: 1
       update_config:

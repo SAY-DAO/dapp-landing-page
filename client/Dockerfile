@@ -22,5 +22,6 @@ RUN yarn run build
 FROM nginx:stable-alpine as prod
 COPY --from=base /app/build /usr/share/nginx/html
 WORKDIR /app
-EXPOSE 80
+COPY nginx/nginx.conf /etc/nginx/
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
