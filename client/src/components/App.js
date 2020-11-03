@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MidSection from './MidSection';
@@ -39,7 +39,9 @@ export default function App() {
 
 function MyComponent() {
   const context = useWeb3Context();
-  console.log(context);
+  useEffect(() => {
+    context.setFirstValidConnector(['MetaMask', 'Infura'])
+  }, [])
   return (
     <button
       onClick={() => {
