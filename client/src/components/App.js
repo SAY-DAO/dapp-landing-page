@@ -11,7 +11,6 @@ import Circle from './Circles';
 import Web3Provider from 'web3-react';
 import { connectors } from '../connectors';
 import { useWeb3Context } from 'web3-react/dist';
-import { ethers } from 'ethers';
 
 console.log(connectors);
 

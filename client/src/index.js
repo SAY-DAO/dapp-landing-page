@@ -27,7 +27,6 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={darkTheme}>
