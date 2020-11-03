@@ -21,11 +21,11 @@ build-dev:
   only:
     - develop
 
-build-stag:
+build-stage:
   stage: build
   retry: 2
   script:
-    - ENVIRONMENT=stag sh ./client/scripts/build-push.sh
+    - ENVIRONMENT=stage sh ./client/scripts/build-push.sh
   only:
     - master
 
@@ -51,14 +51,14 @@ deploy-dev:
   tags:
     - deploy
 
-deploy-stag:
+deploy-stage:
   stage: deploy
   retry: 2
   script:
     - >
-      ENVIRONMENT=stag 
+      ENVIRONMENT=stage 
       DOMAIN=s.saydapp.company
-      STACK_NAME=say-stag-dapp
+      STACK_NAME=say-stage-dapp
       sh ./client/scripts/deploy.sh
   only:
     - master
