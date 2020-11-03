@@ -40,8 +40,9 @@ export default function App() {
 function MyComponent() {
   const context = useWeb3Context();
   useEffect(() => {
-    context.setFirstValidConnector(['MetaMask', 'Infura']);
+    context.setFirstValidConnector(['walletConnect', 'MetaMask', 'Infura']);
   }, []);
+  console.log(context);
   return (
     <button
       onClick={() => {
