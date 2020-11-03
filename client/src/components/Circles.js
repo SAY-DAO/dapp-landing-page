@@ -18,7 +18,6 @@ const styles = () => ({
 
 class Circle extends React.Component {
   render() {
-    console.log(this);
     const { classes } = this.props;
     return (
       <div className={classes.div}>
