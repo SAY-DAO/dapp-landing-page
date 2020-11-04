@@ -55,6 +55,8 @@ class WalletButton extends React.Component {
   };
 
   onConnect = async () => {
+    await getWeb3();
+
     try {
       // Metmask pops up if not connected
       await window.ethereum.request({ method: 'eth_requestAccounts' });
