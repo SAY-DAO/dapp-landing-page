@@ -12,8 +12,6 @@ import Web3Provider from 'web3-react';
 import { connectors } from '../connectors';
 import { useWeb3Context } from 'web3-react/dist';
 
-console.log(connectors);
-
 export default function App() {
   return (
     <React.Fragment>
@@ -39,14 +37,14 @@ export default function App() {
 
 function MyComponent() {
   const context = useWeb3Context();
-  useEffect(() => {
-    context.setFirstValidConnector(['walletConnect', 'MetaMask', 'Infura']);
-  }, []);
-  console.log(context);
+  // useEffect(() => {
+  //   context.setFirstValidConnector(['MetaMask']);
+  // }, [context]);
+  console.log("context: ",context);
   return (
     <button
       onClick={() => {
-        context.setConnector('MetaMask');
+        context.setConnector('walletconnect');
       }}
     >
       Activate

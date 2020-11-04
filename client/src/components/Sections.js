@@ -30,7 +30,6 @@ const useStyles = makeStyles((darkTheme) => ({
 
 export default function Sections(data) {
   const classes = useStyles();
-  console.log(data.props.img);
   return (
     <Container className={classes.root}>
       <Paper className={classes.paper}>

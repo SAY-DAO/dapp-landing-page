@@ -88,6 +88,7 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
+
   };
 
   getContract = async () => {
@@ -105,6 +106,7 @@ class TheNeed extends React.Component {
 
         const NAK = await contract.methods.tokenURI(i).call();
         NAKS = { ...NAKS, [`${i} -- ${userAccount}`]: NAK };
+        console.log(NAK)
       }
     } catch (error) {
       console.log("Can't load Nakamas: ", error);
@@ -113,11 +115,11 @@ class TheNeed extends React.Component {
   };
 
   onMint = async (formValues) => {
-    console.log('values', formValues.amount);
     const contract = (await this.getContract()).contract;
     const totalSupply = (await this.getContract()).totalSupply;
     console.log('Smart Contract: ', contract);
     console.log('Total Supply: ', totalSupply);
+
     const userAccount = this.props.theWallet.userAccount;
     const theNeed = this.props.fetchedNeed;
     // Solidity need uint256 type
@@ -223,7 +225,11 @@ class TheNeed extends React.Component {
           <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
             <Box>
               <Avatar className={classes.needIcon}>
-                <img src={`https://sayapp.company${this.props.fetchedNeed.imageUrl}`} alt="need icons" />
+                <img
+                  src={`https://sayapp.company${this.props.fetchedNeed.imageUrl}`}
+                  alt="need icons"
+                  style={{ maxWidth: 60 }}
+                />
               </Avatar>
             </Box>
             <Box p={1}>
@@ -287,7 +293,6 @@ const validate = (values) => {
   if (!values.amount) {
     errors.amount = 'Required';
   } else if (isNaN(Number(values.amount))) {
-    console.log('here');
     errors.amount = 'Must be a number';
   } else if (values.amount === '') {
     errors.amount = `Minimum price to mint is the price of the need`;

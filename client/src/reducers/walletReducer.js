@@ -16,13 +16,6 @@ export default (
         accounts: action.payload.accounts,
         userAccount: action.payload.userAccount,
       };
-    case 'FETCH_ACCOUNTS':
-      return {
-        ...state,
-        walletConnected: true,
-        accounts: action.payload.accounts,
-        userAccount: action.payload.accounts[0],
-      };
     default:
       return state;
   }

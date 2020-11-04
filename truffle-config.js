@@ -1,4 +1,6 @@
 const path = require("path");
+const HDWalletProvider = require('truffle-hdwallet-provider')
+
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -13,6 +15,16 @@ module.exports = {
     //
 
     // Ganache-CLI
+    rinkeby: {
+      provider: function() {
+        return new HDWalletProvider(
+            'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
+            'https://rinkeby.infura.io/v3/91804a85068e4116a4cafec2644c5158'
+        );
+      },
+      network_id: '4',
+    },
+
     develop: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
