@@ -40,7 +40,7 @@ function MyComponent() {
   // useEffect(() => {
   //   context.setFirstValidConnector(['MetaMask']);
   // }, [context]);
-  console.log("context: ",context);
+  console.log('context: ', context);
   return (
     <button
       onClick={() => {

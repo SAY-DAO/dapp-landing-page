@@ -88,7 +88,6 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
-
   };
 
   getContract = async () => {
@@ -106,7 +105,7 @@ class TheNeed extends React.Component {
 
         const NAK = await contract.methods.tokenURI(i).call();
         NAKS = { ...NAKS, [`${i} -- ${userAccount}`]: NAK };
-        console.log(NAK)
+        console.log(NAK);
       }
     } catch (error) {
       console.log("Can't load Nakamas: ", error);

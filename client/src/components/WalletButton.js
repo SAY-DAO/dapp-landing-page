@@ -31,14 +31,13 @@ class WalletButton extends React.Component {
 
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-      console.log("web3", web3)
-
+      console.log('web3', web3);
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
 
       const networkId = await web3.eth.net.getId();
-      console.log("Networkid: ", networkId)
+      console.log('Networkid: ', networkId);
 
       // Get the contract instance.
       const deployedNetwork = Nakama.networks[networkId];
@@ -49,7 +48,6 @@ class WalletButton extends React.Component {
         // Time to reload your interface with accounts[0]!
         this.props.connectWallet(accounts, web3, networkId, nakama);
       });
-
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(`Failed to load web3, accounts, or contract. Check console for details.`);

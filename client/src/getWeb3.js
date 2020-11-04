@@ -1,6 +1,5 @@
 import Web3 from 'web3';
 
-
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
@@ -10,7 +9,7 @@ const getWeb3 = () =>
         const web3 = new Web3(window.ethereum);
         try {
           // console.log(accounts)
-          console.log("Window Ethereum Web3")
+          console.log('Window Ethereum Web3');
           // Acccounts now exposed
           resolve(web3);
         } catch (error) {
@@ -35,7 +34,6 @@ const getWeb3 = () =>
         // const web3 = new Web3(provider)
         // console.log('No web3 instance injected, using HDWallet web3.');
         // resolve(web3);
-
 
         const provider = new Web3.providers.HttpProvider('http://127.0.0.1:7545');
         const web3 = new Web3(provider);
