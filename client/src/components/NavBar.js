@@ -18,7 +18,7 @@ const styles = (darkTheme) => ({
     justifyContent: 'flex-end',
     direction: 'row',
     // O to sm size until the break
-    display: 'inlineBlock',
+    // display: 'inlineBlock',
     [darkTheme.breakpoints.up('sm')]: {
       display: 'flex',
     },

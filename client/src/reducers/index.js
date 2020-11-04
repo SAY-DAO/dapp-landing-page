@@ -4,6 +4,7 @@ import needReducer from './needReducer';
 import walletReducer from './walletReducer';
 import nakamaReducer from './nakamaReducer';
 import ethReducer from './ethReducer';
+import modalReducer from './modalReducer';
 
 export default combineReducers({
   wallet: walletReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   need: needReducer,
   form: formReducer,
   ethPrice: ethReducer,
+  modal: modalReducer,
 });

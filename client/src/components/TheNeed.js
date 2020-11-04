@@ -8,7 +8,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
-import { fetchEthPrice, fetchNeed } from '../actions';
+import { activateModal, fetchEthPrice, fetchNeed } from '../actions';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { Field, reduxForm } from 'redux-form';
@@ -142,7 +142,7 @@ class TheNeed extends React.Component {
           gas: '1000000',
         })
         .once('receipt', (receipt) => {
-          alert('NAK Receipt');
+          this.props.activateModal();
         });
     } catch (error) {
       if (error.code === -32603) {
@@ -310,7 +310,8 @@ const mapStateToProps = (state) => {
     fetchedNeed: state.need,
     fetchedEth: state.ethPrice,
     theWallet: state.wallet,
+    modal: state.modal,
   };
 };
 
-export default connect(mapStateToProps, { fetchEthPrice, fetchNeed })(formWrapped);
+export default connect(mapStateToProps, { fetchEthPrice, fetchNeed, activateModal })(formWrapped);

@@ -9,31 +9,39 @@ import etherPrice from '../apis/EtherPrice';
 
 // refactored
 export const fetchNeed = () => async (dispatch) => {
-  const response = await randomNeed.get('/api/v2/public/random/need?_lang=en');
-  dispatch({
-    type: 'FETCH_NEED',
-    payload: response.data,
-  });
+  try {
+    const response = await randomNeed.get('/api/v2/public/random/need?_lang=en');
+    dispatch({
+      type: 'FETCH_NEED',
+      payload: response.data,
+    });
+  } catch (e) {
+    alert('looks like there is problem with your internet connection');
+  }
 };
 
 export const fetchEthPrice = (needFetchedCost) => async (dispatch) => {
-  const response = await etherPrice.get('/api/v3/coins/ethereum');
-  // Due to $ / IRR volatility in recent years we are using a constant rate.
-  const USDtoIRR = 30000;
-  const needUsdCost = needFetchedCost / USDtoIRR;
-  const needCostUSD = needUsdCost.toFixed(2);
-  const ethCurrentPrice = response.data.market_data.current_price.usd;
-  const needEthCost = Math.round((needCostUSD / ethCurrentPrice) * 1000000) / 1000000;
+  try {
+    const response = await etherPrice.get('/api/v3/coins/ethereum');
+    // Due to $ / IRR volatility in recent years we are using a constant rate.
+    const USDtoIRR = 30000;
+    const needUsdCost = needFetchedCost / USDtoIRR;
+    const needCostUSD = needUsdCost.toFixed(2);
+    const ethCurrentPrice = response.data.market_data.current_price.usd;
+    const needEthCost = Math.round((needCostUSD / ethCurrentPrice) * 1000000) / 1000000;
 
-  console.log(needFetchedCost, needEthCost);
+    console.log(needFetchedCost, needEthCost);
 
-  dispatch({
-    type: 'FETCH_ETH',
-    payload: {
-      ethCurrentPrice,
-      needEthCost,
-    },
-  });
+    dispatch({
+      type: 'FETCH_ETH',
+      payload: {
+        ethCurrentPrice,
+        needEthCost,
+      },
+    });
+  } catch (error) {
+    alert('looks like there is problem with your internet connection');
+  }
 };
 
 export const connectWallet = (accounts, web3, networkId, nakama) => {
@@ -56,11 +64,16 @@ export const mintedNakama = (NAK) => {
   };
 };
 
-//
-// export const updateServer = (data) => async dispatch => {
-//         const response = randomNeed.post(`/ethereum/${data.needId}/${data.transaction}`);
-//         dispatch({
-//                 type: "UPDATE_SERVER",
-//                 payload: response.data
-//         });
-// }
+export const activateModal = () => {
+  return {
+    type: 'NAK_MODAL',
+    payload: true,
+  };
+};
+
+export const deactivateModal = () => {
+  return {
+    type: 'NO_NAK_MODAL',
+    payload: false,
+  };
+};
