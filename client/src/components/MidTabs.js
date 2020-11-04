@@ -54,11 +54,11 @@ const useStyles = makeStyles((darkTheme) => ({
   paper: {
     padding: darkTheme.spacing(6),
     margin: 'auto',
-    maxWidth: 1440,
+    // maxWidth: 1440,
     borderRadius: 18,
   },
   tab: {
-    marginRight: 40,
+    marginRight: 10,
     minWidth: 50,
   },
 }));
