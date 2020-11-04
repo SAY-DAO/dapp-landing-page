@@ -12,14 +12,13 @@ module.exports = {
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
-    //
 
-    // Ganache-CLI
+    // truffle migrate --network rinkeby
     rinkeby: {
       provider: function() {
         return new HDWalletProvider(
             'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
-            'https://rinkeby.infura.io/v3/91804a85068e4116a4cafec2644c5158'
+            'https://rinkeby.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
         );
       },
       network_id: '4',
