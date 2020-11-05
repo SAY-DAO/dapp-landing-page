@@ -119,7 +119,6 @@ export default function MidTabs() {
         scrollButtons="auto"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
         className={classes.tabs}
       >
         <Tab label={contents.section1.title} {...a11yProps(0)} className={classes.tab} />

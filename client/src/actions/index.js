@@ -48,11 +48,10 @@ export const connectWallet = (accounts, web3, networkId, nakama) => {
   return {
     type: 'CONNECT_WALLET',
     payload: {
+      web3,
+      nakama,
       accounts,
       userAccount: accounts[0],
-      web3,
-      networkId,
-      nakama,
     },
   };
 };
@@ -75,5 +74,17 @@ export const deactivateModal = () => {
   return {
     type: 'NO_NAK_MODAL',
     payload: false,
+  };
+};
+
+export const fetchIsOwner = async (contract, userAccount, totalSupply) => {
+  console.log('Smart Contract: ', contract);
+  console.log('Total Supply: ', totalSupply);
+  console.log('Owner: ', isOwner);
+  console.log('userAccount: ', userAccount);
+
+  return {
+    type: 'ISOWNER',
+    payload: isOwner,
   };
 };

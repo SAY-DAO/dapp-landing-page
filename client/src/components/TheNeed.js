@@ -8,7 +8,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
-import { activateModal, fetchEthPrice, fetchNeed } from '../actions';
+import { activateModal, fetchEthPrice, fetchIsOwner, fetchNeed } from '../actions';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { Field, reduxForm } from 'redux-form';
@@ -78,9 +78,32 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
-
     // Adding commas to price
     // const fetchedCostCleaned = needFetchedCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    let isOwner = false;
+    try {
+      const userAccount = this.props.theWallet.userAccount;
+      const contract = this.props.theWallet.contract;
+      const totalSupply = await contract.methods.totalSupply().call();
+      for (let i = 1; i <= totalSupply; i++) {
+        const owner = await contract.methods.ownerOf(i).call();
+        console.log(i, owner);
+        if (userAccount.toLowerCase() === owner.toLowerCase()) {
+          isOwner = true;
+          const NAK = await contract.methods.tokenURI(i).call();
+          console.log('Owner: ', owner);
+          console.log('NAK: ', NAK);
+        }
+      }
+    } catch (error) {
+      console.log("Can't load Nakamas: ", error);
+    }
+
+    try {
+      await this.props.fetchIsOwner(contract, userAccount, totalSupply);
+    } catch (error) {
+      console.log('Not sure whether a NAK owner: ', error);
+    }
   };
 
   randomNeed = async (event) => {
@@ -90,36 +113,7 @@ class TheNeed extends React.Component {
     await this.props.fetchEthPrice(needFetchedCost);
   };
 
-  getContract = async () => {
-    let contract = {};
-    let totalSupply = null;
-    let NAKS = {};
-
-    try {
-      contract = this.props.theWallet.contract;
-      totalSupply = await contract.methods.totalSupply().call();
-      const userAccount = this.props.theWallet.userAccount;
-
-      for (let i = 1; i <= totalSupply; i++) {
-        // console.log(await contract.methods.ownerOf(i).call())
-
-        const NAK = await contract.methods.tokenURI(i).call();
-        NAKS = { ...NAKS, [`${i} -- ${userAccount}`]: NAK };
-        console.log(NAK);
-      }
-    } catch (error) {
-      console.log("Can't load Nakamas: ", error);
-    }
-    return { contract, totalSupply };
-  };
-
   onMint = async (formValues) => {
-    const contract = (await this.getContract()).contract;
-    const totalSupply = (await this.getContract()).totalSupply;
-    console.log('Smart Contract: ', contract);
-    console.log('Total Supply: ', totalSupply);
-
-    const userAccount = this.props.theWallet.userAccount;
     const theNeed = this.props.fetchedNeed;
     // Solidity need uint256 type
     const needValueEth = this.props.fetchedEth.needEthCost;
@@ -134,20 +128,34 @@ class TheNeed extends React.Component {
     }
 
     try {
-      await contract.methods
-        .awardItem(userAccount, JSON.stringify(theNeed))
-        .send({
-          from: this.props.theWallet.userAccount,
-          value: needValueWei,
-          gas: '1000000',
-        })
-        .once('receipt', (receipt) => {
-          this.props.activateModal();
-        });
-    } catch (error) {
-      if (error.code === -32603) {
-        alert('This need has already been taken care of :)');
+      const userAccount = this.props.theWallet.userAccount;
+      const contract = this.props.theWallet.contract;
+      const isOwner = this.props.theWallet.nakamaOwner;
+      if (!isOwner) {
+        await contract.methods
+          .awardItem(userAccount, JSON.stringify(theNeed))
+          .send({
+            from: this.props.theWallet.userAccount,
+            value: needValueWei,
+            // gas: 21000,
+          })
+          .once('receipt', (receipt) => {
+            this.props.activateModal();
+          });
+      } else {
+        await contract.methods
+          .transferAmount()
+          .send({
+            from: this.props.theWallet.userAccount,
+            value: needValueWei,
+            // gas: 21000,
+          })
+          .once('receipt', (receipt) => {
+            alert('fuck yeah');
+          });
       }
+    } catch (error) {
+      alert(error.message);
       console.log(error);
     }
   };
@@ -314,4 +322,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchEthPrice, fetchNeed, activateModal })(formWrapped);
+export default connect(mapStateToProps, { fetchEthPrice, fetchNeed, activateModal, fetchIsOwner })(formWrapped);

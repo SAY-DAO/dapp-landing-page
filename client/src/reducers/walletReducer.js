@@ -4,6 +4,7 @@ export default (
     web3: null,
     accounts: [],
     userAccount: null,
+    nakamaOwner: false,
   },
   action,
 ) => {
@@ -16,6 +17,8 @@ export default (
         accounts: action.payload.accounts,
         userAccount: action.payload.userAccount,
       };
+    case 'ISOWNER':
+      return { ...state, nakamaOwner: action.payload };
     default:
       return state;
   }

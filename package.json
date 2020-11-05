@@ -1,0 +1,20 @@
+{
+  "name": "truffle",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.2.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "ganache-cli": "^6.12.1",
+    "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prettier": "prettier src/ --write",
+    "lint:prettier": "prettier src/ --check"
+  }
+}

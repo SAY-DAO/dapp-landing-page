@@ -10,15 +10,11 @@ contract Nakama is ERC721 {
     Counters.Counter private _tokenIds;
 
     address payable public  SAY ;
-    mapping(string => bool) _doneNeeds;
-    address[] _donors;
+    mapping(string => bool) public _doneNeeds;
+    mapping(address => bool) public _donors;
 
     constructor() public ERC721("Nakama", "NAK")  {
         SAY = msg.sender;
-    }
-
-    function getDonors()  public  view returns( address [] memory ) {
-        return _donors;
     }
 
     function transferAmount() public payable{
@@ -26,19 +22,23 @@ contract Nakama is ERC721 {
     }
 
     function awardItem(address _donor, string memory _tokenURI) public payable returns (uint256) {
+//      to avoid creating NAK with 0 value
+//        require(msg.value > 0.0001 ether);
         require(!_doneNeeds[_tokenURI]);
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-//        transfer the money to SAY
+//      transfer the money to SAY
         transferAmount();
-//        Mints tokenId and transfers it to to.
+//      if address already has a NAK transfer the amount but do not mint
+        require(!_donors[_donor]);
+//      Mints tokenId and transfers it to to.
         _safeMint(_donor, newItemId);
 
-//        Sets _tokenURI as the tokenURI of tokenId.
+//      Sets _tokenURI as the tokenURI of tokenId.
         _setTokenURI(newItemId, _tokenURI);
-//        One token per need
+//      One token per need
         _doneNeeds[_tokenURI] = true;
-        _donors.push(_donor);
+        _donors[_donor] = true;
 
         return newItemId;
     }

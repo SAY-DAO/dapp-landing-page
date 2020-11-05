@@ -27,12 +27,10 @@ const getWeb3 = () =>
         cacheProvider: true, // optional
         providerOptions, // required
       });
-      console.log(web3Modal);
 
       const provider = await web3Modal.connect();
 
       const web3 = new Web3(provider);
-      console.log('web3');
       resolve(web3);
     } catch (error) {
       console.log(`Something is wrong here.`, error);
