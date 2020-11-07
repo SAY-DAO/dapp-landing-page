@@ -1,100 +1,169 @@
-const Nakama = artifacts.require('Nakama')
-const ganache = require('ganache-cli')
-const Web3 = require('web3')
-const web3 = new Web3(ganache.provider)
+const Nakama = artifacts.require("Nakama");
 
-require('chai')
-    .use(require('chai-as-promised'))
-    .should()
+require("chai").use(require("chai-as-promised")).should();
 
-contract('Nakama', (accounts) => {
-        let contract
+contract("Nakama", () => {
+  let nakama;
 
-        before(async () => {
-            // accounts = await web3.eth.getAccount
-             nakama = await Nakama.deployed();
+  before(async () => {
+    // nakama = await Nakama.deployed();
+    accounts = await web3.eth.getAccounts();
 
-             tokenURIs = [
-                 'https://sayapp.company/child/1/need/45',
-                 'https://sayapp.company/child/56/need/6',
-                 'https://sayapp.company/child/12/need/5',
-                 'https://sayapp.company/child/13/need/15',
-                 'https://sayapp.company/child/2/need/23',
-                 'https://sayapp.company/child/2/need/23',
-                 'https://sayapp.company/child/2/need/23'
-                 ]
+    // create a separate instance of the contract on the ganache network
+    nakama = await new web3.eth.Contract(Nakama.abi)
+      .deploy({ data: Nakama.bytecode })
+      .send({ from: accounts[0], gas: 6721975, gasPrice: 20000000000 });
+
+    tokenURIs = [
+      "https://sayapp.company/child/1/need/45",
+      "https://sayapp.company/child/56/need/6",
+      "https://sayapp.company/child/12/need/5",
+      "https://sayapp.company/child/13/need/15",
+      "https://sayapp.company/child/2/need/233",
+      "https://sayapp.company/child/32/need/231",
+      "https://sayapp.company/child/21/need/243",
+      "https://sayapp.company/child/2/need/43",
+      "https://sayapp.company/child/8/need/83",
+      "https://sayapp.company/child/5/need/3",
+    ];
+  });
+
+  describe("deployment", async () => {
+    it("deploys successfully", async () => {
+      const address = nakama.options.address;
+
+      assert.notEqual(address, 0x0);
+      assert.notEqual(address, "");
+      assert.notEqual(address, null);
+      assert.notEqual(address, undefined);
+      assert.ok(address);
+    });
+    it("has a name", async () => {
+      const name = await nakama.methods.name().call();
+      assert.equal(name, "Nakama");
+    });
+
+    it("has a symbol", async () => {
+      const symbol = await nakama.methods.symbol().call();
+      assert.equal(symbol, "NAK");
+    });
+    it("has SAY as account[0]", async () => {
+      assert.equal(await nakama.methods.SAY().call(), accounts[0]);
+    });
+  });
+
+  describe("minting", async () => {
+    it("does not allow 0 value to mint", async () => {
+      await nakama.methods.awardItem(accounts[0], tokenURIs[0]).send({
+        from: accounts[0],
+        value: await web3.utils.toWei("0.00009", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      }).should.be.rejected;
+    });
+
+    it("creates a new token for the account and transfer it", async () => {
+      const token = await nakama.methods
+        .awardItem(accounts[1], tokenURIs[1])
+        .send({
+          from: accounts[1],
+          value: web3.utils.toWei("0.1", "ether"),
+          gas: 6721975,
+          gasPrice: 20000000000,
         });
+      const totalSupply = await nakama.methods.totalSupply().call();
+      assert.equal(totalSupply, 1);
 
-        describe('deployment', async () => {
+      const transfer = token.events.Transfer.returnValues;
+      assert.equal(
+        token.from.toUpperCase(),
+        accounts[1].toUpperCase(),
+        "calls awardItem from correct account"
+      );
+      assert.equal(
+        transfer.from,
+        "0x0000000000000000000000000000000000000000",
+        "transfers from is correct"
+      );
+      assert.equal(
+        transfer.to.toUpperCase(),
+        accounts[1].toUpperCase(),
+        "token is transfered"
+      );
+    });
+    it("rejects minting for the same need twice", async () => {
+      // Failure - Same need should not be rewarded
+      await nakama.methods.awardItem(accounts[8], tokenURIs[1]).send({
+        from: accounts[8],
+        value: await web3.utils.toWei("0.2", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      }).should.be.rejected;
+    });
+    it("does not mint twice for the same address", async () => {
+      await nakama.methods.awardItem(accounts[1], tokenURIs[7]).send({
+        from: accounts[1],
+        value: web3.utils.toWei("0.1", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      }).should.be.rejected;
+    });
+  });
 
-            it('deploys successfully', async () => {
-                const address = nakama.address;
-                assert.notEqual(address, 0x0);
-                assert.notEqual(address, '');
-                assert.notEqual(address, null);
-                assert.notEqual(address, undefined);
-                assert.ok(nakama.address)
-            });
+  describe("indexing", async () => {
+    it("lists done needs", async () => {
+      //    Mint 3 more tokens
+      await nakama.methods.awardItem(accounts[2], tokenURIs[2]).send({
+        from: accounts[2],
+        value: web3.utils.toWei("0.002", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      });
+      await nakama.methods.awardItem(accounts[3], tokenURIs[3]).send({
+        from: accounts[3],
+        value: web3.utils.toWei("0.002", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      });
+      await nakama.methods.awardItem(accounts[4], tokenURIs[4]).send({
+        from: accounts[4],
+        value: web3.utils.toWei("0.002", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      });
 
-            it('has a name', async () => {
-                const name = await nakama.name();
-                assert.equal(name, 'Nakama');
-            });
+      const totalSupply = await nakama.methods.totalSupply().call();
+      let tokenURI;
+      let result = [];
 
-            it('has a symbol', async () => {
-                const symbol = await nakama.symbol();
-                assert.equal(symbol, 'NAK');
-            });
-        })
+      for (var i = 1; i <= totalSupply; i++) {
+        tokenURI = await nakama.methods.tokenURI(i).call();
+        result.push(tokenURI);
+      }
 
-        describe('minting', async () => {
-            // it('does not allow 0 value to mint', async() => {
-            //     const token = await nakama.awardItem(accounts[0], tokenURIs[0]).send({
-            //         from: accounts[0],
-            //         value: web3.utils.toWei('0', 'ether')
-            //     }).should.be.rejected;
-            //
-            // });
-
-            it('creates a new token for accounts[0]', async () => {
-                const token = await nakama.awardItem(accounts[0], tokenURIs[0])
-                const totalSupply = await nakama.totalSupply()
-                assert.equal(totalSupply, 1);
-
-                // const result = token.logs[0].args;
-                // assert.equal(result.tokenId.toNumber(), 1, 'id is correct');
-                // assert.equal(result.from, '0x0000000000000000000000000000000000000000', 'from is correct');
-                // assert.equal(result.to, accounts[0], 'to is correct');
-                //
-                // // Failure - Same need should not be rewarded
-                // await nakama.awardItem(accounts[0], tokenURIs[0]).should.be.rejected;
-            });
-
-        })
-
-        describe('indexing', async () => {
-            it('lists done needs', async() => {
-            //    Mint 3 more tokens
-                await nakama.awardItem(accounts[1], tokenURIs[1]);
-                await nakama.awardItem(accounts[2], tokenURIs[2]);
-                await nakama.awardItem(accounts[3], tokenURIs[3]);
-
-                const totalSupply = await nakama.totalSupply();
-                let tokenURI;
-                let result = [];
-
-                for (var i=1; i<=totalSupply; i++) {
-                    tokenURI = await nakama.tokenURI(i);
-                    result.push(tokenURI)
-                }
-
-                let expected = [tokenURIs[0], tokenURIs[1], tokenURIs[2], tokenURIs[3]];
-                assert.equal(result.join(','), expected.join(','));
-            });
-
-            it('does not mint twice fo an address', async() => {
-                await nakama.awardItem(accounts[3], tokenURIs[4]).should.be.rejected;
-            })
-        })
-    }
-)
+      let expected = [tokenURIs[1], tokenURIs[2], tokenURIs[3], tokenURIs[4]];
+      assert.equal(
+        result.join(","),
+        expected.join(","),
+        "correect token indexing"
+      );
+    });
+  });
+  describe("transfering ETH", async () => {
+    it("sends eth to SAY address", async () => {
+      const SAY = await nakama.methods.SAY().call();
+      const beforeBalance = await web3.eth.getBalance(SAY);
+      await nakama.methods.awardItem(accounts[9], tokenURIs[9]).send({
+        from: accounts[9],
+        value: web3.utils.toWei("0.2", "ether"),
+        gas: 6721975,
+        gasPrice: 20000000000,
+      });
+      const afterBalance = await web3.eth.getBalance(SAY);
+      assert.ok(
+        afterBalance - beforeBalance > 190000000000000000,
+        "increases SAY balance"
+      );
+    });
+  });
+});

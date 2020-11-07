@@ -77,12 +77,7 @@ export const deactivateModal = () => {
   };
 };
 
-export const fetchIsOwner = async (contract, userAccount, totalSupply) => {
-  console.log('Smart Contract: ', contract);
-  console.log('Total Supply: ', totalSupply);
-  console.log('Owner: ', isOwner);
-  console.log('userAccount: ', userAccount);
-
+export const fetchIsOwner = (isOwner) => {
   return {
     type: 'ISOWNER',
     payload: isOwner,

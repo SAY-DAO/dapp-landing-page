@@ -21,7 +21,6 @@ class TheChild extends React.Component {
   componentDidMount = async () => {
     await this.props.fetchNeed();
   };
-
   renderForm() {
     const { classes } = this.props;
     if (this.props.fetchedNeed['childAvatarUrl']) {

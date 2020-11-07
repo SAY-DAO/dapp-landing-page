@@ -1,4 +1,4 @@
-var Nakama = artifacts.require("./Nakama.sol");
+var Nakama = artifacts.require("Nakama.sol");
 
 module.exports = function(deployer) {
   deployer.deploy(Nakama);

@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import getWeb3 from '../getWeb3';
 import Nakama from '../contracts/Nakama.json';
 import { connect } from 'react-redux';
-import { connectWallet, deactivateModal } from '../actions';
+import { connectWallet, deactivateModal, fetchIsOwner } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
@@ -52,6 +52,33 @@ class WalletButton extends React.Component {
       // Catch any errors for any of the above operations.
       console.log(`Failed to load web3, accounts, or contract.`, error);
     }
+    await this.isOwner();
+  };
+
+  isOwner = async () => {
+    let isOwner = false;
+    const userAccount = this.props.theWallet.userAccount;
+    const contract = this.props.theWallet.contract;
+    const totalSupply = await contract.methods.totalSupply().call();
+    console.log('Smart Contract: ', contract);
+    console.log('Total Supply: ', totalSupply);
+    console.log('Owner: ', isOwner);
+    console.log('userAccount: ', userAccount);
+    try {
+      for (let i = 1; i <= totalSupply; i++) {
+        const owner = await contract.methods.ownerOf(i).call();
+        console.log(i, owner);
+        if (userAccount.toLowerCase() === owner.toLowerCase()) {
+          isOwner = true;
+          const NAK = await contract.methods.tokenURI(i).call();
+          console.log('Owner: ', owner);
+          console.log('NAK: ', NAK);
+        }
+      }
+    } catch (error) {
+      console.log("Can't load Nakamas: ", error);
+    }
+    await this.props.fetchIsOwner(isOwner);
   };
 
   onConnect = async () => {
@@ -126,4 +153,4 @@ const mapToStateProps = (state) => {
   };
 };
 
-export default connect(mapToStateProps, { connectWallet, deactivateModal })(WalletButton);
+export default connect(mapToStateProps, { connectWallet, deactivateModal, fetchIsOwner })(WalletButton);

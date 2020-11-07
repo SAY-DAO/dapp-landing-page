@@ -21,25 +21,26 @@ contract Nakama is ERC721 {
         SAY.transfer(msg.value);
     }
 
-    function awardItem(address _donor, string memory _tokenURI) public payable returns (uint256) {
+
+    function awardItem(address _donor, string memory _tokenURI) payable public returns (uint256) {
 //      to avoid creating NAK with 0 value
-//        require(msg.value > 0.0001 ether);
+        require(msg.value > 0.0001 ether);
         require(!_doneNeeds[_tokenURI]);
-        _tokenIds.increment();
-        uint256 newItemId = _tokenIds.current();
 //      transfer the money to SAY
         transferAmount();
+        _tokenIds.increment();
 //      if address already has a NAK transfer the amount but do not mint
         require(!_donors[_donor]);
+        uint256 newItemId = _tokenIds.current();
 //      Mints tokenId and transfers it to to.
         _safeMint(_donor, newItemId);
-
-//      Sets _tokenURI as the tokenURI of tokenId.
+//      Sets _tokenURI as a unique id.
         _setTokenURI(newItemId, _tokenURI);
 //      One token per need
         _doneNeeds[_tokenURI] = true;
+//      stores the donor
         _donors[_donor] = true;
-
         return newItemId;
+        }
+
     }
-}
