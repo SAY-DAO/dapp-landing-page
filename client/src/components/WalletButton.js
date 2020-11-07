@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import getWeb3 from '../getWeb3';
 import Nakama from '../contracts/Nakama.json';
 import { connect } from 'react-redux';
-import { connectWallet, deactivateModal, fetchIsOwner } from '../actions';
+import { connectWallet, deactivateModal, fetchIsOwner, updateMintButton } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
@@ -23,8 +23,6 @@ const MyButton = styled(Button)({
 class WalletButton extends React.Component {
   componentDidMount = async () => {
     try {
-      this.walletStatus();
-
       if (typeof window.ethereum === 'undefined') {
         console.log('MetaMask is not installed!');
       }
@@ -44,41 +42,43 @@ class WalletButton extends React.Component {
       const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
       this.props.connectWallet(accounts, web3, networkId, nakama);
 
-      window.ethereum.on('accountsChanged', (accounts) => {
+      window.ethereum.on('accountsChanged', async (accounts) => {
         // Time to reload your interface with accounts[0]!
         this.props.connectWallet(accounts, web3, networkId, nakama);
+
+        let isOwner = false;
+        try {
+          const userAccount = this.props.theWallet.userAccount;
+          const contract = this.props.theWallet.contract;
+          const totalSupply = await contract.methods.totalSupply().call();
+          console.log('Smart Contract: ', contract);
+          console.log('Total Supply: ', totalSupply);
+          console.log('userAccount: ', userAccount);
+          for (let i = 1; i <= totalSupply; i++) {
+            const owner = await contract.methods.ownerOf(i).call();
+            console.log(i, owner);
+            if (userAccount.toLowerCase() === owner.toLowerCase()) {
+              isOwner = true;
+              const NAK = await contract.methods.tokenURI(i).call();
+              console.log('Owner: ', owner);
+              console.log('NAK: ', NAK);
+            }
+          }
+          console.log('isOwner: ', isOwner);
+        } catch (error) {
+          console.log("Can't load Nakamas: ", error);
+        }
+        await this.props.fetchIsOwner(isOwner);
+        if (this.props.theWallet.nakamaOwner) {
+          await this.props.updateMintButton('Pay for Need', 'enabled');
+        } else {
+          await this.props.updateMintButton('Mint NAK', 'enabled');
+        }
       });
     } catch (error) {
       // Catch any errors for any of the above operations.
       console.log(`Failed to load web3, accounts, or contract.`, error);
     }
-    await this.isOwner();
-  };
-
-  isOwner = async () => {
-    let isOwner = false;
-    const userAccount = this.props.theWallet.userAccount;
-    const contract = this.props.theWallet.contract;
-    const totalSupply = await contract.methods.totalSupply().call();
-    console.log('Smart Contract: ', contract);
-    console.log('Total Supply: ', totalSupply);
-    console.log('Owner: ', isOwner);
-    console.log('userAccount: ', userAccount);
-    try {
-      for (let i = 1; i <= totalSupply; i++) {
-        const owner = await contract.methods.ownerOf(i).call();
-        console.log(i, owner);
-        if (userAccount.toLowerCase() === owner.toLowerCase()) {
-          isOwner = true;
-          const NAK = await contract.methods.tokenURI(i).call();
-          console.log('Owner: ', owner);
-          console.log('NAK: ', NAK);
-        }
-      }
-    } catch (error) {
-      console.log("Can't load Nakamas: ", error);
-    }
-    await this.props.fetchIsOwner(isOwner);
   };
 
   onConnect = async () => {
@@ -95,7 +95,9 @@ class WalletButton extends React.Component {
   };
 
   isNakama = () => {
-    if (Nakama) {
+    const nakOwner = this.props.theWallet.nakamaOwner;
+    console.log('naknak', nakOwner);
+    if (nakOwner) {
       return (
         <img
           alt="nakama"
@@ -106,13 +108,13 @@ class WalletButton extends React.Component {
     }
     return (
       <svg style={{ position: 'absolute' }}>
-        <circle cx="40" cy="10" r="20" stroke="white" strokeWidth="3" fill="#FF8799" />
+        {/*<circle cx="40" cy="10" r="20" stroke="white" strokeWidth="3" fill="#FF8799" />*/}
       </svg>
     );
   };
 
   walletStatus = () => {
-    if (!this.props.theWallet.accounts[0]) {
+    if (!this.props.theWallet.userAccount) {
       return (
         <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
           Connect Wallet
@@ -122,7 +124,6 @@ class WalletButton extends React.Component {
     const userAccount = this.props.theWallet.userAccount;
     const userAccountStart = userAccount.slice(0, 6);
     const userAccountEnd = userAccount.slice(-5);
-
     return (
       <Grid container>
         <Box style={{ margin: 'auto' }}>
@@ -153,4 +154,6 @@ const mapToStateProps = (state) => {
   };
 };
 
-export default connect(mapToStateProps, { connectWallet, deactivateModal, fetchIsOwner })(WalletButton);
+export default connect(mapToStateProps, { connectWallet, deactivateModal, fetchIsOwner, updateMintButton })(
+  WalletButton,
+);

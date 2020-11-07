@@ -5,6 +5,7 @@ import walletReducer from './walletReducer';
 import nakamaReducer from './nakamaReducer';
 import ethReducer from './ethReducer';
 import modalReducer from './modalReducer';
+import mintButtonReducer from './mintButtonReducer';
 
 export default combineReducers({
   wallet: walletReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   form: formReducer,
   ethPrice: ethReducer,
   modal: modalReducer,
+  mintButton: mintButtonReducer,
 });

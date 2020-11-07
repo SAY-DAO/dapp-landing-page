@@ -17,7 +17,7 @@ export default (
         accounts: action.payload.accounts,
         userAccount: action.payload.userAccount,
       };
-    case 'ISOWNER':
+    case 'IS_OWNER':
       return { ...state, nakamaOwner: action.payload };
     default:
       return state;

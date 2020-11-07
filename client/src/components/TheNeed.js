@@ -8,7 +8,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
-import { activateModal, fetchEthPrice, fetchNeed } from '../actions';
+import { activateModal, fetchEthPrice, fetchNeed, fetchIsOwner, updateMintButton } from '../actions';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { Field, reduxForm } from 'redux-form';
@@ -64,7 +64,6 @@ const styles = (darkTheme) => ({
     border: '1px solid',
     color: 'white',
   },
-
   button2: {
     borderColor: '#8CB4C5',
     borderRadius: 3,
@@ -78,16 +77,54 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
+    await this.isOwner();
+    if (this.props.theWallet.nakamaOwner) {
+      await this.props.updateMintButton('Pay for Need', 'enabled');
+    } else {
+      await this.props.updateMintButton('Mint NAK', 'enabled');
+    }
   };
 
   randomNeed = async (event) => {
     event.preventDefault();
     await this.props.fetchNeed();
+    if (this.props.theWallet.nakamaOwner) {
+      await this.props.updateMintButton('Pay for Need', 'enabled');
+    } else {
+      await this.props.updateMintButton('Mint NAK', 'enabled');
+    }
     // Adding commas to price
     // const fetchedCostCleaned = needFetchedCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
   };
 
+  isOwner = async () => {
+    let isOwner = false;
+    try {
+      const userAccount = this.props.theWallet.userAccount;
+      const contract = this.props.theWallet.contract;
+      const totalSupply = await contract.methods.totalSupply().call();
+      console.log('Smart Contract: ', contract);
+      console.log('Total Supply: ', totalSupply);
+      console.log('userAccount: ', userAccount);
+      for (let i = 1; i <= totalSupply; i++) {
+        const owner = await contract.methods.ownerOf(i).call();
+        console.log(i, owner);
+        if (userAccount.toLowerCase() === owner.toLowerCase()) {
+          isOwner = true;
+          const NAK = await contract.methods.tokenURI(i).call();
+          console.log('Owner: ', owner);
+          console.log('NAK: ', NAK);
+        }
+      }
+      console.log('isOwnerisOwner: ', isOwner);
+    } catch (error) {
+      console.log("Can't load Nakamas: ", error);
+    }
+    await this.props.fetchIsOwner(isOwner);
+  };
+
   onMint = async (formValues) => {
+    await this.isOwner();
     const theNeed = this.props.fetchedNeed;
     // Solidity need uint256 type
     const needValueEth = this.props.fetchedEth.needEthCost;
@@ -107,28 +144,30 @@ class TheNeed extends React.Component {
       const isOwner = this.props.theWallet.nakamaOwner;
       if (!isOwner) {
         await contract.methods
-          .awardItem(userAccount, JSON.stringify(theNeed))
+          .awardToken(userAccount, JSON.stringify(theNeed))
           .send({
             from: userAccount,
             value: needValueWei,
           })
-          .once('receipt', (receipt) => {
+          .once('receipt', async (receipt) => {
             this.props.activateModal();
+            await this.props.updateMintButton('Minted <3', 'disabled');
+            await this.props.fetchIsOwner(true);
           });
       } else {
         await contract.methods
-          .transferAmount()
+          .transferAmount(userAccount, JSON.stringify(theNeed))
           .send({
             from: userAccount,
             value: needValueWei,
           })
-          .once('receipt', (receipt) => {
+          .once('receipt', async (receipt) => {
             alert('ETH is transferred');
+            await this.props.updateMintButton('Paid :)', 'disabled');
           });
       }
     } catch (error) {
       alert(error.message);
-      console.log(error);
     }
   };
 
@@ -167,7 +206,7 @@ class TheNeed extends React.Component {
             </Box>
             <Box style={{ margin: 'auto', height: 56 }}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
-                Mint Nakama
+                {this.props.mintButton.text}
               </Button>
             </Box>
           </Box>
@@ -250,9 +289,9 @@ class TheNeed extends React.Component {
                     Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to the SAY ecosystem
                     such as paying a need, taking part in building the software, or helping with the logistic side of
                     SAY. NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
-                    choose to contribute and are NOT designed to be traded rather behold as a community membership token
-                    to get involved in SAY token economic. More information about tokens use cases will be released in
-                    the coming weeks.
+                    choose to contribute and are NOT designed to be traded rather behold as a bond between us and a
+                    community membership token to get involved in SAY token economic. This also helps with lower
+                    ethereum gas cost. More information about tokens use cases will be released in the coming weeks.
                   </Typography>
                 </AccordionDetails>
               </Accordion>
@@ -291,7 +330,10 @@ const mapStateToProps = (state) => {
     fetchedEth: state.ethPrice,
     theWallet: state.wallet,
     modal: state.modal,
+    mintButton: state.mintButton,
   };
 };
 
-export default connect(mapStateToProps, { fetchEthPrice, fetchNeed, activateModal })(formWrapped);
+export default connect(mapStateToProps, { fetchEthPrice, fetchNeed, activateModal, fetchIsOwner, updateMintButton })(
+  formWrapped,
+);

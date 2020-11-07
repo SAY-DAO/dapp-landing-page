@@ -79,7 +79,14 @@ export const deactivateModal = () => {
 
 export const fetchIsOwner = (isOwner) => {
   return {
-    type: 'ISOWNER',
+    type: 'IS_OWNER',
     payload: isOwner,
+  };
+};
+
+export const updateMintButton = (text, status) => {
+  return {
+    type: 'UPDATE_BUTTON_TEXT',
+    payload: { text, status },
   };
 };
