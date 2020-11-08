@@ -14,28 +14,36 @@ module.exports = {
     // options below to some value.
 
     // truffle migrate --network rinkeby
-    // rinkeby: {
-    //   provider: function() {
-    //     return new HDWalletProvider(
-    //         'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
-    //         'https://rinkeby.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
-    //     );
-    //   },
-    //   network_id: '4',
-    // },
+    rinkeby: {
+      provider: function() {
+        return new HDWalletProvider(
+            'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
+            'https://rinkeby.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
+        );
+      },
+      network_id: '4',
+    },
 
-    // develop: {
-    //   host: "127.0.0.1",     // Localhost (default: none)
-    //   port: 7545,            // Standard Ethereum port (default: none)
-    //   network_id: "*",       // Any network (default: none)
-    // },
+    live: {
+      provider: function() {
+        return new HDWalletProvider(
+            'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
+            'https://mainnet.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
+        );
+      },
+      network_id: '1',
+    },
 
+    develop: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
     ganache: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
-
   },
 
 
@@ -45,14 +53,14 @@ module.exports = {
       version: "^0.6.2",
       // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      settings: {          // See the solidity docs for advice about optimization and evmVersion
-        optimizer: {
-          enabled: false,
-          runs: 200
-        },
+      // settings: {          // See the solidity docs for advice about optimization and evmVersion
+      //   optimizer: {
+      //     enabled: false,
+      //     runs: 200
+      //   },
         //  evmVersion: "byzantium"
         // }
-      }
+      // }
     }
   }
 };

@@ -22,7 +22,9 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'} variant={'body2'}>
+            {children}
+          </Typography>
         </Box>
       )}
     </div>
@@ -60,7 +62,7 @@ export default function ScrollableTabsButtonAuto() {
   const contents = tabsContent;
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="#130f05">
+      <AppBar position="static" style={{ backgroundColor: '#08060287' }}>
         <Tabs
           value={value}
           onChange={handleChange}

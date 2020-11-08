@@ -38,7 +38,7 @@ const styles = (darkTheme) => ({
   more: {
     fontSize: darkTheme.typography.pxToRem(15),
     fontWeight: darkTheme.typography.fontWeightRegular,
-    fontFamily: 'Londrina Shadow',
+    fontFamily: 'Big Shoulders Inline Text',
   },
   accordion: {
     background: '#000000',
@@ -125,7 +125,7 @@ class TheNeed extends React.Component {
 
   onMint = async (formValues) => {
     await this.isOwner();
-    const theNeed = this.props.fetchedNeed;
+    const theNeed = this.props.fetchedNeed.id;
     // Solidity need uint256 type
     const needValueEth = this.props.fetchedEth.needEthCost;
     const web3 = await this.props.theWallet.web3;
@@ -144,7 +144,7 @@ class TheNeed extends React.Component {
       const isOwner = this.props.theWallet.nakamaOwner;
       if (!isOwner) {
         await contract.methods
-          .awardToken(userAccount, JSON.stringify(theNeed))
+          .awardToken(userAccount, `https://sayapp.company/api/v2/public/needs/${theNeed}`)
           .send({
             from: userAccount,
             value: needValueWei,
@@ -156,7 +156,7 @@ class TheNeed extends React.Component {
           });
       } else {
         await contract.methods
-          .transferAmount(userAccount, JSON.stringify(theNeed))
+          .transferAmount(userAccount, `https://sayapp.company/api/v2/public/needs/${theNeed}`)
           .send({
             from: userAccount,
             value: needValueWei,
@@ -255,7 +255,7 @@ class TheNeed extends React.Component {
                 component="p"
                 variant="subtitle1"
                 align="center"
-                style={{ fontFamily: 'Londrina Shadow', fontSize: '1.2rem' }}
+                style={{ fontFamily: 'Big Shoulders Inline Text', fontSize: '1rem' }}
               >
                 {this.props.fetchedNeed.name}
               </Typography>
@@ -265,7 +265,7 @@ class TheNeed extends React.Component {
                 component="p"
                 variant="subtitle1"
                 align="center"
-                style={{ fontFamily: 'Londrina Shadow', fontSize: '1.2rem' }}
+                style={{ fontFamily: 'Big Shoulders Inline Text', fontSize: '1rem' }}
               >
                 {this.props.fetchedEth.needEthCost}
               </Typography>

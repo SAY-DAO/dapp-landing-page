@@ -15,16 +15,16 @@ contract("Nakama", () => {
       .send({ from: accounts[0], gas: 6721975, gasPrice: 20000000000 });
 
     needs = [
-      "/child/1/need/45",
-      "/child/56/need/6",
-      "/child/12/need/5",
-      "/child/13/need/15",
-      "/child/2/need/233",
-      "/child/32/need/231",
-      "/child/21/need/243",
-      "/child/2/need/43",
-      "/child/8/need/83",
-      "/child/5/need/3",
+      "https://sayapp.company/api/v2/public/needs/1",
+      "https://sayapp.company/api/v2/public/needs/2",
+      "https://sayapp.company/api/v2/public/needs/3",
+      "https://sayapp.company/api/v2/public/needs/4",
+      "https://sayapp.company/api/v2/public/needs/5",
+      "https://sayapp.company/api/v2/public/needs/6",
+      "https://sayapp.company/api/v2/public/needs/7",
+      "https://sayapp.company/api/v2/public/needs/8",
+      "https://sayapp.company/api/v2/public/needs/9",
+      "https://sayapp.company/api/v2/public/needs/10",
     ];
   });
 

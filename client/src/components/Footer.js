@@ -27,11 +27,21 @@ class NavBar extends React.Component {
           <Toolbar>
             <Grid container>
               <Grid container item xs={12} justify={'center'}>
-                <Instagram style={{ color: 'gray' }} />
-                <Twitter style={{ color: 'gray' }} />
-                <GitHub style={{ color: 'gray' }} />
-                <Telegram style={{ color: 'gray' }} />
-                <Link style={{ color: 'gray' }} />
+                <a href="https://instagram.com/say.company" target="_blank">
+                  <Instagram style={{ color: 'gray' }} />
+                </a>
+                <a href="https://twitter.com/say_company" target="_blank">
+                  <Twitter style={{ color: 'gray' }} />
+                </a>
+                <a href="https://github.com/saycompany" target="_blank">
+                  <GitHub style={{ color: 'gray' }} />
+                </a>
+                <a href="https://t.me/saycompany" target="_blank">
+                  <Telegram style={{ color: 'gray' }} />
+                </a>
+                <a href="https://say.company" target="_blank">
+                  <Link style={{ color: 'gray' }} />
+                </a>
               </Grid>
             </Grid>
           </Toolbar>
