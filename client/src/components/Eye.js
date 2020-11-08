@@ -1,10 +1,8 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 
@@ -61,7 +59,7 @@ class Eye extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
     return (
       <Container maxWidth="md" style={{ marginTop: 100 }}>
         <Grid
@@ -76,18 +74,18 @@ class Eye extends React.Component {
           <Typography align="center" variant="subtitle1" style={{ opacity: 0.3 }}>
             Where To Find Us
           </Typography>
-          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
-              <Box m={1} color="secondary">
-                <Field name="email" component={this.renderInput} />
-              </Box>
-              <Box style={{ margin: 'auto', height: 56 }}>
-                <Button type="submit" variant="outlined" color="secondary" className={classes.button}>
-                  Join the Community
-                </Button>
-              </Box>
-            </Box>
-          </form>
+          {/*<form onSubmit={this.props.handleSubmit(this.onSubmit)}>*/}
+          {/*  <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">*/}
+          {/*    <Box m={1} color="secondary">*/}
+          {/*      <Field name="email" component={this.renderInput} />*/}
+          {/*    </Box>*/}
+          {/*    <Box style={{ margin: 'auto', height: 56 }}>*/}
+          {/*      <Button type="submit" variant="outlined" color="secondary" className={classes.button}>*/}
+          {/*        Join the Community*/}
+          {/*      </Button>*/}
+          {/*    </Box>*/}
+          {/*  </Box>*/}
+          {/*</form>*/}
         </Grid>
       </Container>
     );

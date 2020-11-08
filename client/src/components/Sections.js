@@ -36,7 +36,11 @@ export default function Sections(data) {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src={require(`../static/${data.props.img}.png`)} />
+              <img
+                className={classes.img}
+                alt="complex"
+                src={require(`../static/${data.props.img.replace("'", '')}.png`)}
+              />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>

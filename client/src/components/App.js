@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import Circle from './Circles';
 import Modal from './Modal';
+import MidTabsRes from './MidTabsRes';
 
 export default function App() {
   return (
@@ -20,7 +21,7 @@ export default function App() {
         <IntroSection />
         <br />
         <MidSection />
-        <MidTabs />
+        {window.innerWidth < 1400 ? <MidTabsRes /> : <MidTabs />}
         {/*<EndSection />*/}
         <Eye />
         <Footer />

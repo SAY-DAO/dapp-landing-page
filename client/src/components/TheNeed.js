@@ -30,7 +30,7 @@ const styles = (darkTheme) => ({
       '&:hover fieldset': {
         borderColor: '#FFF688',
       },
-      '&.Mui-focused fieldset': {
+      '& .Mui-focused fieldset': {
         borderColor: '#FFF688',
       },
     },
@@ -53,8 +53,8 @@ const styles = (darkTheme) => ({
   },
   needIcon: {
     background: '#000000',
-    minWidth: 60,
-    minHeight: 60,
+    maxWidth: 60,
+    maxHeight: 60,
   },
   button1: {
     margin: 'auto',

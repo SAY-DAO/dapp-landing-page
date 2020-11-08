@@ -1,5 +1,4 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -24,7 +23,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <AppBar style={{ backgroundColor: 'transparent' }} position="static">
+        <Grid style={{ backgroundColor: 'transparent' }} position="static">
           <Toolbar>
             <Grid container>
               <Grid container item xs={12} justify={'center'}>
@@ -36,7 +35,7 @@ class NavBar extends React.Component {
               </Grid>
             </Grid>
           </Toolbar>
-        </AppBar>
+        </Grid>
       </div>
     );
   }

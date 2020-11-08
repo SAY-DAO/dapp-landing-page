@@ -23,8 +23,8 @@ export const fetchNeed = () => async (dispatch) => {
 export const fetchEthPrice = (needFetchedCost) => async (dispatch) => {
   try {
     const response = await etherPrice.get('/api/v3/coins/ethereum');
-    // Due to $ / IRR volatility in recent years we are using a constant rate.
-    const USDtoIRR = 30000;
+    // Due to $ / IRR sever volatility in recent years we are using a constant rate for this version.
+    const USDtoIRR = 25000;
     const needUsdCost = needFetchedCost / USDtoIRR;
     const needCostUSD = needUsdCost.toFixed(2);
     const ethCurrentPrice = response.data.market_data.current_price.usd;

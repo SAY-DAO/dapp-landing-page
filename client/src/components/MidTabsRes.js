@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -15,15 +16,13 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
       {value === index && (
         <Box p={3}>
-          <Typography component={'span'} variant={'body2'}>
-            {children}
-          </Typography>
+          <Typography>{children}</Typography>
         </Box>
       )}
     </div>
@@ -38,55 +37,45 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((darkTheme) => ({
   root: {
     flexGrow: 1,
+    width: '100%',
     backgroundColor: darkTheme.palette.background.paper,
-    display: 'flex',
-  },
-  tabs: {
-    borderRight: `1px solid ${darkTheme.palette.divider}`,
-  },
-  paper: {
-    padding: darkTheme.spacing(6),
-    margin: 'auto',
-    // maxWidth: 1440,
-    borderRadius: 18,
-  },
-  tab: {
-    marginRight: 10,
-    minWidth: 50,
   },
 }));
 
-export default function MidTabs() {
+export default function ScrollableTabsButtonAuto() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const contents = tabsContent;
   return (
     <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        scrollButtons="auto"
-        value={value}
-        onChange={handleChange}
-        className={classes.tabs}
-      >
-        <Tab label={contents.section1.title} {...a11yProps(0)} className={classes.tab} />
-        <Tab label={contents.section2.title} {...a11yProps(1)} className={classes.tab} />
-        <Tab label={contents.section3.title} {...a11yProps(2)} className={classes.tab} />
-        <Tab label={contents.section4.title} {...a11yProps(3)} className={classes.tab} />
-      </Tabs>
+      <AppBar position="static" color="#130f05">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="secondary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs"
+        >
+          <Tab label={contents.section1.title} {...a11yProps(0)} />
+          <Tab label={contents.section2.title} {...a11yProps(1)} />
+          <Tab label={contents.section3.title} {...a11yProps(2)} />
+          <Tab label={contents.section4.title} {...a11yProps(3)} />
+        </Tabs>
+      </AppBar>
       <TabPanel value={value} index={0}>
         <Sections props={contents.section1} />
       </TabPanel>
