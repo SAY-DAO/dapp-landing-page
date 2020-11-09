@@ -8,11 +8,13 @@
   "sourceMap": "93:834:15:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "93:834:15:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.6.0;\n\n/**\n * @dev String operations.\n */\nlibrary Strings {\n    /**\n     * @dev Converts a `uint256` to its ASCII `string` representation.\n     */\n    function toString(uint256 value) internal pure returns (string memory) {\n        // Inspired by OraclizeAPI's implementation - MIT licence\n        // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol\n\n        if (value == 0) {\n            return \"0\";\n        }\n        uint256 temp = value;\n        uint256 digits;\n        while (temp != 0) {\n            digits++;\n            temp /= 10;\n        }\n        bytes memory buffer = new bytes(digits);\n        uint256 index = digits - 1;\n        temp = value;\n        while (temp != 0) {\n            buffer[index--] = byte(uint8(48 + temp % 10));\n            temp /= 10;\n        }\n        return string(buffer);\n    }\n}\n",
-  "sourcePath": "@openzeppelin\\contracts\\utils\\Strings.sol",
+  "sourcePath": "@openzeppelin/contracts/utils/Strings.sol",
   "ast": {
     "absolutePath": "@openzeppelin/contracts/utils/Strings.sol",
     "exportedSymbols": {
-      "Strings": [2871]
+      "Strings": [
+        2871
+      ]
     },
     "id": 2872,
     "license": "MIT",
@@ -20,7 +22,12 @@
     "nodes": [
       {
         "id": 2786,
-        "literals": ["solidity", "^", "0.6", ".0"],
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "33:23:15"
       },
@@ -37,7 +44,9 @@
         },
         "fullyImplemented": true,
         "id": 2871,
-        "linearizedBaseContracts": [2871],
+        "linearizedBaseContracts": [
+          2871
+        ],
         "name": "Strings",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -135,7 +144,9 @@
                   }
                 },
                 {
-                  "assignments": [2803],
+                  "assignments": [
+                    2803
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -184,7 +195,9 @@
                   "src": "531:20:15"
                 },
                 {
-                  "assignments": [2807],
+                  "assignments": [
+                    2807
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -368,7 +381,9 @@
                   "src": "585:75:15"
                 },
                 {
-                  "assignments": [2822],
+                  "assignments": [
+                    2822
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -465,7 +480,9 @@
                   "src": "669:39:15"
                 },
                 {
-                  "assignments": [2829],
+                  "assignments": [
+                    2829
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -1136,7 +1153,9 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/utils/Strings.sol",
     "exportedSymbols": {
-      "Strings": [2871]
+      "Strings": [
+        2871
+      ]
     },
     "id": 2872,
     "license": "MIT",
@@ -1144,7 +1163,12 @@
     "nodes": [
       {
         "id": 2786,
-        "literals": ["solidity", "^", "0.6", ".0"],
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "33:23:15"
       },
@@ -1161,7 +1185,9 @@
         },
         "fullyImplemented": true,
         "id": 2871,
-        "linearizedBaseContracts": [2871],
+        "linearizedBaseContracts": [
+          2871
+        ],
         "name": "Strings",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1259,7 +1285,9 @@
                   }
                 },
                 {
-                  "assignments": [2803],
+                  "assignments": [
+                    2803
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -1308,7 +1336,9 @@
                   "src": "531:20:15"
                 },
                 {
-                  "assignments": [2807],
+                  "assignments": [
+                    2807
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -1492,7 +1522,9 @@
                   "src": "585:75:15"
                 },
                 {
-                  "assignments": [2822],
+                  "assignments": [
+                    2822
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -1589,7 +1621,9 @@
                   "src": "669:39:15"
                 },
                 {
-                  "assignments": [2829],
+                  "assignments": [
+                    2829
+                  ],
                   "declarations": [
                     {
                       "constant": false,
@@ -2262,8 +2296,8 @@
     "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.0",
-  "updatedAt": "2020-11-09T16:37:03.544Z",
+  "schemaVersion": "3.3.1",
+  "updatedAt": "2020-11-09T17:33:50.171Z",
   "devdoc": {
     "details": "String operations.",
     "kind": "dev",

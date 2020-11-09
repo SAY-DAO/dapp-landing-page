@@ -7,44 +7,43 @@ module.exports = {
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
-     // truffle migrate --network rinkeby
+    // truffle migrate --network rinkeby
     rinkeby: {
-      provider: function() {
+      provider: function () {
         return new HDWalletProvider(
-            'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
-            'https://rinkeby.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
+          "sweet lucky guitar walk hold fitness pioneer above because coast butter arctic",
+          "https://rinkeby.infura.io/v3/187f0c9471ef426a84f48d4be7f81042"
         );
       },
-      network_id: '4',
+      network_id: "4",
     },
 
     live: {
-      provider: function() {
+      provider: function () {
         return new HDWalletProvider(
-            '',
-            'https://mainnet.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
+          "",
+          "https://mainnet.infura.io/v3/187f0c9471ef426a84f48d4be7f81042"
         );
       },
-      network_id: '1',
-      networkCheckTimeout : 20000,
+      network_id: "1",
+      networkCheckTimeout: 20000,
       // timeoutBlocks: 100,
-      gasPrice: 10000000000 ,
+      gasPrice: 18000000000,
+      gas: 4000000,
     },
-
 
     development: {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*", // match any network
-      websockets: true
-    }
+      websockets: true,
+    },
     // ganache: {
     //   host: "127.0.0.1",     // Localhost (default: none)
     //   port: 7545,            // Standard Ethereum port (default: none)
     //   network_id: "*",       // Any network (default: none)
     // },
   },
-
 
   // Configure your compilers
   compilers: {
@@ -57,9 +56,9 @@ module.exports = {
       //     enabled: false,
       //     runs: 200
       //   },
-        //  evmVersion: "byzantium"
-        // }
+      //  evmVersion: "byzantium"
       // }
-    }
-  }
+      // }
+    },
+  },
 };

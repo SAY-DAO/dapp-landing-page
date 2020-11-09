@@ -8,11 +8,13 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.6.0;\n\n/*\n * @dev Provides information about the current execution context, including the\n * sender of the transaction and its data. While these are generally available\n * via msg.sender and msg.data, they should not be accessed in such a direct\n * manner, since when dealing with GSN meta-transactions the account sending and\n * paying for execution may not be the actual sender (as far as an application\n * is concerned).\n *\n * This contract is only required for intermediate, library-like contracts.\n */\nabstract contract Context {\n    function _msgSender() internal view virtual returns (address payable) {\n        return msg.sender;\n    }\n\n    function _msgData() internal view virtual returns (bytes memory) {\n        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691\n        return msg.data;\n    }\n}\n",
-  "sourcePath": "@openzeppelin\\contracts\\GSN\\Context.sol",
+  "sourcePath": "@openzeppelin/contracts/GSN/Context.sol",
   "ast": {
     "absolutePath": "@openzeppelin/contracts/GSN/Context.sol",
     "exportedSymbols": {
-      "Context": [301]
+      "Context": [
+        301
+      ]
     },
     "id": 302,
     "license": "MIT",
@@ -20,7 +22,12 @@
     "nodes": [
       {
         "id": 280,
-        "literals": ["solidity", "^", "0.6", ".0"],
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "33:23:2"
       },
@@ -32,7 +39,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 301,
-        "linearizedBaseContracts": [301],
+        "linearizedBaseContracts": [
+          301
+        ],
         "name": "Context",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -261,7 +270,9 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/GSN/Context.sol",
     "exportedSymbols": {
-      "Context": [301]
+      "Context": [
+        301
+      ]
     },
     "id": 302,
     "license": "MIT",
@@ -269,7 +280,12 @@
     "nodes": [
       {
         "id": 280,
-        "literals": ["solidity", "^", "0.6", ".0"],
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "33:23:2"
       },
@@ -281,7 +297,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 301,
-        "linearizedBaseContracts": [301],
+        "linearizedBaseContracts": [
+          301
+        ],
         "name": "Context",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -512,8 +530,8 @@
     "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.0",
-  "updatedAt": "2020-11-09T16:37:03.508Z",
+  "schemaVersion": "3.3.1",
+  "updatedAt": "2020-11-09T17:33:50.085Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

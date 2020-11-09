@@ -17,7 +17,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -30,7 +31,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -46,18 +48,20 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"last_completed_migration\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"completed\",\"type\":\"uint256\"}],\"name\":\"setCompleted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol\":\"Migrations\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol\":{\"keccak256\":\"0xc93c4d9040d6d696f1b41346888ce18568d4d652b651ced80d64bfe2ea64614a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f13bdf3af9e36d7ad6c019690ee2e9b6b3f0e1aa048a409150e56f494dca63ce\",\"dweb:/ipfs/QmQUCHmbgBqt6xPwsUrspeRTBcoFtKe8x5b3ZSyUiq6Kp1\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610185806100606000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea264697066735822122020600a6002f6632b2d83b85e0ddbbb6afcecb820b7dc96d900fc9176698c483964736f6c634300060c0033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea264697066735822122020600a6002f6632b2d83b85e0ddbbb6afcecb820b7dc96d900fc9176698c483964736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"last_completed_migration\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"completed\",\"type\":\"uint256\"}],\"name\":\"setCompleted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/rhonin2/workspace/landing-page/contracts/Migrations.sol\":\"Migrations\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/rhonin2/workspace/landing-page/contracts/Migrations.sol\":{\"keccak256\":\"0xc93c4d9040d6d696f1b41346888ce18568d4d652b651ced80d64bfe2ea64614a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f13bdf3af9e36d7ad6c019690ee2e9b6b3f0e1aa048a409150e56f494dca63ce\",\"dweb:/ipfs/QmQUCHmbgBqt6xPwsUrspeRTBcoFtKe8x5b3ZSyUiq6Kp1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610185806100606000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea2646970667358221220753c5918e280902a7ca0d5c34d994aa2e87a6f7f6fdc972359c15ffc33150e1464736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea2646970667358221220753c5918e280902a7ca0d5c34d994aa2e87a6f7f6fdc972359c15ffc33150e1464736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "66:311:0:-:0;;;218:50;;;;;;;;;;253:10;245:5;;:18;;;;;;;;;;;;;;;;;;66:311;;;;;;",
   "deployedSourceMap": "66:311:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;114:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;90:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;272:103;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;114:36;;;;:::o;90:20::-;;;;;;;;;;;;:::o;272:103::-;201:5;;;;;;;;;;187:19;;:10;:19;;;183:26;;;361:9:::1;334:24;:36;;;;183:26:::0;272:103;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract Migrations {\n  address public owner;\n  uint public last_completed_migration;\n\n  modifier restricted() {\n    if (msg.sender == owner) _;\n  }\n\n  constructor() public {\n    owner = msg.sender;\n  }\n\n  function setCompleted(uint completed) public restricted {\n    last_completed_migration = completed;\n  }\n}\n",
-  "sourcePath": "C:/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol",
+  "sourcePath": "/home/rhonin2/workspace/landing-page/contracts/Migrations.sol",
   "ast": {
-    "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol",
+    "absolutePath": "/home/rhonin2/workspace/landing-page/contracts/Migrations.sol",
     "exportedSymbols": {
-      "Migrations": [36]
+      "Migrations": [
+        36
+      ]
     },
     "id": 37,
     "license": "MIT",
@@ -65,7 +69,15 @@
     "nodes": [
       {
         "id": 1,
-        "literals": ["solidity", ">=", "0.4", ".21", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "32:32:0"
       },
@@ -77,7 +89,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 36,
-        "linearizedBaseContracts": [36],
+        "linearizedBaseContracts": [
+          36
+        ],
         "name": "Migrations",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -469,9 +483,11 @@
     "src": "32:346:0"
   },
   "legacyAST": {
-    "absolutePath": "/C/Users/SC/Documents/SAY-DAO/landing-page/contracts/Migrations.sol",
+    "absolutePath": "/home/rhonin2/workspace/landing-page/contracts/Migrations.sol",
     "exportedSymbols": {
-      "Migrations": [36]
+      "Migrations": [
+        36
+      ]
     },
     "id": 37,
     "license": "MIT",
@@ -479,7 +495,15 @@
     "nodes": [
       {
         "id": 1,
-        "literals": ["solidity", ">=", "0.4", ".21", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "32:32:0"
       },
@@ -491,7 +515,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 36,
-        "linearizedBaseContracts": [36],
+        "linearizedBaseContracts": [
+          36
+        ],
         "name": "Migrations",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -886,9 +912,17 @@
     "name": "solc",
     "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
-  "networks": {},
-  "schemaVersion": "3.3.0",
-  "updatedAt": "2020-11-09T16:37:03.501Z",
+  "networks": {
+    "1": {
+      "events": {},
+      "links": {},
+      "address": "0x26ed2766B24F7761A1496A1b2633F81Ef90a54A0",
+      "transactionHash": "0xc39ff0dabc48c3c315d5176a7025741c98092bdac0f437a33d749437eaa6954e"
+    }
+  },
+  "schemaVersion": "3.3.1",
+  "updatedAt": "2020-11-09T19:05:29.819Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

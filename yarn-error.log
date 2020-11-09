@@ -1,0 +1,45 @@
+Arguments: 
+  /usr/local/bin/node /home/rhonin2/.yarn/bin/yarn.js install
+
+PATH: 
+  /home/rhonin2/.cargo/bin:/home/rhonin2/.poetry/bin:/home/rhonin2/.local/bin:/home/rhonin2/bin:/home/rhonin2/.cargo/bin:/home/rhonin2/.yarn/bin:/home/rhonin2/.config/yarn/global/node_modules/.bin:/home/rhonin2/.cargo/bin:/home/rhonin2/.poetry/bin:/home/rhonin2/.local/bin:/home/rhonin2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rhonin2/bin/JetBrains.PyCharm.2020.1.2.Linux/pycharm-2020.1.2/bin:/opt/intel/sgxsdk/bin:/opt/intel/sgxsdk/bin/x64
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.18.3
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
+
+npm manifest: 
+  {
+    "name": "truffle",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+      "@openzeppelin/contracts": "^3.2.0",
+      "@truffle/hdwallet-provider": "^1.2.0",
+      "chai": "^4.2.0",
+      "chai-as-promised": "^7.1.1",
+      "ganache-cli": "^6.12.1",
+      "mocha": "^8.2.1",
+      "prettier": "^2.1.2"
+    },
+    "scripts": {
+      "test": "mocha",
+      "prettier": "prettier test/ --write",
+      "lint:prettier": "prettier src/ --check"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
