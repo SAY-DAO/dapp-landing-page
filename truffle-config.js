@@ -1,5 +1,5 @@
 const path = require("path");
-// const HDWalletProvider = require('truffle-hdwallet-provider')
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 
 module.exports = {
@@ -7,13 +7,7 @@ module.exports = {
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
-    // Useful for testing. The `development` name is special - truffle uses it by default
-    // if it's defined here and no other network is specified at the command line.
-    // You should run a client (like ganache-cli, geth or parity) in a separate terminal
-    // tab if you use this network and you must also set the `host`, `port` and `network_id`
-    // options below to some value.
-
-    // truffle migrate --network rinkeby
+     // truffle migrate --network rinkeby
     rinkeby: {
       provider: function() {
         return new HDWalletProvider(
@@ -27,23 +21,28 @@ module.exports = {
     live: {
       provider: function() {
         return new HDWalletProvider(
-            'sweet lucky guitar walk hold fitness pioneer above because coast butter arctic',
+            '',
             'https://mainnet.infura.io/v3/187f0c9471ef426a84f48d4be7f81042'
         );
       },
       network_id: '1',
+      networkCheckTimeout : 20000,
+      // timeoutBlocks: 100,
+      gasPrice: 10000000000 ,
     },
 
-    develop: {
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 7545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
-    },
-    ganache: {
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 7545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
-    },
+
+    development: {
+      host: "127.0.0.1",
+      port: 8545,
+      network_id: "*", // match any network
+      websockets: true
+    }
+    // ganache: {
+    //   host: "127.0.0.1",     // Localhost (default: none)
+    //   port: 7545,            // Standard Ethereum port (default: none)
+    //   network_id: "*",       // Any network (default: none)
+    // },
   },
 
 

@@ -15,6 +15,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)));
 
 const env = process.env.ENVIRONMENT || 'local';
+process.env.UV_THREADPOOL_SIZE = 128;
 
 // Sentry
 Sentry.init({
