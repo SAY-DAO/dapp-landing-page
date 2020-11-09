@@ -12,6 +12,7 @@ variables:
 
 before_script:
   - docker login -u $USER -p $TOKEN $CI_REGISTRY
+  - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
 
 build-dev:
   stage: build
