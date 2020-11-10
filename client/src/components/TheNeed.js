@@ -278,12 +278,13 @@ class TheNeed extends React.Component {
                 </Box>
                 <AccordionDetails>
                   <Typography style={{ fontSize: '0.7rem' }}>
-                    Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to the SAY ecosystem
-                    such as paying a need, taking part in building the software, or helping with the logistic side of
-                    SAY. NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
+                    Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to SAY ecosystem such
+                    as paying a need, taking part in building the software, or helping with the logistic side of SAY.
+                    NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
                     choose to contribute and are NOT designed to be traded rather behold as a bond between us and a
-                    community membership token to get involved in SAY token economic. This also helps with lower
-                    ethereum gas cost. More information about tokens use cases will be released in the coming weeks.
+                    community membership token to get involved in the SAY ecosystem. Moreover, this also helps with
+                    lower ethereum gas costs for further transactions. More information about tokens use cases will be
+                    released in the upcoming weeks.
                   </Typography>
                 </AccordionDetails>
               </Accordion>
