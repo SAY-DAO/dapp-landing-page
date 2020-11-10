@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { connectWallet, deactivateModal, fetchIsOwner, updateMintButton } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import detectEthereumProvider from '@metamask/detect-provider';
 
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
@@ -22,13 +23,29 @@ const MyButton = styled(Button)({
 
 class WalletButton extends React.Component {
   componentDidMount = async () => {
+    await this.isOwner();
     try {
       if (typeof window.ethereum === 'undefined') {
         console.log('MetaMask is not installed!');
       }
 
+      const provider = await detectEthereumProvider();
+
+      // Subscribe to session connection
+      provider.on('connect', async () => {
+        console.log('connecting');
+        await this.isOwner();
+      });
+
+      // Subscribe to disconnecting
+      provider.on('disconnect', async () => {
+        console.log('disconnected');
+        await this.isOwner();
+      });
+
       // Subscribe to accounts change
-      window.ethereum.on('accountsChanged', async (accounts) => {
+      provider.on('accountsChanged', async (accounts) => {
+        console.log('Account is changed');
         await this.isOwner();
       });
     } catch (error) {
@@ -38,6 +55,8 @@ class WalletButton extends React.Component {
   };
 
   isOwner = async () => {
+    let isOwner = false;
+    console.log('isOwner function is initiated');
     // Get network provider and web3 instance.
     const web3 = await getWeb3();
     console.log('web3', web3);
@@ -55,17 +74,13 @@ class WalletButton extends React.Component {
     // Time to reload your interface with accounts[0]!
     this.props.connectWallet(accounts, web3, networkId, nakama);
 
-    let isOwner = false;
     try {
       const userAccount = this.props.theWallet.userAccount;
       const contract = this.props.theWallet.contract;
       const totalSupply = await contract.methods.totalSupply().call();
-      console.log('Smart Contract: ', contract);
       console.log('Total Supply: ', totalSupply);
-      console.log('userAccount: ', userAccount);
       for (let i = 1; i <= totalSupply; i++) {
         const owner = await contract.methods.ownerOf(i).call();
-        console.log(i, owner);
         if (userAccount.toLowerCase() === owner.toLowerCase()) {
           isOwner = true;
           const NAK = await contract.methods.tokenURI(i).call();
@@ -74,7 +89,7 @@ class WalletButton extends React.Component {
           break;
         }
       }
-      console.log('Check isOwner: ', isOwner);
+      console.log('isOwner(): ', isOwner);
     } catch (error) {
       console.log("Can't load Nakamas: ", error);
     }
@@ -101,7 +116,7 @@ class WalletButton extends React.Component {
 
   isNakama = () => {
     const nakOwner = this.props.theWallet.nakamaOwner;
-    console.log('naknak', nakOwner);
+    console.log('isNakama()', nakOwner);
     if (nakOwner) {
       return (
         <img

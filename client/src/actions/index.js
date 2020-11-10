@@ -30,8 +30,6 @@ export const fetchEthPrice = (needFetchedCost) => async (dispatch) => {
     const ethCurrentPrice = response.data.market_data.current_price.usd;
     const needEthCost = Math.round((needCostUSD / ethCurrentPrice) * 1000000) / 1000000;
 
-    console.log(needFetchedCost, needEthCost);
-
     dispatch({
       type: 'FETCH_ETH',
       payload: {

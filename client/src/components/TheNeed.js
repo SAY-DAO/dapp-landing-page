@@ -53,8 +53,8 @@ const styles = (darkTheme) => ({
   },
   needIcon: {
     background: '#000000',
-    maxWidth: 60,
-    maxHeight: 60,
+    width: 60,
+    height: 60,
   },
   button1: {
     margin: 'auto',
@@ -103,20 +103,12 @@ class TheNeed extends React.Component {
       const userAccount = this.props.theWallet.userAccount;
       const contract = this.props.theWallet.contract;
       const totalSupply = await contract.methods.totalSupply().call();
-      console.log('Smart Contract: ', contract);
-      console.log('Total Supply: ', totalSupply);
-      console.log('userAccount: ', userAccount);
       for (let i = 1; i <= totalSupply; i++) {
         const owner = await contract.methods.ownerOf(i).call();
-        console.log(i, owner);
         if (userAccount.toLowerCase() === owner.toLowerCase()) {
           isOwner = true;
-          const NAK = await contract.methods.tokenURI(i).call();
-          console.log('Owner: ', owner);
-          console.log('NAK: ', NAK);
         }
       }
-      console.log('isOwnerisOwner: ', isOwner);
     } catch (error) {
       console.log("Can't load Nakamas: ", error);
     }
