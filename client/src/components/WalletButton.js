@@ -27,57 +27,62 @@ class WalletButton extends React.Component {
         console.log('MetaMask is not installed!');
       }
 
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
-      console.log('web3', web3);
-
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
-
-      const networkId = await web3.eth.net.getId();
-      console.log('Networkid: ', networkId);
-
-      // Get the contract instance.
-      const deployedNetwork = Nakama.networks[networkId];
-      const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
-      this.props.connectWallet(accounts, web3, networkId, nakama);
-
+      // Subscribe to accounts change
       window.ethereum.on('accountsChanged', async (accounts) => {
-        // Time to reload your interface with accounts[0]!
-        this.props.connectWallet(accounts, web3, networkId, nakama);
-
-        let isOwner = false;
-        try {
-          const userAccount = this.props.theWallet.userAccount;
-          const contract = this.props.theWallet.contract;
-          const totalSupply = await contract.methods.totalSupply().call();
-          console.log('Smart Contract: ', contract);
-          console.log('Total Supply: ', totalSupply);
-          console.log('userAccount: ', userAccount);
-          for (let i = 1; i <= totalSupply; i++) {
-            const owner = await contract.methods.ownerOf(i).call();
-            console.log(i, owner);
-            if (userAccount.toLowerCase() === owner.toLowerCase()) {
-              isOwner = true;
-              const NAK = await contract.methods.tokenURI(i).call();
-              console.log('Owner: ', owner);
-              console.log('NAK: ', NAK);
-            }
-          }
-          console.log('isOwner: ', isOwner);
-        } catch (error) {
-          console.log("Can't load Nakamas: ", error);
-        }
-        await this.props.fetchIsOwner(isOwner);
-        if (this.props.theWallet.nakamaOwner) {
-          await this.props.updateMintButton('Pay for Need', 'enabled');
-        } else {
-          await this.props.updateMintButton('Mint NAK', 'enabled');
-        }
+        await this.isOwner();
       });
     } catch (error) {
       // Catch any errors for any of the above operations.
       console.log(`Failed to load web3, accounts, or contract.`, error);
+    }
+  };
+
+  isOwner = async () => {
+    // Get network provider and web3 instance.
+    const web3 = await getWeb3();
+    console.log('web3', web3);
+
+    // Use web3 to get the user's accounts.
+    const accounts = await web3.eth.getAccounts();
+
+    const networkId = await web3.eth.net.getId();
+    console.log('Networkid: ', networkId);
+
+    // Get the contract instance.
+    const deployedNetwork = Nakama.networks[networkId];
+    const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
+    this.props.connectWallet(accounts, web3, networkId, nakama);
+    // Time to reload your interface with accounts[0]!
+    this.props.connectWallet(accounts, web3, networkId, nakama);
+
+    let isOwner = false;
+    try {
+      const userAccount = this.props.theWallet.userAccount;
+      const contract = this.props.theWallet.contract;
+      const totalSupply = await contract.methods.totalSupply().call();
+      console.log('Smart Contract: ', contract);
+      console.log('Total Supply: ', totalSupply);
+      console.log('userAccount: ', userAccount);
+      for (let i = 1; i <= totalSupply; i++) {
+        const owner = await contract.methods.ownerOf(i).call();
+        console.log(i, owner);
+        if (userAccount.toLowerCase() === owner.toLowerCase()) {
+          isOwner = true;
+          const NAK = await contract.methods.tokenURI(i).call();
+          console.log('Owner: ', owner);
+          console.log('NAK: ', NAK);
+          break;
+        }
+      }
+      console.log('Check isOwner: ', isOwner);
+    } catch (error) {
+      console.log("Can't load Nakamas: ", error);
+    }
+    await this.props.fetchIsOwner(isOwner);
+    if (this.props.theWallet.nakamaOwner) {
+      await this.props.updateMintButton('Pay for Need', 'enabled');
+    } else {
+      await this.props.updateMintButton('Mint NAK', 'enabled');
     }
   };
 

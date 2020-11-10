@@ -12,9 +12,7 @@
   "ast": {
     "absolutePath": "@openzeppelin/contracts/GSN/Context.sol",
     "exportedSymbols": {
-      "Context": [
-        301
-      ]
+      "Context": [301]
     },
     "id": 302,
     "license": "MIT",
@@ -22,12 +20,7 @@
     "nodes": [
       {
         "id": 280,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:2"
       },
@@ -39,9 +32,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 301,
-        "linearizedBaseContracts": [
-          301
-        ],
+        "linearizedBaseContracts": [301],
         "name": "Context",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -270,9 +261,7 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/GSN/Context.sol",
     "exportedSymbols": {
-      "Context": [
-        301
-      ]
+      "Context": [301]
     },
     "id": 302,
     "license": "MIT",
@@ -280,12 +269,7 @@
     "nodes": [
       {
         "id": 280,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:2"
       },
@@ -297,9 +281,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 301,
-        "linearizedBaseContracts": [
-          301
-        ],
+        "linearizedBaseContracts": [301],
         "name": "Context",
         "nodeType": "ContractDefinition",
         "nodes": [

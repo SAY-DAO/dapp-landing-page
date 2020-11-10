@@ -487,9 +487,7 @@
   "ast": {
     "absolutePath": "/home/rhonin2/workspace/landing-page/contracts/Nakama.sol",
     "exportedSymbols": {
-      "Nakama": [
-        278
-      ]
+      "Nakama": [278]
     },
     "id": 279,
     "license": "MIT",
@@ -497,12 +495,7 @@
     "nodes": [
       {
         "id": 38,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "58:23:1"
       },
@@ -550,29 +543,12 @@
             "src": "214:6:1"
           }
         ],
-        "contractDependencies": [
-          301,
-          358,
-          370,
-          1497,
-          1613,
-          1644,
-          1671
-        ],
+        "contractDependencies": [301, 358, 370, 1497, 1613, 1644, 1671],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
         "id": 278,
-        "linearizedBaseContracts": [
-          278,
-          1497,
-          1644,
-          1671,
-          1613,
-          358,
-          370,
-          301
-        ],
+        "linearizedBaseContracts": [278, 1497, 1644, 1671, 1613, 358, 370, 301],
         "name": "Nakama",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1229,9 +1205,7 @@
                   "src": "957:21:1"
                 },
                 {
-                  "assignments": [
-                    104
-                  ],
+                  "assignments": [104],
                   "declarations": [
                     {
                       "constant": false,
@@ -1632,9 +1606,7 @@
               "src": "1277:177:1",
               "statements": [
                 {
-                  "assignments": [
-                    136
-                  ],
+                  "assignments": [136],
                   "declarations": [
                     {
                       "constant": false,
@@ -2168,10 +2140,7 @@
                       "id": 173,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1545:7:1",
                       "typeDescriptions": {
@@ -2269,10 +2238,7 @@
                       "id": 180,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1588:7:1",
                       "typeDescriptions": {
@@ -2354,10 +2320,7 @@
                       "id": 187,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1626:7:1",
                       "typeDescriptions": {
@@ -2717,10 +2680,7 @@
                       "id": 215,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1891:7:1",
                       "typeDescriptions": {
@@ -2818,10 +2778,7 @@
                       "id": 222,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1934:7:1",
                       "typeDescriptions": {
@@ -2919,10 +2876,7 @@
                       "id": 229,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1972:7:1",
                       "typeDescriptions": {
@@ -3002,9 +2956,7 @@
                   "src": "2010:21:1"
                 },
                 {
-                  "assignments": [
-                    242
-                  ],
+                  "assignments": [242],
                   "declarations": [
                     {
                       "constant": false,
@@ -3131,10 +3083,7 @@
                       "id": 247,
                       "name": "_safeMint",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1145,
-                        1174
-                      ],
+                      "overloadedDeclarations": [1145, 1174],
                       "referencedDeclaration": 1145,
                       "src": "2200:9:1",
                       "typeDescriptions": {
@@ -3609,9 +3558,7 @@
   "legacyAST": {
     "absolutePath": "/home/rhonin2/workspace/landing-page/contracts/Nakama.sol",
     "exportedSymbols": {
-      "Nakama": [
-        278
-      ]
+      "Nakama": [278]
     },
     "id": 279,
     "license": "MIT",
@@ -3619,12 +3566,7 @@
     "nodes": [
       {
         "id": 38,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "58:23:1"
       },
@@ -3672,29 +3614,12 @@
             "src": "214:6:1"
           }
         ],
-        "contractDependencies": [
-          301,
-          358,
-          370,
-          1497,
-          1613,
-          1644,
-          1671
-        ],
+        "contractDependencies": [301, 358, 370, 1497, 1613, 1644, 1671],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
         "id": 278,
-        "linearizedBaseContracts": [
-          278,
-          1497,
-          1644,
-          1671,
-          1613,
-          358,
-          370,
-          301
-        ],
+        "linearizedBaseContracts": [278, 1497, 1644, 1671, 1613, 358, 370, 301],
         "name": "Nakama",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -4351,9 +4276,7 @@
                   "src": "957:21:1"
                 },
                 {
-                  "assignments": [
-                    104
-                  ],
+                  "assignments": [104],
                   "declarations": [
                     {
                       "constant": false,
@@ -4754,9 +4677,7 @@
               "src": "1277:177:1",
               "statements": [
                 {
-                  "assignments": [
-                    136
-                  ],
+                  "assignments": [136],
                   "declarations": [
                     {
                       "constant": false,
@@ -5290,10 +5211,7 @@
                       "id": 173,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1545:7:1",
                       "typeDescriptions": {
@@ -5391,10 +5309,7 @@
                       "id": 180,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1588:7:1",
                       "typeDescriptions": {
@@ -5476,10 +5391,7 @@
                       "id": 187,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1626:7:1",
                       "typeDescriptions": {
@@ -5839,10 +5751,7 @@
                       "id": 215,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1891:7:1",
                       "typeDescriptions": {
@@ -5940,10 +5849,7 @@
                       "id": 222,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1934:7:1",
                       "typeDescriptions": {
@@ -6041,10 +5947,7 @@
                       "id": 229,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        -18,
-                        -18
-                      ],
+                      "overloadedDeclarations": [-18, -18],
                       "referencedDeclaration": -18,
                       "src": "1972:7:1",
                       "typeDescriptions": {
@@ -6124,9 +6027,7 @@
                   "src": "2010:21:1"
                 },
                 {
-                  "assignments": [
-                    242
-                  ],
+                  "assignments": [242],
                   "declarations": [
                     {
                       "constant": false,
@@ -6253,10 +6154,7 @@
                       "id": 247,
                       "name": "_safeMint",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        1145,
-                        1174
-                      ],
+                      "overloadedDeclarations": [1145, 1174],
                       "referencedDeclaration": 1145,
                       "src": "2200:9:1",
                       "typeDescriptions": {

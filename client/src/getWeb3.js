@@ -25,11 +25,11 @@ const getWeb3 = () =>
       const web3Modal = new Web3Modal({
         network: 'mainnet', // optional
         cacheProvider: true, // optional
-        providerOptions, // required
+        providerOptions, // required,
+        theme: 'dark',
       });
 
       const provider = await web3Modal.connect();
-
       const web3 = new Web3(provider);
       resolve(web3);
     } catch (error) {

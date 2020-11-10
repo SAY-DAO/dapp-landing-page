@@ -12,9 +12,7 @@
   "ast": {
     "absolutePath": "@openzeppelin/contracts/utils/Counters.sol",
     "exportedSymbols": {
-      "Counters": [
-        1934
-      ]
+      "Counters": [1934]
     },
     "id": 1935,
     "license": "MIT",
@@ -22,12 +20,7 @@
     "nodes": [
       {
         "id": 1886,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:12"
       },
@@ -55,9 +48,7 @@
         },
         "fullyImplemented": true,
         "id": 1934,
-        "linearizedBaseContracts": [
-          1934
-        ],
+        "linearizedBaseContracts": [1934],
         "name": "Counters",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -599,9 +590,7 @@
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/utils/Counters.sol",
     "exportedSymbols": {
-      "Counters": [
-        1934
-      ]
+      "Counters": [1934]
     },
     "id": 1935,
     "license": "MIT",
@@ -609,12 +598,7 @@
     "nodes": [
       {
         "id": 1886,
-        "literals": [
-          "solidity",
-          "^",
-          "0.6",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.6", ".0"],
         "nodeType": "PragmaDirective",
         "src": "33:23:12"
       },
@@ -642,9 +626,7 @@
         },
         "fullyImplemented": true,
         "id": 1934,
-        "linearizedBaseContracts": [
-          1934
-        ],
+        "linearizedBaseContracts": [1934],
         "name": "Counters",
         "nodeType": "ContractDefinition",
         "nodes": [
