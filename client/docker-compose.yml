@@ -18,11 +18,11 @@ services:
         - traefik.docker.network=traefik-public
         - traefik.constraint-label=traefik-public
         - traefik.http.routers.${STACK_NAME}-dapp-http.entrypoints=http
-        - traefik.http.routers.${STACK_NAME}-dapp-http.rule=Host(`${DOMAIN}`)
+        - traefik.http.routers.${STACK_NAME}-dapp-http.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)
         - traefik.http.routers.${STACK_NAME}-dapp-http.service=${STACK_NAME}-dapp
         - traefik.http.routers.${STACK_NAME}-dapp-http.middlewares=https-redirect
         - traefik.http.routers.${STACK_NAME}-dapp.entrypoints=https
-        - traefik.http.routers.${STACK_NAME}-dapp.rule=Host(`${DOMAIN}`)
+        - traefik.http.routers.${STACK_NAME}-dapp.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)
         - traefik.http.routers.${STACK_NAME}-dapp.service=${STACK_NAME}-dapp
         - traefik.http.routers.${STACK_NAME}-dapp.tls=true
         - traefik.http.routers.${STACK_NAME}-dapp.tls.certresolver=le
