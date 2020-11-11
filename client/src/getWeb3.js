@@ -24,7 +24,7 @@ const getWeb3 = () =>
 
       const web3Modal = new Web3Modal({
         network: 'mainnet', // optional
-        cacheProvider: true, // optional
+        cacheProvider: false, // optional
         providerOptions, // required,
         theme: 'dark',
       });

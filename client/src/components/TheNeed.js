@@ -88,6 +88,8 @@ class TheNeed extends React.Component {
   randomNeed = async (event) => {
     event.preventDefault();
     await this.props.fetchNeed();
+    const needFetchedCost = this.props.fetchedNeed.cost;
+    await this.props.fetchEthPrice(needFetchedCost);
     if (this.props.theWallet.nakamaOwner) {
       await this.props.updateMintButton('Pay for Need', 'enabled');
     } else {
