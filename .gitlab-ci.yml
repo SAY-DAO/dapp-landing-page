@@ -1,6 +1,6 @@
 image: $BASE_CI_IMAGE
 services:
-  - $BASE_CI_SERVICE_IMAGE
+  - docker:19.03.12-dind
 
 stages:
   - build
@@ -9,6 +9,8 @@ stages:
 variables:
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   BASE_IMAGE: $CI_REGISTRY_IMAGE:base
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
 
 before_script:
   - docker login -u $USER -p $TOKEN $CI_REGISTRY
