@@ -58,21 +58,25 @@ class WalletButton extends React.Component {
     let isOwner = false;
     console.log('isOwner function is initiated');
     // Get network provider and web3 instance.
-    const web3 = await getWeb3();
-    console.log('web3', web3);
+    try {
+      const web3 = await getWeb3();
+      console.log('web3', web3);
 
-    // Use web3 to get the user's accounts.
-    const accounts = await web3.eth.getAccounts();
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
 
-    const networkId = await web3.eth.net.getId();
-    console.log('Networkid: ', networkId);
+      const networkId = await web3.eth.net.getId();
+      console.log('Networkid: ', networkId);
 
-    // Get the contract instance.
-    const deployedNetwork = Nakama.networks[networkId];
-    const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
-    this.props.connectWallet(accounts, web3, networkId, nakama);
-    // Time to reload your interface with accounts[0]!
-    this.props.connectWallet(accounts, web3, networkId, nakama);
+      // Get the contract instance.
+      const deployedNetwork = Nakama.networks[networkId];
+      const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
+      this.props.connectWallet(accounts, web3, networkId, nakama);
+      // Time to reload your interface with accounts[0]!
+      this.props.connectWallet(accounts, web3, networkId, nakama);
+    } catch (error) {
+      console.log('Owner Error', error);
+    }
 
     try {
       const userAccount = this.props.theWallet.userAccount;

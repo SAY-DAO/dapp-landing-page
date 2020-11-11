@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import WalletButton from './WalletButton';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Alert from '@material-ui/lab/Alert';
 
 const styles = (darkTheme) => ({
   root: {
@@ -23,6 +24,12 @@ const styles = (darkTheme) => ({
       display: 'flex',
     },
   },
+  alert: {
+    display: 'flex',
+    [darkTheme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
 });
 
 class NavBar extends React.Component {
@@ -30,6 +37,9 @@ class NavBar extends React.Component {
     const { classes } = this.props;
     return (
       <div>
+        <Alert className={classes.alert} severity="warning">
+          Please use the desktop version if you are having trouble on mobile while we are working on this version!
+        </Alert>
         <AppBar style={{ backgroundColor: 'transparent' }} position="static">
           <Toolbar>
             <Grid container>
