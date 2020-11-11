@@ -1,6 +1,6 @@
 image: $BASE_CI_IMAGE
 services:
-  - docker:19.03.12-dind
+  - $BASE_CI_SERVICE_IMAGE
 
 stages:
   - build
