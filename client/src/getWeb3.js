@@ -6,6 +6,7 @@ import MewConnect from '@myetherwallet/mewconnect-web-client';
 const getWeb3 = () =>
   new Promise(async (resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
+
     try {
       const providerOptions = {
         walletconnect: {
@@ -30,7 +31,11 @@ const getWeb3 = () =>
       });
 
       const provider = await web3Modal.connect();
-      const web3 = new Web3(provider);
+      console.log(provider);
+
+      const web3 = window.web3 ? new Web3(window.web3.currentProvider) : new Web3(provider);
+      console.log('the web3 plz', await web3.eth.getAccounts());
+
       resolve(web3);
     } catch (error) {
       console.log(`Something is wrong here.`, error);
