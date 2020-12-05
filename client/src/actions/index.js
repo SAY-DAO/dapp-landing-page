@@ -46,18 +46,12 @@ export const connectWallet = (accounts, web3, networkId, nakama) => {
   return {
     type: 'CONNECT_WALLET',
     payload: {
-      web3,
-      nakama,
       accounts,
       userAccount: accounts[0],
+      web3,
+      nakama,
+      networkId,
     },
-  };
-};
-
-export const mintedNakama = (NAK) => {
-  return {
-    type: 'MINTED',
-    payload: NAK,
   };
 };
 
@@ -79,6 +73,14 @@ export const fetchIsOwner = (isOwner) => {
   return {
     type: 'IS_OWNER',
     payload: isOwner,
+  };
+};
+
+export const fetchTokenURI = (link) => {
+  console.log(link);
+  return {
+    type: 'LINK',
+    payload: link,
   };
 };
 

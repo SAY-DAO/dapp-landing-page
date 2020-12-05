@@ -5,7 +5,6 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { mintedNakama } from '../actions';
 import TheChild from './TheChild';
 import TheNeed from './TheNeed';
 
@@ -64,8 +63,7 @@ class IntroSection extends React.Component {
 const mapStateToProps = (state) => {
   return {
     theWallet: state.wallet,
-    fetchedTokens: state.tokens,
   };
 };
 
-export default connect(mapStateToProps, { mintedNakama })(withStyles(styles)(IntroSection));
+export default connect(mapStateToProps)(withStyles(styles)(IntroSection));

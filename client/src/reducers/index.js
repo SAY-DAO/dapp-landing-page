@@ -9,7 +9,7 @@ import mintButtonReducer from './mintButtonReducer';
 
 export default combineReducers({
   wallet: walletReducer,
-  tokens: nakamaReducer,
+  tokenURI: nakamaReducer,
   need: needReducer,
   form: formReducer,
   ethPrice: ethReducer,
