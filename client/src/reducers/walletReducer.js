@@ -3,8 +3,10 @@ export default (
     walletConnected: false,
     web3: null,
     accounts: [],
-    userAccount: null,
+    userAccount: '',
     nakamaOwner: false,
+    chainId: 1,
+    showModal: false,
   },
   action,
 ) => {
@@ -16,6 +18,8 @@ export default (
         contract: action.payload.nakama,
         accounts: action.payload.accounts,
         userAccount: action.payload.userAccount,
+        chainId: action.payload.networkId,
+        showModal: action.payload.showModal,
       };
     case 'IS_OWNER':
       return { ...state, nakamaOwner: action.payload };

@@ -1,14 +1,18 @@
 import React from 'react';
 import { styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import getWeb3 from '../getWeb3';
-import Nakama from '../contracts/Nakama.json';
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import MewConnect from '@myetherwallet/mewconnect-web-client';
 import { connect } from 'react-redux';
-import { connectWallet, deactivateModal, fetchIsOwner, updateMintButton } from '../actions';
+import { connectWallet, fetchIsOwner, updateMintButton } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import detectEthereumProvider from '@metamask/detect-provider';
+import Nakama from '../contracts/Nakama.json';
+import Web3 from 'web3';
+import { fetchTokenURI } from '../actions';
 
+let provider;
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
   border: '0px solid',
@@ -24,72 +28,24 @@ const MyButton = styled(Button)({
 class WalletButton extends React.Component {
   componentDidMount = async () => {
     await this.isOwner();
-    try {
-      if (typeof window.ethereum === 'undefined') {
-        console.log('MetaMask is not installed!');
-      }
-
-      const provider = await detectEthereumProvider();
-
-      // Subscribe to session connection
-      provider.on('connect', async () => {
-        console.log('connecting');
-        await this.isOwner();
-      });
-
-      // Subscribe to disconnecting
-      provider.on('disconnect', async () => {
-        console.log('disconnected');
-        await this.isOwner();
-      });
-
-      // Subscribe to accounts change
-      provider.on('accountsChanged', async (accounts) => {
-        console.log('Account is changed');
-        await this.isOwner();
-      });
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      console.log(`Failed to load web3, accounts, or contract.`, error);
-    }
+    await this.onConnect();
   };
 
   isOwner = async () => {
     let isOwner = false;
     console.log('isOwner function is initiated');
-    // Get network provider and web3 instance.
-    try {
-      const web3 = await getWeb3();
-      console.log('web3', web3);
-
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
-
-      const networkId = await web3.eth.net.getId();
-      console.log('Networkid: ', networkId);
-
-      // Get the contract instance.
-      const deployedNetwork = Nakama.networks[networkId];
-      const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
-      this.props.connectWallet(accounts, web3, networkId, nakama);
-      // Time to reload your interface with accounts[0]!
-      this.props.connectWallet(accounts, web3, networkId, nakama);
-    } catch (error) {
-      console.log('Owner Error', error);
-    }
-
     try {
       const userAccount = this.props.theWallet.userAccount;
       const contract = this.props.theWallet.contract;
       const totalSupply = await contract.methods.totalSupply().call();
-      console.log('Total Supply: ', totalSupply);
       for (let i = 1; i <= totalSupply; i++) {
         const owner = await contract.methods.ownerOf(i).call();
         if (userAccount.toLowerCase() === owner.toLowerCase()) {
           isOwner = true;
-          const NAK = await contract.methods.tokenURI(i).call();
+          const NAK_LINK = await contract.methods.tokenURI(i).call();
+          this.props.fetchTokenURI(NAK_LINK);
           console.log('Owner: ', owner);
-          console.log('NAK: ', NAK);
+          console.log('NAK Token URI: ', NAK_LINK);
           break;
         }
       }
@@ -106,16 +62,85 @@ class WalletButton extends React.Component {
   };
 
   onConnect = async () => {
-    await getWeb3();
+    console.log('Initializing example');
+    console.log('WalletConnectProvider is', WalletConnectProvider);
+    console.log('Mew is', MewConnect);
+    console.log('window.web3 is', window.web3, 'window.ethereum is', window.ethereum);
 
+    const providerOptions = {
+      walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+          infuraId: '187f0c9471ef426a84f48d4be7f81042', // required
+        },
+      },
+      mewconnect: {
+        package: MewConnect, // required
+        options: {
+          infuraId: '187f0c9471ef426a84f48d4be7f81042', // required
+        },
+      },
+    };
+    const web3Modal = new Web3Modal({
+      cacheProvider: false, // optional
+      providerOptions, // required,
+      theme: 'dark',
+    });
+    console.log('Web3Modal instance is', web3Modal);
     try {
-      // Metmask pops up if not connected
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      await this.onModalConnect(web3Modal);
     } catch (error) {
-      if (error.code === -32002) {
-        console.log(' Already processing in background');
-      }
+      console.log(`Something is wrong here.`, error);
     }
+  };
+
+  onModalConnect = async (web3Modal) => {
+    console.log('Opening a dialog', web3Modal);
+    try {
+      provider = await web3Modal.connect();
+    } catch (e) {
+      console.log('Could not get a wallet connection', e);
+      return;
+    }
+
+    // Subscribe to accounts change
+    provider.on('accountsChanged', (accounts) => {
+      this.fetchAccountData();
+    });
+
+    // Subscribe to chainId change
+    provider.on('chainChanged', (chainId) => {
+      this.fetchAccountData();
+    });
+
+    // Subscribe to networkId change
+    provider.on('networkChanged', (networkId) => {
+      this.fetchAccountData();
+    });
+
+    await this.refreshAccountData();
+  };
+
+  fetchAccountData = async () => {
+    // Get a Web3 instance for the wallet
+    const web3 = window.web3 ? new Web3(window.web3.currentProvider) : new Web3(provider);
+    console.log('Web3 instance is', web3);
+    // Use web3 to get the user's accounts.
+    const accounts = await web3.eth.getAccounts();
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = Nakama.networks[networkId];
+    // Get the contract instance.
+    const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
+
+    console.log('Networkid: ', networkId);
+    console.log('Deployed: ', deployedNetwork);
+    console.log('Nakama Contract: ', nakama);
+    this.props.connectWallet(accounts, web3, networkId, nakama);
+    await this.isOwner();
+  };
+
+  refreshAccountData = async () => {
+    await this.fetchAccountData();
   };
 
   isNakama = () => {
@@ -123,11 +148,13 @@ class WalletButton extends React.Component {
     console.log('isNakama()', nakOwner);
     if (nakOwner) {
       return (
-        <img
-          alt="nakama"
-          src={require('../static/theNakama.png')}
-          style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
-        />
+        <a href={this.props.tokenURI}>
+          <img
+            alt="nakama"
+            src={require('../static/theNakama.png')}
+            style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
+          />
+        </a>
       );
     }
     return (
@@ -175,9 +202,8 @@ const mapToStateProps = (state) => {
   return {
     theWallet: state.wallet,
     modal: state.modal,
+    tokenURI: state.tokenURI,
   };
 };
 
-export default connect(mapToStateProps, { connectWallet, deactivateModal, fetchIsOwner, updateMintButton })(
-  WalletButton,
-);
+export default connect(mapToStateProps, { connectWallet, fetchTokenURI, fetchIsOwner, updateMintButton })(WalletButton);

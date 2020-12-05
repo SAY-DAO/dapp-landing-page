@@ -1,9 +1,7 @@
-export default (state = [], action) => {
+export default (state = null, action) => {
   switch (action.type) {
-    case 'MINTED':
-      console.log('nak', action);
-
-      return [...state, action.payload.NAK];
+    case 'LINK':
+      return (state = action.payload);
     default:
       return state;
   }

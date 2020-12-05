@@ -77,7 +77,7 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
-    await this.isOwner();
+    // await this.isOwner();
     if (this.props.theWallet.nakamaOwner) {
       await this.props.updateMintButton('Pay for Need', 'enabled');
     } else {
@@ -280,13 +280,13 @@ class TheNeed extends React.Component {
                 </Box>
                 <AccordionDetails>
                   <Typography style={{ fontSize: '0.7rem' }}>
-                    Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to SAY ecosystem such
-                    as paying a need, taking part in building the software, or helping with the logistic side of SAY.
-                    NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
-                    choose to contribute and are NOT designed to be traded rather behold as a bond between us and a
+                    Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to SAY ecosystem, such
+                    as by paying for a need, taking part in building the software, or helping with the logistic side of
+                    SAY. NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
+                    choose to contribute and are NOT designed to be traded. They rather act as a bond between us and a
                     community membership token to get involved in the SAY ecosystem. Moreover, this also helps with
                     lower ethereum gas costs for further transactions. More information about tokens use cases will be
-                    released in the upcoming weeks.
+                    released in the coming weeks.
                   </Typography>
                 </AccordionDetails>
               </Accordion>
