@@ -5,12 +5,12 @@ import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import MewConnect from '@myetherwallet/mewconnect-web-client';
 import { connect } from 'react-redux';
-import { connectWallet, deactivateModal, fetchIsOwner, updateMintButton } from '../actions';
+import { connectWallet, fetchIsOwner, updateMintButton } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Nakama from "../contracts/Nakama.json";
-import Web3 from "web3";
-
+import Nakama from '../contracts/Nakama.json';
+import Web3 from 'web3';
+import { fetchTokenURI } from '../actions';
 
 let provider;
 const MyButton = styled(Button)({
@@ -27,9 +27,9 @@ const MyButton = styled(Button)({
 
 class WalletButton extends React.Component {
   componentDidMount = async () => {
-    await this.isOwner()
-    await this.onConnect()
-  }
+    await this.isOwner();
+    await this.onConnect();
+  };
 
   isOwner = async () => {
     let isOwner = false;
@@ -38,14 +38,14 @@ class WalletButton extends React.Component {
       const userAccount = this.props.theWallet.userAccount;
       const contract = this.props.theWallet.contract;
       const totalSupply = await contract.methods.totalSupply().call();
-      console.log('Total Supply: ', totalSupply);
       for (let i = 1; i <= totalSupply; i++) {
         const owner = await contract.methods.ownerOf(i).call();
         if (userAccount.toLowerCase() === owner.toLowerCase()) {
           isOwner = true;
-          const NAK = await contract.methods.tokenURI(i).call();
+          const NAK_LINK = await contract.methods.tokenURI(i).call();
+          this.props.fetchTokenURI(NAK_LINK);
           console.log('Owner: ', owner);
-          console.log('NAK: ', NAK);
+          console.log('NAK Token URI: ', NAK_LINK);
           break;
         }
       }
@@ -62,10 +62,10 @@ class WalletButton extends React.Component {
   };
 
   onConnect = async () => {
-    console.log("Initializing example");
-    console.log("WalletConnectProvider is", WalletConnectProvider);
-    console.log("Mew is", MewConnect);
-    console.log("window.web3 is", window.web3, "window.ethereum is", window.ethereum);
+    console.log('Initializing example');
+    console.log('WalletConnectProvider is', WalletConnectProvider);
+    console.log('Mew is', MewConnect);
+    console.log('window.web3 is', window.web3, 'window.ethereum is', window.ethereum);
 
     const providerOptions = {
       walletconnect: {
@@ -86,45 +86,45 @@ class WalletButton extends React.Component {
       providerOptions, // required,
       theme: 'dark',
     });
-    console.log("Web3Modal instance is", web3Modal);
+    console.log('Web3Modal instance is', web3Modal);
     try {
-      await this.onModalConnect(web3Modal)
+      await this.onModalConnect(web3Modal);
     } catch (error) {
       console.log(`Something is wrong here.`, error);
     }
   };
 
   onModalConnect = async (web3Modal) => {
-    console.log("Opening a dialog", web3Modal);
+    console.log('Opening a dialog', web3Modal);
     try {
       provider = await web3Modal.connect();
-    } catch(e) {
-      console.log("Could not get a wallet connection", e);
+    } catch (e) {
+      console.log('Could not get a wallet connection', e);
       return;
     }
 
     // Subscribe to accounts change
-    provider.on("accountsChanged", (accounts) => {
+    provider.on('accountsChanged', (accounts) => {
       this.fetchAccountData();
     });
 
     // Subscribe to chainId change
-    provider.on("chainChanged", (chainId) => {
+    provider.on('chainChanged', (chainId) => {
       this.fetchAccountData();
     });
 
     // Subscribe to networkId change
-    provider.on("networkChanged", (networkId) => {
+    provider.on('networkChanged', (networkId) => {
       this.fetchAccountData();
     });
 
     await this.refreshAccountData();
-  }
+  };
 
   fetchAccountData = async () => {
     // Get a Web3 instance for the wallet
     const web3 = window.web3 ? new Web3(window.web3.currentProvider) : new Web3(provider);
-    console.log("Web3 instance is", web3);
+    console.log('Web3 instance is', web3);
     // Use web3 to get the user's accounts.
     const accounts = await web3.eth.getAccounts();
     const networkId = await web3.eth.net.getId();
@@ -133,65 +133,67 @@ class WalletButton extends React.Component {
     const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
 
     console.log('Networkid: ', networkId);
-    console.log("Deployed: ", deployedNetwork)
-    console.log("Nakama Contract: ", nakama)
+    console.log('Deployed: ', deployedNetwork);
+    console.log('Nakama Contract: ', nakama);
     this.props.connectWallet(accounts, web3, networkId, nakama);
-    await this.isOwner()
-  }
+    await this.isOwner();
+  };
 
   refreshAccountData = async () => {
     await this.fetchAccountData();
-  }
+  };
 
   isNakama = () => {
     const nakOwner = this.props.theWallet.nakamaOwner;
     console.log('isNakama()', nakOwner);
     if (nakOwner) {
       return (
+        <a href={this.props.tokenURI}>
           <img
-              alt="nakama"
-              src={require('../static/theNakama.png')}
-              style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
+            alt="nakama"
+            src={require('../static/theNakama.png')}
+            style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
           />
+        </a>
       );
     }
     return (
-        <svg style={{ position: 'absolute' }}>
-          {/*<circle cx="40" cy="10" r="20" stroke="white" strokeWidth="3" fill="#FF8799" />*/}
-        </svg>
+      <svg style={{ position: 'absolute' }}>
+        {/*<circle cx="40" cy="10" r="20" stroke="white" strokeWidth="3" fill="#FF8799" />*/}
+      </svg>
     );
   };
 
   walletStatus = () => {
     if (!this.props.theWallet.userAccount) {
       return (
-          <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-            Connect Wallet
-          </MyButton>
+        <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+          Connect Wallet
+        </MyButton>
       );
     }
     const userAccount = this.props.theWallet.userAccount;
     const userAccountStart = userAccount.slice(0, 6);
     const userAccountEnd = userAccount.slice(-5);
     return (
-        <Grid container>
-          <Box style={{ margin: 'auto' }}>
-            <Box xs={2}>{this.isNakama}</Box>
-          </Box>
-          <Box>
-            <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-              {userAccountStart}...{userAccountEnd}
-            </MyButton>
-          </Box>
-        </Grid>
+      <Grid container>
+        <Box style={{ margin: 'auto' }}>
+          <Box xs={2}>{this.isNakama}</Box>
+        </Box>
+        <Box>
+          <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+            {userAccountStart}...{userAccountEnd}
+          </MyButton>
+        </Box>
+      </Grid>
     );
   };
 
   render() {
     return (
-        <div>
-          <div className="App">{this.walletStatus()}</div>
-        </div>
+      <div>
+        <div className="App">{this.walletStatus()}</div>
+      </div>
     );
   }
 }
@@ -200,9 +202,8 @@ const mapToStateProps = (state) => {
   return {
     theWallet: state.wallet,
     modal: state.modal,
+    tokenURI: state.tokenURI,
   };
 };
 
-export default connect(mapToStateProps, { connectWallet, deactivateModal, fetchIsOwner, updateMintButton })(
-    WalletButton,
-);
+export default connect(mapToStateProps, { connectWallet, fetchTokenURI, fetchIsOwner, updateMintButton })(WalletButton);

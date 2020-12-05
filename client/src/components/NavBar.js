@@ -37,9 +37,9 @@ class NavBar extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Alert className={classes.alert} severity="warning">
-          Please use the desktop version if you are having trouble on mobile while we are working on this version!
-        </Alert>
+        {/*<Alert className={classes.alert} severity="warning">*/}
+        {/*  Please use the desktop version if you are having trouble on mobile while we are working on this version!*/}
+        {/*</Alert>*/}
         <AppBar style={{ backgroundColor: 'transparent' }} position="static">
           <Toolbar>
             <Grid container>
