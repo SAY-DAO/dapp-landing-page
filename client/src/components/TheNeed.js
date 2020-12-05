@@ -77,7 +77,7 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
-    await this.isOwner();
+    // await this.isOwner();
     if (this.props.theWallet.nakamaOwner) {
       await this.props.updateMintButton('Pay for Need', 'enabled');
     } else {

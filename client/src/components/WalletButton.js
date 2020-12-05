@@ -1,165 +1,208 @@
-import * as React from 'react';
-import WalletConnect from '@walletconnect/client';
-import QRCodeModal from '@walletconnect/qrcode-modal';
-//
-import { apiGetAccountAssets } from '../apis/helpers/api';
+import React from 'react';
+import { styled } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import MewConnect from '@myetherwallet/mewconnect-web-client';
+import { connect } from 'react-redux';
+import { connectWallet, deactivateModal, fetchIsOwner, updateMintButton } from '../actions';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Nakama from "../contracts/Nakama.json";
+import Web3 from "web3";
 
-class walletConnect extends React.Component {
-  state = {
-    fetching: false,
-    connector: null,
-    connected: false,
-    chainId: 1,
-    showModal: false,
-    pendingRequest: false,
-    accounts: [],
-    address: '',
-    result: null,
-    assets: [],
-  };
-  // Initiate a connector and its session
-  walletConnectInit = async () => {
-    // bridge url
-    const bridge = 'https://bridge.walletconnect.org';
-    // create new connector
-    const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal });
-    await this.setState({ connector });
-    // check if already connected
-    if (!connector.connected) {
-      // create new session
-      await connector.createSession();
+
+let provider;
+const MyButton = styled(Button)({
+  background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
+  border: '0px solid',
+  borderRadius: 10,
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  color: '#ffffff',
+  height: 48,
+  padding: '0 30px',
+  margin: 10,
+  whiteSpace: 'normal',
+});
+
+class WalletButton extends React.Component {
+  componentDidMount = async () => {
+    await this.isOwner()
+    await this.onConnect()
+  }
+
+  isOwner = async () => {
+    let isOwner = false;
+    console.log('isOwner function is initiated');
+    try {
+      const userAccount = this.props.theWallet.userAccount;
+      const contract = this.props.theWallet.contract;
+      const totalSupply = await contract.methods.totalSupply().call();
+      console.log('Total Supply: ', totalSupply);
+      for (let i = 1; i <= totalSupply; i++) {
+        const owner = await contract.methods.ownerOf(i).call();
+        if (userAccount.toLowerCase() === owner.toLowerCase()) {
+          isOwner = true;
+          const NAK = await contract.methods.tokenURI(i).call();
+          console.log('Owner: ', owner);
+          console.log('NAK: ', NAK);
+          break;
+        }
+      }
+      console.log('isOwner(): ', isOwner);
+    } catch (error) {
+      console.log("Can't load Nakamas: ", error);
     }
-    // subscribe to events
-    await this.subscribeToEvents();
-    console.log('initiated', connector);
+    await this.props.fetchIsOwner(isOwner);
+    if (this.props.theWallet.nakamaOwner) {
+      await this.props.updateMintButton('Pay for Need', 'enabled');
+    } else {
+      await this.props.updateMintButton('Mint NAK', 'enabled');
+    }
   };
 
-  subscribeToEvents = async () => {
-    const { connector } = this.state;
-    if (!connector) {
+  onConnect = async () => {
+    console.log("Initializing example");
+    console.log("WalletConnectProvider is", WalletConnectProvider);
+    console.log("Mew is", MewConnect);
+    console.log("window.web3 is", window.web3, "window.ethereum is", window.ethereum);
+
+    const providerOptions = {
+      walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+          infuraId: '187f0c9471ef426a84f48d4be7f81042', // required
+        },
+      },
+      mewconnect: {
+        package: MewConnect, // required
+        options: {
+          infuraId: '187f0c9471ef426a84f48d4be7f81042', // required
+        },
+      },
+    };
+    const web3Modal = new Web3Modal({
+      cacheProvider: false, // optional
+      providerOptions, // required,
+      theme: 'dark',
+    });
+    console.log("Web3Modal instance is", web3Modal);
+    try {
+      await this.onModalConnect(web3Modal)
+    } catch (error) {
+      console.log(`Something is wrong here.`, error);
+    }
+  };
+
+  onModalConnect = async (web3Modal) => {
+    console.log("Opening a dialog", web3Modal);
+    try {
+      provider = await web3Modal.connect();
+    } catch(e) {
+      console.log("Could not get a wallet connection", e);
       return;
     }
-    connector.on('session_update', async (error, payload) => {
-      console.log(`connector.on("session_update")`);
-      if (error) {
-        throw error;
-      }
-      const { chainId, accounts } = payload.params[0];
-      await this.onSessionUpdate(accounts, chainId);
+
+    // Subscribe to accounts change
+    provider.on("accountsChanged", (accounts) => {
+      this.fetchAccountData();
     });
-    connector.on('connect', (error, payload) => {
-      console.log(`connector.on("connect")`);
-      if (error) {
-        throw error;
-      }
-      this.onConnect(payload);
+
+    // Subscribe to chainId change
+    provider.on("chainChanged", (chainId) => {
+      this.fetchAccountData();
     });
-    connector.on('disconnect', async (error, payload) => {
-      console.log(`connector.on("disconnect")`);
-      if (error) {
-        throw error;
-      }
-      await this.onDisconnect();
+
+    // Subscribe to networkId change
+    provider.on("networkChanged", (networkId) => {
+      this.fetchAccountData();
     });
-    if (connector.connected) {
-      const { chainId, accounts } = connector;
-      const address = accounts[0];
-      this.setState({
-        connected: true,
-        chainId,
-        accounts,
-        address,
-      });
-      await this.onSessionUpdate(accounts, chainId);
+
+    await this.refreshAccountData();
+  }
+
+  fetchAccountData = async () => {
+    // Get a Web3 instance for the wallet
+    const web3 = window.web3 ? new Web3(window.web3.currentProvider) : new Web3(provider);
+    console.log("Web3 instance is", web3);
+    // Use web3 to get the user's accounts.
+    const accounts = await web3.eth.getAccounts();
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = Nakama.networks[networkId];
+    // Get the contract instance.
+    const nakama = new web3.eth.Contract(Nakama.abi, deployedNetwork && deployedNetwork.address);
+
+    console.log('Networkid: ', networkId);
+    console.log("Deployed: ", deployedNetwork)
+    console.log("Nakama Contract: ", nakama)
+    this.props.connectWallet(accounts, web3, networkId, nakama);
+    await this.isOwner()
+  }
+
+  refreshAccountData = async () => {
+    await this.fetchAccountData();
+  }
+
+  isNakama = () => {
+    const nakOwner = this.props.theWallet.nakamaOwner;
+    console.log('isNakama()', nakOwner);
+    if (nakOwner) {
+      return (
+          <img
+              alt="nakama"
+              src={require('../static/theNakama.png')}
+              style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
+          />
+      );
     }
-
-    this.setState({ connector });
+    return (
+        <svg style={{ position: 'absolute' }}>
+          {/*<circle cx="40" cy="10" r="20" stroke="white" strokeWidth="3" fill="#FF8799" />*/}
+        </svg>
+    );
   };
 
-  onSessionUpdate = async (accounts, chainId) => {
-    const address = accounts[0];
-    await this.setState({ chainId, accounts, address });
-    await this.getAccountAssets();
-  };
-
-  getAccountAssets = async () => {
-    const { address, chainId } = this.state;
-    this.setState({ fetching: true });
-    try {
-      // get account balances
-      const assets = await apiGetAccountAssets(address, chainId);
-      await this.setState({ fetching: false, address, assets });
-    } catch (error) {
-      console.error(error);
-      await this.setState({ fetching: false });
+  walletStatus = () => {
+    if (!this.props.theWallet.userAccount) {
+      return (
+          <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+            Connect Wallet
+          </MyButton>
+      );
     }
-  };
-
-  onConnect = async (payload) => {
-    const { chainId, accounts } = payload.params[0];
-    const address = accounts[0];
-    await this.setState({
-      connected: true,
-      chainId,
-      accounts,
-      address,
-    });
-    await this.getAccountAssets();
-  };
-
-  onDisconnect = async () => {
-    await this.resetApp();
-  };
-
-  resetApp = async () => {
-    await this.setState({
-      fetching: false,
-      connector: null,
-      connected: false,
-      chainId: 1,
-      showModal: false,
-      pendingRequest: false,
-      accounts: [],
-      address: '',
-      result: null,
-      assets: [],
-    });
-  };
-
-  killSession = async () => {
-    const { connector } = this.state;
-    if (connector) {
-      await connector.killSession();
-    }
-    await this.resetApp();
+    const userAccount = this.props.theWallet.userAccount;
+    const userAccountStart = userAccount.slice(0, 6);
+    const userAccountEnd = userAccount.slice(-5);
+    return (
+        <Grid container>
+          <Box style={{ margin: 'auto' }}>
+            <Box xs={2}>{this.isNakama}</Box>
+          </Box>
+          <Box>
+            <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+              {userAccountStart}...{userAccountEnd}
+            </MyButton>
+          </Box>
+        </Grid>
+    );
   };
 
   render() {
     return (
-      <div>
         <div>
-          {`showModal: ${this.state.showModal}`}
-          <br />
-          {`pendingRequest: ${this.state.pendingRequest}`}
-          <br />
-          {`result: ${this.state.result}`}
-          <br />
-          {`fetching: ${this.state.fetching}`}
-          <br />
-          {`isConnected: ${this.state.connected}`}
-          <br />
-          {`account: ${this.state.address}`}
-          <br />
-          {`chainId: ${this.state.chainId}`}
-          <br />
-          {`balance: ${this.state.assets[0] ? this.state.assets[0]['balance'] : 0}`}
-          <br />
+          <div className="App">{this.walletStatus()}</div>
         </div>
-        <button onClick={this.walletConnectInit}>{'Connect to WalletConnect'}</button>
-        <button onClick={this.killSession}>{'Disconnect'}</button>
-      </div>
     );
   }
 }
 
-export default walletConnect;
+const mapToStateProps = (state) => {
+  return {
+    theWallet: state.wallet,
+    modal: state.modal,
+  };
+};
+
+export default connect(mapToStateProps, { connectWallet, deactivateModal, fetchIsOwner, updateMintButton })(
+    WalletButton,
+);
