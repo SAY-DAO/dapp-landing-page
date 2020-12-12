@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 
 export default function () {
   return (
-    <Container id="midsection" maxWidth="md" style={{ marginTop: 100, marginBottom: 150 }}>
+    <Container id="midsection" maxWidth="md" style={{ marginTop: 40, marginBottom: 55 }}>
       <Box className="container">
         <Typography align="center" color="secondary" variant="h5">
           The world is changing and so is SAY
