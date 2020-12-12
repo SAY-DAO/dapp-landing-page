@@ -22,11 +22,11 @@ class Circle extends React.Component {
     return (
       <div className={classes.div}>
         <svg className={classes.svg} style={{ height: 1700 }}>
-          <circle cx="200" cy="500" r="20" stroke="black" strokeWidth="3" fill="#5CD0CC" />
-          <circle cx="1900" cy="900" r="150" stroke="black" strokeWidth="3" fill="#FF8799" />
-          <circle cx="20" cy="1100" r="50" stroke="black" strokeWidth="3" fill="#5CD0CC" />
-          <circle cx="1400" cy="1400" r="20" stroke="black" strokeWidth="3" fill="#5CD0CC" />
-          <circle cx="400" cy="1600" r="20" stroke="black" strokeWidth="3" fill="#FF8799" />
+          <circle cx="200" cy="500" r="20" stroke="black" fill="#FF8799" />
+          <circle cx="1900" cy="900" r="150" stroke="black" fill="#FF8799" />
+          <circle cx="20" cy="1100" r="50" stroke="black" fill="#5CD0CC" />
+          <circle cx="1400" cy="1400" r="20" stroke="black" fill="#5CD0CC" />
+          <circle cx="400" cy="1600" r="20" stroke="black" fill="#FF8799" />
         </svg>
       </div>
     );
