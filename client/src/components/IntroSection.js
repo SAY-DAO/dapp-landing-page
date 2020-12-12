@@ -11,6 +11,7 @@ import TheNeed from './TheNeed';
 const styles = (darkTheme) => ({
   paper: {
     marginTop: darkTheme.spacing(3),
+    marginBottom: darkTheme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

@@ -234,7 +234,7 @@ class TheNeed extends React.Component {
             </form>
           </Box>
           <Box>{this.renderTheForm()}</Box>
-          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center" alignItems="center">
             <Box>
               <Avatar className={classes.needIcon}>
                 <img
