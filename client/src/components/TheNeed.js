@@ -57,7 +57,6 @@ const styles = (darkTheme) => ({
     height: 60,
   },
   button1: {
-    margin: 'auto',
     height: 56,
     borderColor: '#8CB4C5',
     borderRadius: 3,
@@ -65,10 +64,11 @@ const styles = (darkTheme) => ({
     color: 'white',
   },
   button2: {
-    borderColor: '#8CB4C5',
+    height: 56,
+    borderColor: '#ffeb90',
     borderRadius: 3,
     border: '1px solid',
-    color: 'white',
+    color: '#ffeb90',
   },
 });
 
@@ -188,7 +188,7 @@ class TheNeed extends React.Component {
       const needEthCost = this.props.fetchedEth.needEthCost;
       return (
         <form onSubmit={this.props.handleSubmit(this.onMint)}>
-          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center" alignItems="flex-start">
             <Box m={1} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
               <Field
                 name="amount"
@@ -198,7 +198,7 @@ class TheNeed extends React.Component {
                 defaultValue={needEthCost}
               />
             </Box>
-            <Box style={{ margin: 'auto', height: 56 }}>
+            <Box my={1}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
                 {this.props.mintButton.text}
               </Button>
@@ -208,11 +208,11 @@ class TheNeed extends React.Component {
       );
     }
     return (
-      <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+      <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center" alignItems="flex-start">
         <Box m={1} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
-        <Box style={{ margin: 'auto', height: 56 }}>
+        <Box my={1}>
           <Button type="submit" variant="outlined" color="secondary" className={classes.button1} disabled>
             Connect Wallet
           </Button>
