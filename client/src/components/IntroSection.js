@@ -20,7 +20,7 @@ const styles = (darkTheme) => ({
   paper2: {
     background: '#000000',
     width: '85%',
-    margin: 15,
+    margin: 8,
     borderRadius: 18,
   },
   grid: {

@@ -51,6 +51,7 @@ const useStyles = makeStyles((darkTheme) => ({
   },
   tabs: {
     borderRight: `1px solid ${darkTheme.palette.divider}`,
+    minWidth: 170,
   },
   paper: {
     padding: darkTheme.spacing(6),
@@ -60,6 +61,7 @@ const useStyles = makeStyles((darkTheme) => ({
   },
   tab: {
     marginRight: 10,
+    marginLeft: 10,
     minWidth: 50,
   },
 }));
