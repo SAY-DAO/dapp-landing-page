@@ -40,7 +40,7 @@ class NavBar extends React.Component {
         {/*<Alert className={classes.alert} severity="warning">*/}
         {/*  Please use the desktop version if you are having trouble on mobile while we are working on this version!*/}
         {/*</Alert>*/}
-        <AppBar style={{ backgroundColor: 'transparent' }} position="static">
+        <AppBar style={{ backgroundColor: 'transparent', marginTop: '10px' }} position="static">
           <Toolbar>
             <Grid container>
               <Grid container className={classes.imgGrid} item xs={2}>
