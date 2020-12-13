@@ -8,18 +8,14 @@ import Alert from '@material-ui/lab/Alert';
 
 const styles = (darkTheme) => ({
   root: {
-    flexGrow: 1,
+    [darkTheme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
+    },
+    [darkTheme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-start',
+    }
   },
 
-  buttonGrid: {
-    justifyContent: 'flex-end',
-    direction: 'row',
-    // O to sm size until the break
-    // display: 'inlineBlock',
-    [darkTheme.breakpoints.up('sm')]: {
-      display: 'flex',
-    },
-  },
   alert: {
     display: 'flex',
     [darkTheme.breakpoints.up('sm')]: {
@@ -39,12 +35,10 @@ class NavBar extends React.Component {
         <AppBar style={{ backgroundColor: 'transparent', marginTop: '10px' }} position="static">
           <Toolbar>
             <Grid container>
-              <Grid container alignItems="center" item xs={4}>
+              <Grid container alignItems="center" item xs={12} sm={4} className={classes.root}>
                 <img alt="logo" src={require('../static/sayLogo.png')} />
               </Grid>
-              <Grid container className={classes.buttonGrid} item xs={8}>
-                <WalletButton />
-              </Grid>
+              <WalletButton />
             </Grid>
           </Toolbar>
         </AppBar>

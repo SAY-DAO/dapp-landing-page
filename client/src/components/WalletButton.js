@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import MewConnect from '@myetherwallet/mewconnect-web-client';
@@ -11,6 +12,25 @@ import Box from '@material-ui/core/Box';
 import Nakama from '../contracts/Nakama.json';
 import Web3 from 'web3';
 import { fetchTokenURI } from '../actions';
+
+const styles = (darkTheme) => ({
+  root: {
+    [darkTheme.breakpoints.down('xs')]: {
+      justifyContent: 'space-between',
+    },
+    [darkTheme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-end',
+    },
+  },
+  singleBtn: {
+    [darkTheme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
+    },
+    [darkTheme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-end',
+    },
+  },
+});
 
 let provider;
 const MyButton = styled(Button)({
@@ -144,7 +164,7 @@ class WalletButton extends React.Component {
     console.log('isNakama()', nakOwner);
     if (nakOwner) {
       return (
-        <a href={this.props.tokenURI} style={{ display: 'flex', alignItems: 'center' }}>
+        <a href={this.props.tokenURI} style={{ display: 'flex', alignItems: 'center', margin: 10 }}>
           <img
             alt="nakama"
             src={require('../static/theNakama.png')}
@@ -162,31 +182,37 @@ class WalletButton extends React.Component {
 
   walletStatus = () => {
     const buttonSize = window.innerWidth < 394 ? "medium" : "large";
+    const { classes } = this.props;
     if (!this.props.theWallet.userAccount) {
       return (
-        <MyButton size={buttonSize} color="secondary" variant="outlined" onClick={this.onConnect}>
-          Connect Wallet
-        </MyButton>
+        <Grid container className={classes.singleBtn}>
+          <MyButton size={buttonSize} color="secondary" variant="outlined" onClick={this.onConnect}>
+            Connect Wallet
+          </MyButton>
+        </Grid>
       );
     }
     const userAccount = this.props.theWallet.userAccount;
     const userAccountStart = userAccount.slice(0, 6);
     const userAccountEnd = userAccount.slice(-5);
     return (
-      <Grid container justify='center'>
+      <>
         <Box>
           {this.isNakama}
         </Box>
         <MyButton size={buttonSize} color="secondary" variant="outlined" onClick={this.onConnect}>
           {userAccountStart}...{userAccountEnd}
         </MyButton>
-      </Grid>
+      </>
     );
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="App">{this.walletStatus()}</div>
+      <Grid container xs={12} sm={8} className={classes.root}>
+        {this.walletStatus()}
+      </Grid>
     );
   }
 }
@@ -199,4 +225,4 @@ const mapToStateProps = (state) => {
   };
 };
 
-export default connect(mapToStateProps, { connectWallet, fetchTokenURI, fetchIsOwner, updateMintButton })(WalletButton);
+export default connect(mapToStateProps, { connectWallet, fetchTokenURI, fetchIsOwner, updateMintButton })(withStyles(styles)(WalletButton));
