@@ -70,6 +70,11 @@ const styles = (darkTheme) => ({
     border: '1px solid',
     color: '#ffeb90',
   },
+
+  spacing: {
+    marginTop: '16px',
+    marginBottom: '8px',
+  },
 });
 
 class TheNeed extends React.Component {
@@ -188,8 +193,8 @@ class TheNeed extends React.Component {
       const needEthCost = this.props.fetchedEth.needEthCost;
       return (
         <form onSubmit={this.props.handleSubmit(this.onMint)}>
-          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center" alignItems="flex-start">
-            <Box m={1} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
+          <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
+            <Box m={0.5} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
               <Field
                 name="amount"
                 component={this.renderInput}
@@ -198,26 +203,26 @@ class TheNeed extends React.Component {
                 defaultValue={needEthCost}
               />
             </Box>
-            <Box my={1}>
+            <Box my={0.5}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
                 {this.props.mintButton.text}
               </Button>
             </Box>
-          </Box>
+          </Grid>
         </form>
       );
     }
     return (
-      <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center" alignItems="flex-start">
-        <Box m={1} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
+      <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
+        <Box m={0.5} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
-        <Box my={1}>
+        <Box my={0.5}>
           <Button type="submit" variant="outlined" color="secondary" className={classes.button1} disabled>
             Connect Wallet
           </Button>
         </Box>
-      </Box>
+      </Grid>
     );
   };
 
