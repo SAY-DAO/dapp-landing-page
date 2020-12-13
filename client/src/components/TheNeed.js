@@ -58,6 +58,7 @@ const styles = (darkTheme) => ({
   },
   button1: {
     height: 56,
+    width: 140,
     borderColor: '#8CB4C5',
     borderRadius: 3,
     border: '1px solid',
@@ -65,6 +66,7 @@ const styles = (darkTheme) => ({
   },
   button2: {
     height: 56,
+    width: 140,
     borderColor: '#ffeb90',
     borderRadius: 3,
     border: '1px solid',
@@ -194,7 +196,7 @@ class TheNeed extends React.Component {
       return (
         <form onSubmit={this.props.handleSubmit(this.onMint)}>
           <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
-            <Box m={0.5} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
+            <Box m={0.5} style={{ width: 140, maxHeight: '70%' }} color="secondary">
               <Field
                 name="amount"
                 component={this.renderInput}
@@ -214,7 +216,7 @@ class TheNeed extends React.Component {
     }
     return (
       <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
-        <Box m={0.5} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
+        <Box m={0.5} style={{ width: 140, maxHeight: '70%' }} color="secondary" >
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
         <Box m={0.5}>
