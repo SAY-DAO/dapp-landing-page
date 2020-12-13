@@ -203,7 +203,7 @@ class TheNeed extends React.Component {
                 defaultValue={needEthCost}
               />
             </Box>
-            <Box my={0.5}>
+            <Box m={0.5}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
                 {this.props.mintButton.text}
               </Button>
@@ -217,7 +217,7 @@ class TheNeed extends React.Component {
         <Box m={0.5} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
-        <Box my={0.5}>
+        <Box m={0.5}>
           <Button type="submit" variant="outlined" color="secondary" className={classes.button1} disabled>
             Connect Wallet
           </Button>

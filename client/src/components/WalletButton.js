@@ -16,10 +16,7 @@ let provider;
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
   border: '0px solid',
-  borderRadius: 10,
   color: '#ffffff',
-  height: 48,
-  padding: '0 30px',
   margin: 10,
   whiteSpace: 'normal',
 });
@@ -147,11 +144,11 @@ class WalletButton extends React.Component {
     console.log('isNakama()', nakOwner);
     if (nakOwner) {
       return (
-        <a href={this.props.tokenURI}>
+        <a href={this.props.tokenURI} style={{ display: 'flex', alignItems: 'center' }}>
           <img
             alt="nakama"
             src={require('../static/theNakama.png')}
-            style={{ height: 40, justifyContent: 'center', marginTop: 'auto' }}
+            style={{ height: 40 }}
           />
         </a>
       );
@@ -164,9 +161,10 @@ class WalletButton extends React.Component {
   };
 
   walletStatus = () => {
+    const buttonSize = window.innerWidth < 394 ? "medium" : "large";
     if (!this.props.theWallet.userAccount) {
       return (
-        <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
+        <MyButton size={buttonSize} color="secondary" variant="outlined" onClick={this.onConnect}>
           Connect Wallet
         </MyButton>
       );
@@ -175,24 +173,20 @@ class WalletButton extends React.Component {
     const userAccountStart = userAccount.slice(0, 6);
     const userAccountEnd = userAccount.slice(-5);
     return (
-      <Grid container>
-        <Box style={{ margin: 'auto' }}>
-          <Box xs={2}>{this.isNakama}</Box>
-        </Box>
+      <Grid container justify='center'>
         <Box>
-          <MyButton color="secondary" variant="outlined" onClick={this.onConnect}>
-            {userAccountStart}...{userAccountEnd}
-          </MyButton>
+          {this.isNakama}
         </Box>
+        <MyButton size={buttonSize} color="secondary" variant="outlined" onClick={this.onConnect}>
+          {userAccountStart}...{userAccountEnd}
+        </MyButton>
       </Grid>
     );
   };
 
   render() {
     return (
-      <div>
-        <div className="App">{this.walletStatus()}</div>
-      </div>
+      <div className="App">{this.walletStatus()}</div>
     );
   }
 }

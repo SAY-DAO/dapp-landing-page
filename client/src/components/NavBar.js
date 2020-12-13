@@ -11,10 +11,6 @@ const styles = (darkTheme) => ({
     flexGrow: 1,
   },
 
-  imgGrid: {
-    alignItems: 'center',
-  },
-
   buttonGrid: {
     justifyContent: 'flex-end',
     direction: 'row',
@@ -43,10 +39,10 @@ class NavBar extends React.Component {
         <AppBar style={{ backgroundColor: 'transparent', marginTop: '10px' }} position="static">
           <Toolbar>
             <Grid container>
-              <Grid container className={classes.imgGrid} item xs={2}>
+              <Grid container alignItems="center" item xs={4}>
                 <img alt="logo" src={require('../static/sayLogo.png')} />
               </Grid>
-              <Grid container className={classes.buttonGrid} item xs={10}>
+              <Grid container className={classes.buttonGrid} item xs={8}>
                 <WalletButton />
               </Grid>
             </Grid>
