@@ -35,7 +35,7 @@ class NavBar extends React.Component {
         <Grid style={{ backgroundColor: 'transparent', marginBottom: 30 }} position="static">
           <Toolbar>
             <Grid container justify='center'>
-              <Grid container item xs={8} sm={3} justify='space-around'>
+              <Grid container item sm={8} lg={3} justify='space-around'>
                 <a href="https://instagram.com/say.company" target="_blank" rel="noopener noreferrer">
                   <Instagram className={classes.icons} />
                 </a>
