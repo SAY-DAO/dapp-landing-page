@@ -37,7 +37,7 @@ const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
   border: '0px solid',
   color: '#ffffff',
-  margin: 10,
+  margin: 5,
   whiteSpace: 'normal',
 });
 
@@ -164,7 +164,7 @@ class WalletButton extends React.Component {
     console.log('isNakama()', nakOwner);
     if (nakOwner) {
       return (
-        <a href={this.props.tokenURI} style={{ display: 'flex', alignItems: 'center', margin: 10 }}>
+        <a href={this.props.tokenURI} style={{ display: 'flex', alignItems: 'center', margin: 5 }}>
           <img
             alt="nakama"
             src={require('../static/theNakama.png')}
@@ -181,7 +181,7 @@ class WalletButton extends React.Component {
   };
 
   walletStatus = () => {
-    const buttonSize = window.innerWidth < 394 ? "medium" : "large";
+    const buttonSize = window.innerWidth < 376 ? "meduim" : "large";
     const { classes } = this.props;
     if (!this.props.theWallet.userAccount) {
       return (
@@ -210,7 +210,7 @@ class WalletButton extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid container xs={12} sm={8} className={classes.root}>
+      <Grid container xs={12} sm={9} className={classes.root}>
         {this.walletStatus()}
       </Grid>
     );

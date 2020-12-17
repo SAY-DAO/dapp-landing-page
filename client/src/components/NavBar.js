@@ -35,7 +35,7 @@ class NavBar extends React.Component {
         <AppBar style={{ backgroundColor: 'transparent', marginTop: '10px' }} position="static">
           <Toolbar>
             <Grid container>
-              <Grid container alignItems="center" item xs={12} sm={4} className={classes.root}>
+              <Grid container alignItems="center" item xs={12} sm={3} className={classes.root}>
                 <img alt="logo" src={require('../static/sayLogo.png')} />
               </Grid>
               <WalletButton />
