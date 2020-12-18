@@ -58,7 +58,7 @@ const styles = (darkTheme) => ({
   },
   button1: {
     height: 56,
-    width: 140,
+    width: '100%',
     borderColor: '#8CB4C5',
     borderRadius: 3,
     border: '1px solid',
@@ -77,6 +77,14 @@ const styles = (darkTheme) => ({
     marginTop: '16px',
     marginBottom: '8px',
   },
+
+  paymentBoxes: {
+    width: '45%',
+    maxWidth: 140,
+    [darkTheme.breakpoints.down('xs')]: {
+      width: 140,
+    }
+  }
 });
 
 class TheNeed extends React.Component {
@@ -196,7 +204,7 @@ class TheNeed extends React.Component {
       return (
         <form onSubmit={this.props.handleSubmit(this.onMint)}>
           <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
-            <Box m={0.5} style={{ width: 140, maxHeight: '70%' }} color="secondary">
+            <Box m={0.5} color="secondary" className={classes.paymentBoxes}>
               <Field
                 name="amount"
                 component={this.renderInput}
@@ -205,7 +213,7 @@ class TheNeed extends React.Component {
                 defaultValue={needEthCost}
               />
             </Box>
-            <Box m={0.5}>
+            <Box m={0.5} className={classes.paymentBoxes}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
                 {this.props.mintButton.text}
               </Button>
@@ -216,10 +224,10 @@ class TheNeed extends React.Component {
     }
     return (
       <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
-        <Box m={0.5} style={{ width: 140, maxHeight: '70%' }} color="secondary" >
+        <Box m={0.5} color="secondary" className={classes.paymentBoxes}>
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
-        <Box m={0.5}>
+        <Box m={0.5} className={classes.paymentBoxes}>
           <Button type="submit" variant="outlined" color="secondary" className={classes.button1} disabled>
             Connect Wallet
           </Button>

@@ -19,7 +19,6 @@ export default function () {
           <a style={{ color: '#8CB4C5' }} href="https://say.company">
             www.say.company
           </a>
-          .
           <br />
           {/*Up to today 673 needs of 31 children have been taken care of by SAY virtual families.*/}
         </Typography>
