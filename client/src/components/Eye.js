@@ -61,7 +61,7 @@ class Eye extends React.Component {
   render() {
     // const { classes } = this.props;
     return (
-      <Container maxWidth="md" style={{ marginTop: 100 }}>
+      <Container maxWidth="md" style={{ marginTop: 70, marginBottom: 30 }}>
         <Grid
           style={{
             margin: 'auto',

@@ -30,6 +30,16 @@ const darkTheme = createMuiTheme({
       },
     },
   },
+
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 360,
+      md: 600,
+      lg: 960,
+      xl: 1920,
+    },
+  },
 });
 
 export default darkTheme;

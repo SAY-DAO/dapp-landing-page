@@ -8,22 +8,14 @@ import Alert from '@material-ui/lab/Alert';
 
 const styles = (darkTheme) => ({
   root: {
-    flexGrow: 1,
-  },
-
-  imgGrid: {
-    alignItems: 'center',
-  },
-
-  buttonGrid: {
-    justifyContent: 'flex-end',
-    direction: 'row',
-    // O to sm size until the break
-    // display: 'inlineBlock',
-    [darkTheme.breakpoints.up('sm')]: {
-      display: 'flex',
+    [darkTheme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
     },
+    [darkTheme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-start',
+    }
   },
+
   alert: {
     display: 'flex',
     [darkTheme.breakpoints.up('sm')]: {
@@ -40,15 +32,13 @@ class NavBar extends React.Component {
         {/*<Alert className={classes.alert} severity="warning">*/}
         {/*  Please use the desktop version if you are having trouble on mobile while we are working on this version!*/}
         {/*</Alert>*/}
-        <AppBar style={{ backgroundColor: 'transparent' }} position="static">
+        <AppBar style={{ backgroundColor: 'transparent', marginTop: '10px' }} position="static">
           <Toolbar>
             <Grid container>
-              <Grid container className={classes.imgGrid} item xs={2}>
+              <Grid container alignItems="center" item xs={12} sm={3} className={classes.root}>
                 <img alt="logo" src={require('../static/sayLogo.png')} />
               </Grid>
-              <Grid container className={classes.buttonGrid} item xs={10}>
-                <WalletButton />
-              </Grid>
+              <WalletButton />
             </Grid>
           </Toolbar>
         </AppBar>

@@ -17,30 +17,39 @@ const styles = (darkTheme) => ({
       display: 'flex',
     },
   },
+
+  icons: {
+    color: 'gray',
+    '&:hover': {
+      color: '#ffeb90',
+    }
+  }
 });
 
 class NavBar extends React.Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
-        <Grid style={{ backgroundColor: 'transparent' }} position="static">
+        <Grid style={{ backgroundColor: 'transparent', marginBottom: 30 }} position="static">
           <Toolbar>
-            <Grid container>
-              <Grid container item xs={12} justify={'center'}>
+            <Grid container justify='center'>
+              <Grid container item sm={8} lg={3} justify='space-around'>
                 <a href="https://instagram.com/say.company" target="_blank" rel="noopener noreferrer">
-                  <Instagram style={{ color: 'gray' }} />
+                  <Instagram className={classes.icons} />
                 </a>
                 <a href="https://twitter.com/say_company" target="_blank" rel="noopener noreferrer">
-                  <Twitter style={{ color: 'gray' }} />
+                  <Twitter className={classes.icons} />
                 </a>
                 <a href="https://github.com/saycompany" target="_blank" rel="noopener noreferrer">
-                  <GitHub style={{ color: 'gray' }} />
+                  <GitHub className={classes.icons} />
                 </a>
                 <a href="https://t.me/saycompany" target="_blank" rel="noopener noreferrer">
-                  <Telegram style={{ color: 'gray' }} />
+                  <Telegram className={classes.icons} />
                 </a>
                 <a href="https://say.company" target="_blank" rel="noopener noreferrer">
-                  <Link style={{ color: 'gray' }} />
+                  <Link className={classes.icons} />
                 </a>
               </Grid>
             </Grid>
