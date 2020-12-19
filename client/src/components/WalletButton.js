@@ -210,8 +210,10 @@ class WalletButton extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const nakOwner = this.props.theWallet.nakamaOwner;
+    const theClass = nakOwner ? classes.root : classes.singleBtn;
     return (
-      <Grid container xs={12} sm={9} className={classes.root}>
+      <Grid container xs={12} sm={9} className={theClass}>
         {this.walletStatus()}
       </Grid>
     );
