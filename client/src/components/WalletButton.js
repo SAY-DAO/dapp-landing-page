@@ -36,6 +36,7 @@ let provider;
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
   border: '0px solid',
+  borderRadius: 10,
   color: '#ffffff',
   margin: 5,
   whiteSpace: 'normal',
