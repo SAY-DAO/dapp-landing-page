@@ -58,7 +58,7 @@ const styles = (darkTheme) => ({
   },
   button1: {
     height: 56,
-    width: 140,
+    width: '100%',
     borderColor: '#8CB4C5',
     borderRadius: 3,
     border: '1px solid',
@@ -77,6 +77,14 @@ const styles = (darkTheme) => ({
     marginTop: '16px',
     marginBottom: '8px',
   },
+
+  paymentBoxes: {
+    width: '45%',
+    maxWidth: 140,
+    [darkTheme.breakpoints.down('xs')]: {
+      width: 140,
+    }
+  }
 });
 
 class TheNeed extends React.Component {
@@ -196,7 +204,7 @@ class TheNeed extends React.Component {
       return (
         <form onSubmit={this.props.handleSubmit(this.onMint)}>
           <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
-            <Box m={0.5} style={{ width: 140, maxHeight: '70%' }} color="secondary">
+            <Box m={0.5} color="secondary" className={classes.paymentBoxes}>
               <Field
                 name="amount"
                 component={this.renderInput}
@@ -205,7 +213,7 @@ class TheNeed extends React.Component {
                 defaultValue={needEthCost}
               />
             </Box>
-            <Box m={0.5}>
+            <Box m={0.5} className={classes.paymentBoxes}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
                 {this.props.mintButton.text}
               </Button>
@@ -216,10 +224,10 @@ class TheNeed extends React.Component {
     }
     return (
       <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
-        <Box m={0.5} style={{ width: 140, maxHeight: '70%' }} color="secondary" >
+        <Box m={0.5} color="secondary" className={classes.paymentBoxes}>
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
-        <Box m={0.5}>
+        <Box m={0.5} className={classes.paymentBoxes}>
           <Button type="submit" variant="outlined" color="secondary" className={classes.button1} disabled>
             Connect Wallet
           </Button>
@@ -287,13 +295,7 @@ class TheNeed extends React.Component {
                 </Box>
                 <AccordionDetails>
                   <Typography style={{ fontSize: '0.7rem' }}>
-                    Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to SAY ecosystem, such
-                    as by paying for a need, taking part in building the software, or helping with the logistic side of
-                    SAY. NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
-                    choose to contribute and are NOT designed to be traded. They rather act as a bond between us and a
-                    community membership token to get involved in the SAY ecosystem. Moreover, this also helps with
-                    lower ethereum gas costs for further transactions. More information about tokens use cases will be
-                    released in the coming weeks.
+                  Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to the SAY eco-system, such as by paying for a need, taking part in building the software, or helping with the logistic side of SAY. NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you choose to contribute and are NOT designed to be traded. They rather act as a bond between us and a community membership token to get involved in the SAY token economy. This also helps with lower ethereum gas costs. More information on token use cases will be released in the coming weeks.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

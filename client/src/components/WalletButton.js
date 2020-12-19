@@ -36,6 +36,7 @@ let provider;
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FF8E53 30%, #FF8E53 90%)',
   border: '0px solid',
+  borderRadius: 10,
   color: '#ffffff',
   margin: 5,
   whiteSpace: 'normal',
@@ -209,8 +210,10 @@ class WalletButton extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const nakOwner = this.props.theWallet.nakamaOwner;
+    const theClass = nakOwner ? classes.root : classes.singleBtn;
     return (
-      <Grid container xs={12} sm={9} className={classes.root}>
+      <Grid container xs={12} sm={9} className={theClass}>
         {this.walletStatus()}
       </Grid>
     );
