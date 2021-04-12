@@ -3,7 +3,7 @@ name: Build, Push and Deploy
 env:
   REGISTRY: ghcr.io
   DEVELOPMENT: dev
-  STAGING: stag
+  STAGING: stage
   PRODUCTION: prod
   MAIN_BRANCH: master
   DEV_DOMAIN: d.saydapp.company
@@ -11,7 +11,7 @@ env:
   PROD_DOMAIN: saydapp.company
   TARGET_LAYER: prod
   DEV_STACK_NAME: say-dev-dapp
-  STAGE_STACK_NAME: say-stag-dapp
+  STAGE_STACK_NAME: say-stage-dapp
   PROD_STACK_NAME: say-dapp
 
 on:
