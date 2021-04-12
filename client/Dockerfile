@@ -1,13 +1,3 @@
-# FROM node:12-slim as style
-# ENV ENVIRONMENT=development
-# RUN apt-get update && apt-get install -y \
-#     git
-# WORKDIR /app
-# COPY package.json yarn.lock ./
-# RUN yarn install --only=development
-# COPY . /app
-# RUN yarn run lint:prettier
-
 FROM node:12-slim as base
 WORKDIR /app
 RUN apt-get update && apt-get install -y \
