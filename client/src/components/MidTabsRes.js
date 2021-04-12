@@ -16,8 +16,8 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
+      id={`scrollable-force-tabpanel-${index}`}
+      aria-labelledby={`scrollable-force-tabpanel-${index}`}
       {...other}
     >
       {value === index && (
@@ -39,8 +39,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    id: `scrollable-force-tabpanel-${index}`,
+    'aria-controls': `scrollable-force-tabpanel-${index}`,
   };
 }
 
@@ -69,8 +69,8 @@ export default function ScrollableTabsButtonAuto() {
           indicatorColor="secondary"
           textColor="secondary"
           variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs"
+          scrollButtons="on"
+          aria-label="scrollable force tabs example"
         >
           <Tab label={contents.section1.title} {...a11yProps(0)} />
           <Tab label={contents.section2.title} {...a11yProps(1)} />

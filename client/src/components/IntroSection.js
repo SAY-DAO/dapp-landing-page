@@ -5,13 +5,13 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { mintedNakama } from '../actions';
 import TheChild from './TheChild';
 import TheNeed from './TheNeed';
 
 const styles = (darkTheme) => ({
   paper: {
     marginTop: darkTheme.spacing(3),
+    marginBottom: darkTheme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -20,7 +20,7 @@ const styles = (darkTheme) => ({
   paper2: {
     background: '#000000',
     width: '85%',
-    margin: 15,
+    margin: 8,
     borderRadius: 18,
   },
   grid: {
@@ -64,8 +64,7 @@ class IntroSection extends React.Component {
 const mapStateToProps = (state) => {
   return {
     theWallet: state.wallet,
-    fetchedTokens: state.tokens,
   };
 };
 
-export default connect(mapStateToProps, { mintedNakama })(withStyles(styles)(IntroSection));
+export default connect(mapStateToProps)(withStyles(styles)(IntroSection));

@@ -43,9 +43,9 @@ export default function Sections(data) {
               />
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
+          <Grid item sm={12} md container>
+            <Grid item sm container direction="column" spacing={2}>
+              <Grid item sm>
                 <Typography gutterBottom variant="subtitle1">
                   {data.props.title}
                 </Typography>

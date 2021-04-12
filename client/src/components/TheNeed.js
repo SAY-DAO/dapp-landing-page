@@ -57,19 +57,34 @@ const styles = (darkTheme) => ({
     height: 60,
   },
   button1: {
-    margin: 'auto',
     height: 56,
+    width: '100%',
     borderColor: '#8CB4C5',
     borderRadius: 3,
     border: '1px solid',
     color: 'white',
   },
   button2: {
-    borderColor: '#8CB4C5',
+    height: 56,
+    width: 140,
+    borderColor: '#ffeb90',
     borderRadius: 3,
     border: '1px solid',
-    color: 'white',
+    color: '#ffeb90',
   },
+
+  spacing: {
+    marginTop: '16px',
+    marginBottom: '8px',
+  },
+
+  paymentBoxes: {
+    width: '45%',
+    maxWidth: 140,
+    [darkTheme.breakpoints.down('xs')]: {
+      width: 140,
+    }
+  }
 });
 
 class TheNeed extends React.Component {
@@ -77,7 +92,7 @@ class TheNeed extends React.Component {
     await this.props.fetchNeed();
     const needFetchedCost = this.props.fetchedNeed.cost;
     await this.props.fetchEthPrice(needFetchedCost);
-    await this.isOwner();
+    // await this.isOwner();
     if (this.props.theWallet.nakamaOwner) {
       await this.props.updateMintButton('Pay for Need', 'enabled');
     } else {
@@ -188,8 +203,8 @@ class TheNeed extends React.Component {
       const needEthCost = this.props.fetchedEth.needEthCost;
       return (
         <form onSubmit={this.props.handleSubmit(this.onMint)}>
-          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
-            <Box m={1} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
+          <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
+            <Box m={0.5} color="secondary" className={classes.paymentBoxes}>
               <Field
                 name="amount"
                 component={this.renderInput}
@@ -198,26 +213,26 @@ class TheNeed extends React.Component {
                 defaultValue={needEthCost}
               />
             </Box>
-            <Box style={{ margin: 'auto', height: 56 }}>
+            <Box m={0.5} className={classes.paymentBoxes}>
               <Button type="submit" variant="outlined" color="secondary" className={classes.button1}>
                 {this.props.mintButton.text}
               </Button>
             </Box>
-          </Box>
+          </Grid>
         </form>
       );
     }
     return (
-      <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
-        <Box m={1} style={{ width: '50%', maxHeight: '70%' }} color="secondary">
+      <Grid container alignItems='flex-start' justify='center' className={classes.spacing}>
+        <Box m={0.5} color="secondary" className={classes.paymentBoxes}>
           <Field name="amount" component={this.renderInput} label="ETH" style={{ border: '1px solid #ced4da' }} />
         </Box>
-        <Box style={{ margin: 'auto', height: 56 }}>
+        <Box m={0.5} className={classes.paymentBoxes}>
           <Button type="submit" variant="outlined" color="secondary" className={classes.button1} disabled>
             Connect Wallet
           </Button>
         </Box>
-      </Box>
+      </Grid>
     );
   };
 
@@ -234,7 +249,7 @@ class TheNeed extends React.Component {
             </form>
           </Box>
           <Box>{this.renderTheForm()}</Box>
-          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center">
+          <Box display="flex" flexDirection="row" p={1} m={1} justifyContent="center" alignItems="center">
             <Box>
               <Avatar className={classes.needIcon}>
                 <img
@@ -280,13 +295,7 @@ class TheNeed extends React.Component {
                 </Box>
                 <AccordionDetails>
                   <Typography style={{ fontSize: '0.7rem' }}>
-                    Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to SAY ecosystem such
-                    as paying a need, taking part in building the software, or helping with the logistic side of SAY.
-                    NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you
-                    choose to contribute and are NOT designed to be traded rather behold as a bond between us and a
-                    community membership token to get involved in the SAY ecosystem. Moreover, this also helps with
-                    lower ethereum gas costs for further transactions. More information about tokens use cases will be
-                    released in the upcoming weeks.
+                  Nakama (NAK) is an ERC-721/non fungible token that is created by contributing to the SAY eco-system, such as by paying for a need, taking part in building the software, or helping with the logistic side of SAY. NAK is meant to be created only once per person. NAK tokens are NOT valued based on the way you choose to contribute and are NOT designed to be traded. They rather act as a bond between us and a community membership token to get involved in the SAY token economy. More information on token use cases will be released in the coming weeks.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

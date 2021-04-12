@@ -10,11 +10,14 @@ const styles = (darkTheme) => ({
     maxWidth: 225,
     maxHeight: 225,
     margin: darkTheme.spacing(1),
-    boxShadow: '10px',
     justifyContent: 'center',
     background: '#7f3536',
     borderRadius: '50%',
-    filter: 'drop-shadow(0px 18px 18px #262617)',
+  },
+  
+  spacing: {
+    marginTop: '10px',
+    marginBottom: '10px',
   },
 });
 
@@ -29,7 +32,7 @@ class TheChild extends React.Component {
             <img className={classes.childImg} alt="child" src={`https://sayapp.company${imgUrl}`} />
           </Grid>
           <Grid>
-            <Typography component="h1" variant="h5" align="center">
+            <Typography component="h1" variant="h5" align="center" className={classes.spacing}>
               {this.props.fetchedNeed.childSayName}
             </Typography>
           </Grid>
@@ -42,7 +45,7 @@ class TheChild extends React.Component {
           <img className={classes.childImg} alt="child" src={require('../static/circle.png')} />
         </Grid>
         <Grid>
-          <Typography component="h1" variant="h5" align="center">
+          <Typography component="h1" variant="h5" align="center" className={classes.spacing}>
             {this.props.fetchedNeed.childSayName}
           </Typography>
         </Grid>
