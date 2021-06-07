@@ -14,7 +14,7 @@ const styles = (darkTheme) => ({
     background: '#7f3536',
     borderRadius: '50%',
   },
-  
+
   spacing: {
     marginTop: '10px',
     marginBottom: '10px',
@@ -29,7 +29,7 @@ class TheChild extends React.Component {
       return (
         <div>
           <Grid container>
-            <img className={classes.childImg} alt="child" src={`https://sayapp.company${imgUrl}`} />
+            <img className={classes.childImg} alt="child" src={imgUrl} />
           </Grid>
           <Grid>
             <Typography component="h1" variant="h5" align="center" className={classes.spacing}>
